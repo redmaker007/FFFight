@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctuv1ou4cgov3"]
+
+[ext_resource type="Script" uid="uid://ddig366rrowg2" path="res://spwan_unit_button.gd" id="1_lv4kh"]
+
+[node name="spwan_unit_1" type="Button"]
+custom_minimum_size = Vector2(100, 0)
+offset_left = 42.0
+offset_top = 564.0
+offset_right = 105.0
+offset_bottom = 595.0
+text = "unit 1"
+script = ExtResource("1_lv4kh")
+unit_name = "boxer"

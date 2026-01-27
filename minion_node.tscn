@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjm0nj26a41bk"]
+
+[ext_resource type="Script" uid="uid://nri6rxqxptwd" path="res://minion.gd" id="1_7228o"]
+[ext_resource type="Texture2D" uid="uid://dwrwslc4vqk7k" path="res://minion.png" id="2_xvyn4"]
+[ext_resource type="Script" uid="uid://b0k5fb6t88m0" path="res://att_state.gd" id="3_fwx2u"]
+[ext_resource type="Script" uid="uid://dxdl67sg02lqg" path="res://walk_state.gd" id="3_xvyn4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fwx2u"]
+radius = 30.066593
+
+[node name="minion_node" type="Node2D"]
+script = ExtResource("1_7228o")
+
+[node name="walk_state" type="Node" parent="."]
+script = ExtResource("3_xvyn4")
+
+[node name="att_state" type="Node" parent="."]
+script = ExtResource("3_fwx2u")
+
+[node name="Minion" type="Sprite2D" parent="."]
+texture = ExtResource("2_xvyn4")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_fwx2u")

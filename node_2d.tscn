@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://bae3kf36u3115"]
+
+[ext_resource type="Script" uid="uid://bxoj4abwmi3vj" path="res://GM.gd" id="1_0hol4"]
+[ext_resource type="Texture2D" uid="uid://1fsfpkgncr3b" path="res://background.png" id="1_epypp"]
+[ext_resource type="Texture2D" uid="uid://beh7q7npd5fjt" path="res://castle.png" id="2_0hol4"]
+[ext_resource type="Script" uid="uid://gdxci1xh3ufw" path="res://minion_map.gd" id="2_d21ai"]
+[ext_resource type="Script" uid="uid://cge3tf2fxqpgb" path="res://castle_1.gd" id="3_q6r6c"]
+[ext_resource type="PackedScene" uid="uid://ctuv1ou4cgov3" path="res://spwan_unit_button.tscn" id="3_rj586"]
+[ext_resource type="Script" uid="uid://bq6jelu08e04t" path="res://unit_spawner.gd" id="5_q6r6c"]
+[ext_resource type="Script" uid="uid://3a083idnpn5a" path="res://enemy_spawner.gd" id="6_kdubu"]
+
+[node name="GM" type="Node2D"]
+script = ExtResource("1_0hol4")
+
+[node name="minion_map" type="Node" parent="."]
+script = ExtResource("2_d21ai")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 40.0
+offset_top = 567.0
+offset_right = 207.0
+offset_bottom = 607.0
+theme_override_constants/separation = 50
+
+[node name="spwan_unit_1" parent="CanvasLayer/HBoxContainer" instance=ExtResource("3_rj586")]
+layout_mode = 2
+unit_name = "red"
+
+[node name="spwan_unit_2" parent="CanvasLayer/HBoxContainer" instance=ExtResource("3_rj586")]
+layout_mode = 2
+unit_name = "blue"
+
+[node name="spwan_unit_3" parent="CanvasLayer/HBoxContainer" instance=ExtResource("3_rj586")]
+layout_mode = 2
+
+[node name="spwan_unit_4" parent="CanvasLayer/HBoxContainer" instance=ExtResource("3_rj586")]
+layout_mode = 2
+unit_name = "snow_ball_shooter"
+
+[node name="background" type="Node" parent="."]
+
+[node name="bg" type="Sprite2D" parent="background"]
+position = Vector2(575.5, 323.5)
+scale = Vector2(0.59843755, 0.6009259)
+texture = ExtResource("1_epypp")
+
+[node name="castle1" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(73.00001, 363.5)
+scale = Vector2(1.96875, 3.7343748)
+texture = ExtResource("2_0hol4")
+script = ExtResource("3_q6r6c")
+
+[node name="Castle2" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(1077, 344)
+scale = Vector2(1.921875, 3.7031248)
+texture = ExtResource("2_0hol4")
+
+[node name="unit spawner" type="Node" parent="."]
+script = ExtResource("5_q6r6c")
+
+[node name="enemy spawner" type="Node" parent="."]
+script = ExtResource("6_kdubu")
+spec_unit = "snow_ball_shooter"
