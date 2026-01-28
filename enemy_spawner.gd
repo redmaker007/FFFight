@@ -10,17 +10,23 @@ var GM
 var spawn_CD = 0
 var pool = ["red","blue","boxer","snow_ball_shooter"]
 var u_name
-		
+
+var functioning
+
+
 func _ready() -> void:
 	GM = get_parent()
-	if random_pool_on:
-			u_name = pool.pick_random()
-	else:
+	function_switch(true)
+	if not random_pool_on:
 		u_name = spec_unit
 
+func function_switch(v:bool):
+	functioning =v
 
 func _process(delta: float) -> void:
-	if spawn_CD >= 2:
+	if spawn_CD >= 1.5:
+		if random_pool_on:
+			u_name = pool.pick_random()
 		spawn_enemy_1(u_name)
 		spawn_CD = 0
 	else:
@@ -31,6 +37,8 @@ func _process(delta: float) -> void:
 
 
 func spawn_enemy_1(s_name):
+	if not functioning:
+		return
 	var new_enemy = GM.minion_precast.instantiate()
 
 	new_enemy.ini_w_dic(GM.mm.mm[s_name])

@@ -9,7 +9,7 @@ func state_ready():
 
 func state_process(delta: float) -> void:
 	if att_CD_sec <= 0:
-		get_parent().attack()
+		get_parent().attack_t()
 		att_CD_sec = get_parent().att_CD
 	else:
 		att_CD_sec -=delta

@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bae3kf36u3115"]
+[gd_scene load_steps=11 format=3 uid="uid://bae3kf36u3115"]
 
 [ext_resource type="Script" uid="uid://bxoj4abwmi3vj" path="res://GM.gd" id="1_0hol4"]
 [ext_resource type="Texture2D" uid="uid://1fsfpkgncr3b" path="res://background.png" id="1_epypp"]
 [ext_resource type="Texture2D" uid="uid://beh7q7npd5fjt" path="res://castle.png" id="2_0hol4"]
+[ext_resource type="Script" uid="uid://cgpdqiexfumo4" path="res://play_state.gd" id="2_4d7sh"]
 [ext_resource type="Script" uid="uid://gdxci1xh3ufw" path="res://minion_map.gd" id="2_d21ai"]
+[ext_resource type="Script" uid="uid://4sbh4qu28whe" path="res://end_state.gd" id="3_ir8iy"]
 [ext_resource type="Script" uid="uid://cge3tf2fxqpgb" path="res://castle_1.gd" id="3_q6r6c"]
 [ext_resource type="PackedScene" uid="uid://ctuv1ou4cgov3" path="res://spwan_unit_button.tscn" id="3_rj586"]
 [ext_resource type="Script" uid="uid://bq6jelu08e04t" path="res://unit_spawner.gd" id="5_q6r6c"]
@@ -11,6 +13,12 @@
 
 [node name="GM" type="Node2D"]
 script = ExtResource("1_0hol4")
+
+[node name="play_state" type="Node" parent="."]
+script = ExtResource("2_4d7sh")
+
+[node name="end_state" type="Node" parent="."]
+script = ExtResource("3_ir8iy")
 
 [node name="minion_map" type="Node" parent="."]
 script = ExtResource("2_d21ai")
@@ -64,4 +72,5 @@ script = ExtResource("5_q6r6c")
 
 [node name="enemy spawner" type="Node" parent="."]
 script = ExtResource("6_kdubu")
+random_pool_on = true
 spec_unit = "snow_ball_shooter"

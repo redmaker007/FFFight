@@ -11,7 +11,8 @@ var att_CD = 1
 #機制參數
 var target = null
 var side = "ally"
-
+var size = 1
+var unit_name
 
 #狀態機
 enum state{walk,attack}
@@ -31,6 +32,8 @@ func _ready() -> void:
 	1:$att_state
 	}
 	switch_state(state.walk)
+	position = self.position - Vector2(0,size*50)
+	$health.value = 100
 
 
 
@@ -88,6 +91,7 @@ func set_png(png):
 	pass
 
 func ini_w_dic(dic):
+	unit_name = dic["name"]
 	speed = dic["speed"]
 	hp = dic["max_hp"]
 	max_hp = dic["max_hp"]
@@ -95,10 +99,13 @@ func ini_w_dic(dic):
 	att_r = dic["att_r"]
 	att_CD = dic["att_CD"]
 	set_png(dic["image"])
+	scale = Vector2(1,1)*(1+dic["size"])
+	size = dic["size"]
+	
 	pass
 
 
-func attack():
+func attack_t():
 	if(not target):
 		switch_state(state.walk)
 		return
@@ -108,22 +115,24 @@ func attack():
 
 func attack_animation():
 	var side_sign
-	var base_pos = self.position
+	var base_pos = $Minion.position
 	if side == "ally":
 		side_sign = 1
 	else:
 		side_sign = -1
 	var tw = create_tween()
-	tw.parallel().tween_property(self,"position",base_pos +Vector2(side_sign*10,0),0.1)
-	tw.parallel().tween_property(self,"rotation_degrees",side_sign*15,0.1)
+	tw.parallel().tween_property($Minion,"position",base_pos +Vector2(side_sign*10,0),0.1)
+	tw.parallel().tween_property($Minion,"rotation_degrees",side_sign*15,0.1)
 	
-	tw.tween_property(self,"position",base_pos,0.05)
-	tw.tween_property(self,"rotation_degrees",0,0.05)
+	tw.tween_property($Minion,"position",base_pos,0.05)
+	tw.tween_property($Minion,"rotation_degrees",0,0.05)
 
 func take_damage(value):
 	hp -= value
+	$health.value = float(hp)/float(max_hp)*100
 	if (hp <= 0):
 		death()
 
 func death():
+	SignalBus.emit_signal("unit_death",self)
 	queue_free()
