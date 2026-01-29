@@ -22,3 +22,7 @@ SignalBus="*res://Signal_Bus.gd"
 [display]
 
 window/stretch/scale_mode="integer"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

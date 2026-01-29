@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bae3kf36u3115"]
+[gd_scene load_steps=13 format=3 uid="uid://bae3kf36u3115"]
 
 [ext_resource type="Script" uid="uid://bxoj4abwmi3vj" path="res://GM.gd" id="1_0hol4"]
 [ext_resource type="Texture2D" uid="uid://1fsfpkgncr3b" path="res://background.png" id="1_epypp"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://ctuv1ou4cgov3" path="res://spwan_unit_button.tscn" id="3_rj586"]
 [ext_resource type="Script" uid="uid://bq6jelu08e04t" path="res://unit_spawner.gd" id="5_q6r6c"]
 [ext_resource type="Script" uid="uid://3a083idnpn5a" path="res://enemy_spawner.gd" id="6_kdubu"]
-[ext_resource type="Texture2D" uid="uid://b3q2ijnvp5kss" path="res://upgrade.png" id="6_x0ka3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x0ka3"]
 bg_color = Color(0.6901961, 0.5921569, 0.27058825, 0.6431373)
@@ -33,30 +32,14 @@ script = ExtResource("2_d21ai")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Money_text" type="Label" parent="CanvasLayer/HBoxContainer2"]
-custom_minimum_size = Vector2(128, 64)
-layout_mode = 2
+[node name="Money_text" type="Label" parent="CanvasLayer"]
+offset_left = 23.0
+offset_top = 23.0
+offset_right = 118.0
+offset_bottom = 65.0
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_x0ka3")
 text = "$:0"
-vertical_alignment = 1
-
-[node name="money_upgrade" type="TextureButton" parent="CanvasLayer/HBoxContainer2"]
-layout_mode = 2
-texture_normal = ExtResource("6_x0ka3")
-
-[node name="money_upgrade_text" type="Label" parent="CanvasLayer/HBoxContainer2/money_upgrade"]
-layout_mode = 0
-offset_left = 84.0
-offset_top = 13.0
-offset_right = 127.0
-offset_bottom = 48.0
-theme_override_font_sizes/font_size = 25
-text = "50"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
 offset_left = 40.0

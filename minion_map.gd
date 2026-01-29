@@ -17,7 +17,7 @@ var mm = {
 	"red":{
 		"name"="red",
 		
-		"cost"= 8,
+		"cost"= 15,
 		
 		"speed" = 40,
 		"max_hp" = 300,
