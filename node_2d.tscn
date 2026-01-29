@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bae3kf36u3115"]
+[gd_scene load_steps=13 format=3 uid="uid://bae3kf36u3115"]
 
 [ext_resource type="Script" uid="uid://bxoj4abwmi3vj" path="res://GM.gd" id="1_0hol4"]
 [ext_resource type="Texture2D" uid="uid://1fsfpkgncr3b" path="res://background.png" id="1_epypp"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://gdxci1xh3ufw" path="res://minion_map.gd" id="2_d21ai"]
 [ext_resource type="Script" uid="uid://bt2qdir04qfjw" path="res://money_system.gd" id="2_hqns4"]
 [ext_resource type="Script" uid="uid://4sbh4qu28whe" path="res://end_state.gd" id="3_ir8iy"]
-[ext_resource type="Script" uid="uid://cge3tf2fxqpgb" path="res://castle_1.gd" id="3_q6r6c"]
 [ext_resource type="PackedScene" uid="uid://ctuv1ou4cgov3" path="res://spwan_unit_button.tscn" id="3_rj586"]
 [ext_resource type="Script" uid="uid://bq6jelu08e04t" path="res://unit_spawner.gd" id="5_q6r6c"]
 [ext_resource type="Script" uid="uid://3a083idnpn5a" path="res://enemy_spawner.gd" id="6_kdubu"]
@@ -92,7 +91,6 @@ z_index = 2
 position = Vector2(73.00001, 363.5)
 scale = Vector2(1.96875, 3.7343748)
 texture = ExtResource("2_0hol4")
-script = ExtResource("3_q6r6c")
 
 [node name="Castle2" type="Sprite2D" parent="."]
 z_index = 2

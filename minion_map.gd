@@ -20,8 +20,8 @@ var mm = {
 		"cost"= 15,
 		
 		"speed" = 40,
-		"max_hp" = 300,
-		"att" = 5,
+		"max_hp" = 250,
+		"att" = 10,
 		"att_r" = 30,
 		"att_CD" = 1,
 		"image" = preload("res://minion.png"),
@@ -34,9 +34,9 @@ var mm = {
 		
 		"speed" = 120,
 		"max_hp" = 90,
-		"att" = 10,
+		"att" = 8,
 		"att_r" = 50,
-		"att_CD" = 0.35,
+		"att_CD" = 0.37,
 		"image" = preload("res://binion.png"),
 		"size" = 0
 	},
@@ -60,9 +60,9 @@ var mm = {
 		
 		"speed" = 70,
 		"max_hp" = 80,
-		"att" = 30,
+		"att" = 35,
 		"att_r" = 250,
-		"att_CD" = 1,
+		"att_CD" = 0.8,
 		"image" = preload("res://snow_b_s.png"),
 		"size" = -0.1
 	}

@@ -44,22 +44,26 @@ func _process(delta: float) -> void:
 func spawn_level_1():
 	var unit_name
 	var time_int
-	if count < 16:
+	if count < 4:
+		unit_name = "red"
+		time_int = 5
+
+	elif count < 16:
 		unit_name = "red"
 		if count%2 ==0:
-			time_int = 0.5
+			time_int = 1
 		else:
 			time_int = 3
 	elif count < 20:
 		unit_name = "blue"
-		time_int = 0.5
+		time_int = 1
 	elif count < 75:
-		if count %4 == 0:
+		if count %10 == 0:
 			unit_name = "snow_ball_shooter"
-			time_int = 1
+			time_int = 3
 		else:
-			unit_name = "red"
-			time_int = 0.5
+			unit_name = ["red","blue"].pick_random()
+			time_int = 2
 	elif count < 80:
 		unit_name = "boxer"
 		time_int = 0.1
