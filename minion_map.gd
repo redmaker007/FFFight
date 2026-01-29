@@ -30,26 +30,26 @@ var mm = {
 	"blue":{
 		"name"="blue",
 		
-		"cost"= 8,
+		"cost"= 10,
 		
-		"speed" = 120,
-		"max_hp" = 90,
-		"att" = 8,
+		"speed" = 100,
+		"max_hp" = 80,
+		"att" = 6,
 		"att_r" = 50,
-		"att_CD" = 0.37,
+		"att_CD" = 0.6,
 		"image" = preload("res://binion.png"),
 		"size" = 0
 	},
 	"boxer":{
 		"name"="boxer",
 		
-		"cost"= 20,
+		"cost"= 35,
 		
 		"speed" = 40,
-		"max_hp" = 140,
-		"att" = 60,
+		"max_hp" = 180,
+		"att" = 50,
 		"att_r" = 50,
-		"att_CD" = 0.4,
+		"att_CD" = 0.7,
 		"image" = preload("res://boxer.png"),
 		"size" = 0
 	},
@@ -62,7 +62,7 @@ var mm = {
 		"max_hp" = 80,
 		"att" = 35,
 		"att_r" = 250,
-		"att_CD" = 0.8,
+		"att_CD" = 0.5,
 		"image" = preload("res://snow_b_s.png"),
 		"size" = -0.1
 	}
