@@ -13,6 +13,7 @@ var target = null
 var side = "ally"
 var size = 1
 var unit_name
+var att_CD_sec
 
 #狀態機
 enum state{walk,attack}
@@ -101,12 +102,12 @@ func ini_w_dic(dic):
 	set_png(dic["image"])
 	scale = Vector2(1,1)*(1+dic["size"])
 	size = dic["size"]
-	
+	att_CD_sec = att_CD
 	pass
 
 
 func attack_t():
-	if(not target):
+	if not target:
 		switch_state(state.walk)
 		return
 	target.take_damage(att)
@@ -122,7 +123,7 @@ func attack_animation():
 		side_sign = -1
 	var tw = create_tween()
 	tw.parallel().tween_property($Minion,"position",base_pos +Vector2(side_sign*10,0),0.1)
-	tw.parallel().tween_property($Minion,"rotation_degrees",side_sign*15,0.1)
+	tw.parallel().tween_property($Minion,"rotation_degrees",side_sign*20,0.1)
 	
 	tw.tween_property($Minion,"position",base_pos,0.05)
 	tw.tween_property($Minion,"rotation_degrees",0,0.05)

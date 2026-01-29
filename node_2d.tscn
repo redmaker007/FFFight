@@ -72,5 +72,4 @@ script = ExtResource("5_q6r6c")
 
 [node name="enemy spawner" type="Node" parent="."]
 script = ExtResource("6_kdubu")
-random_pool_on = true
 spec_unit = "snow_ball_shooter"

@@ -27,10 +27,10 @@ var mm = {
 		"name"="blue",
 		
 		"speed" = 120,
-		"max_hp" = 120,
+		"max_hp" = 100,
 		"att" = 11,
 		"att_r" = 50,
-		"att_CD" = 0.3,
+		"att_CD" = 0.33,
 		"image" = preload("res://binion.png"),
 		"size" = 0
 	},
@@ -38,7 +38,7 @@ var mm = {
 		"name"="boxer",
 		
 		"speed" = 40,
-		"max_hp" = 150,
+		"max_hp" = 130,
 		"att" = 55,
 		"att_r" = 50,
 		"att_CD" = 0.4,
@@ -48,11 +48,11 @@ var mm = {
 	"snow_ball_shooter":{
 		"name"="snow_ball_shooter",
 		
-		"speed" = 40,
+		"speed" = 70,
 		"max_hp" = 100,
-		"att" = 16,
+		"att" = 22,
 		"att_r" = 250,
-		"att_CD" = 1.2,
+		"att_CD" = 1.1,
 		"image" = preload("res://snow_b_s.png"),
 		"size" = -0.1
 	}
