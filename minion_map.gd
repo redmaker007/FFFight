@@ -12,38 +12,44 @@ var mm = {
 		"att_r" = 0,
 		"att_CD" = 9999,
 		"image" = preload("res://empty.png"),
-		"size" = 1
+		"size" = 1,
+		
+		"ability" = ["empty"],
 	},
 	"red":{
 		"name"="red",
 		
-		"cost"= 15,
+		"cost"= 25,
 		
 		"speed" = 40,
 		"max_hp" = 250,
-		"att" = 10,
+		"att" = 15,
 		"att_r" = 30,
 		"att_CD" = 1,
 		"image" = preload("res://minion.png"),
-		"size" = 0.2
+		"size" = 0.2,
+		
+		"ability" = ["empty"],
 	},
 	"blue":{
 		"name"="blue",
 		
-		"cost"= 10,
+		"cost"= 15,
 		
 		"speed" = 100,
-		"max_hp" = 80,
-		"att" = 6,
+		"max_hp" = 60,
+		"att" = 5,
 		"att_r" = 50,
-		"att_CD" = 0.6,
+		"att_CD" = 0.9,
 		"image" = preload("res://binion.png"),
-		"size" = 0
+		"size" = 0,
+		
+		"ability" = ["empty"],
 	},
 	"boxer":{
 		"name"="boxer",
 		
-		"cost"= 35,
+		"cost"= 40,
 		
 		"speed" = 40,
 		"max_hp" = 180,
@@ -51,19 +57,23 @@ var mm = {
 		"att_r" = 50,
 		"att_CD" = 0.7,
 		"image" = preload("res://boxer.png"),
-		"size" = 0
+		"size" = 0,
+		
+		"ability" = ["empty"],
 	},
 	"snow_ball_shooter":{
 		"name"="snow_ball_shooter",
 		
-		"cost"= 50,
+		"cost"= 70,
 		
 		"speed" = 70,
 		"max_hp" = 80,
-		"att" = 35,
+		"att" = 20,
 		"att_r" = 250,
-		"att_CD" = 0.5,
+		"att_CD" = 0.6,
 		"image" = preload("res://snow_b_s.png"),
-		"size" = -0.1
+		"size" = -0.1,
+		
+		"ability" = ["apply_slow"],
 	}
 }

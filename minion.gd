@@ -8,12 +8,19 @@ var att = 10
 var att_r = 50
 var att_CD = 1
 
+ #狀態類私人參數
+var debuff ={}
+
 #機制參數
 var target = null
 var side = "ally"
 var size = 1
 var unit_name
 var att_CD_sec
+
+#技能槽
+var abilities = []
+var ability_preload = preload("res://ability.tscn")
 
 #狀態機
 enum state{walk,attack}
@@ -35,7 +42,9 @@ func _ready() -> void:
 	switch_state(state.walk)
 	position = self.position - Vector2(0,size*50)
 	$health.value = 100
-
+	
+	for a in abilities:
+		add_abilities(a)
 
 
 
@@ -103,14 +112,23 @@ func ini_w_dic(dic):
 	scale = Vector2(1,1)*(1+dic["size"])
 	size = dic["size"]
 	att_CD_sec = att_CD
+	abilities = dic["ability"]
+	
 	pass
 
+func add_abilities(ab_name):
+	var new_ab = ability_preload.instantiate()
+	new_ab.ability_name = ab_name
+	$ability_slot.add_child(new_ab)
 
 func attack_t():
 	if not target:
 		switch_state(state.walk)
 		return
 	target.take_damage(att)
+	for a in $ability_slot.get_children():
+		a.on_attack(self,target)
+		pass
 	attack_animation()
 	pass
 
@@ -137,3 +155,7 @@ func take_damage(value):
 func death():
 	SignalBus.emit_signal("unit_death",self)
 	queue_free()
+
+func apply_debuff(debuff_name,level):
+	$debuff_map.debuff_func_map[debuff_name].call(self,level)
+	pass

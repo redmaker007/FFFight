@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjm0nj26a41bk"]
+[gd_scene load_steps=9 format=3 uid="uid://cjm0nj26a41bk"]
 
 [ext_resource type="Script" uid="uid://nri6rxqxptwd" path="res://minion.gd" id="1_7228o"]
 [ext_resource type="Texture2D" uid="uid://dwrwslc4vqk7k" path="res://minion.png" id="2_xvyn4"]
 [ext_resource type="Script" uid="uid://b0k5fb6t88m0" path="res://att_state.gd" id="3_fwx2u"]
 [ext_resource type="Script" uid="uid://dxdl67sg02lqg" path="res://walk_state.gd" id="3_xvyn4"]
+[ext_resource type="Script" uid="uid://daeo56rcyrgfn" path="res://debuff_map.gd" id="5_3xtw3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fwx2u"]
 radius = 30.066593
@@ -49,3 +50,8 @@ theme_override_styles/background = SubResource("StyleBoxFlat_3xtw3")
 theme_override_styles/fill = SubResource("StyleBoxFlat_fwx2u")
 value = 100.0
 show_percentage = false
+
+[node name="ability_slot" type="Node" parent="."]
+
+[node name="debuff_map" type="Node" parent="."]
+script = ExtResource("5_3xtw3")

@@ -33,7 +33,6 @@ func _process(delta: float) -> void:
 	if spawn_CD >= spawn_t_time:
 		var ab = []
 		ab = spawn_level_1()
-		print(count)
 		spawn_enemy_1(ab[0])
 		spawn_t_time = ab[1]
 		spawn_CD = 0
