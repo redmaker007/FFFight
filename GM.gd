@@ -5,6 +5,9 @@ enum Gamestate{play_s,end_s}
 var current_state
 var state_map
 
+#statemachine
+@onready var gm_state_machine:Node = $GMStateMachine
+
 @onready var son_node_group:Array = [$"unit spawner",$"enemy spawner"]
 func switch_state(s:Gamestate):
 	current_state = s
@@ -17,6 +20,7 @@ var minion_precast = preload("res://minion_node.tscn")
 var binion_png = preload("res://binion.png")
 #unit data
 @onready var mm:Node = $minion_map
+
 
 
 
