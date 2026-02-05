@@ -18,7 +18,7 @@ func function_switch(v:bool):
 func on_spwan_unit_pressed(name):
 	if not functioning:
 		return
-	var new_unit = GM.minion_precast.instantiate()
+	var new_unit = Global.minion_scene.instantiate()
 	new_unit.ini_w_dic(GM.mm.mm[name])
 	
 	new_unit.z_index = 3

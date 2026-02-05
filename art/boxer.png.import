@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cpk6aigxp4nmm"
-path="res://.godot/imported/boxer.png-ccad9bf3b64b96b8e40afb413b1e0f9f.ctex"
+path="res://.godot/imported/boxer.png-e1de641e2d849570b96a4d68d0c129e0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://boxer.png"
-dest_files=["res://.godot/imported/boxer.png-ccad9bf3b64b96b8e40afb413b1e0f9f.ctex"]
+source_file="res://art/boxer.png"
+dest_files=["res://.godot/imported/boxer.png-e1de641e2d849570b96a4d68d0c129e0.ctex"]
 
 [params]
 

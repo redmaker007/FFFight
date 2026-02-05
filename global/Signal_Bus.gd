@@ -11,3 +11,6 @@ signal buy_unit
 
 @warning_ignore("unused_signal")
 signal try_upgrade_bank
+
+@warning_ignore("unused_signal")
+signal hex_select

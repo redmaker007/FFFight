@@ -20,25 +20,26 @@ var att_CD_sec
 
 #技能槽
 var abilities = []
-var ability_preload = preload("res://ability.tscn")
+
 
 #狀態機
 enum state{walk,attack}
 var state_map = {}
-var current_state
+var current_state = 0
 
 
 
 func _ready() -> void:
+	state_map = {
+	0:$walk_state,
+	1:$att_state
+	}
 	await get_tree().process_frame
 	if side == "enemy":
 		$Minion.flip_h = true
 
 	hp = max_hp
-	state_map = {
-	0:$walk_state,
-	1:$att_state
-	}
+
 	switch_state(state.walk)
 	position = self.position - Vector2(0,size*50)
 	$health.value = 100
@@ -117,7 +118,7 @@ func ini_w_dic(dic):
 	pass
 
 func add_abilities(ab_name):
-	var new_ab = ability_preload.instantiate()
+	var new_ab = Global.ability_preload.instantiate()
 	new_ab.ability_name = ab_name
 	$ability_slot.add_child(new_ab)
 

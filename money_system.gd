@@ -1,5 +1,10 @@
 extends Node
+#公开参数
+var default_money_amount =100
+var default_bank_level = 1
 
+#机制参数
+var bank_active = false
 var money_amount = 100
 var money_CD = 1
 
@@ -25,9 +30,12 @@ func _ready() -> void:
 	current_bank_level = 1
 	get_parent().get_node("CanvasLayer/HBoxContainer2/money_upgrade/money_upgrade_text").text = str(bank_upgrade_map[current_bank_level][1])
 
-
+func function_switch(b):
+	bank_active =b
 
 func _process(delta: float) -> void:
+	if not bank_active:
+		return
 	if money_CD >=1:
 		get_fund(bank_upgrade_map[current_bank_level][0])
 		money_CD =0
@@ -54,5 +62,16 @@ func upgrade_bank():
 		money_text.text = "$: "+str(money_amount)
 		current_bank_level+=1
 		get_parent().get_node("CanvasLayer/HBoxContainer2/money_upgrade/money_upgrade_text").text = str(bank_upgrade_map[current_bank_level][1])
-		
-	
+
+func start_level():
+	money_amount += default_money_amount
+	current_bank_level = default_bank_level
+	money_text.text = "$: "+str(money_amount)
+	get_parent().get_node("CanvasLayer/HBoxContainer2/money_upgrade/money_upgrade_text").text = str(bank_upgrade_map[current_bank_level][1])
+
+
+func reset_bank():
+	current_bank_level = default_bank_level
+	money_amount = 0
+	money_text.text = "$: "+str(money_amount)
+	get_parent().get_node("CanvasLayer/HBoxContainer2/money_upgrade/money_upgrade_text").text = str(bank_upgrade_map[current_bank_level][1])

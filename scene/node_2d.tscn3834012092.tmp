@@ -1,0 +1,193 @@
+[gd_scene load_steps=21 format=3 uid="uid://bae3kf36u3115"]
+
+[ext_resource type="Script" uid="uid://bxoj4abwmi3vj" path="res://GM.gd" id="1_123pn"]
+[ext_resource type="Script" uid="uid://4aj1roadh4qo" path="res://gm_state_machine.gd" id="2_3u7g2"]
+[ext_resource type="Script" uid="uid://cnw3s12h3gech" path="res://pre_play_state.gd" id="3_f08rc"]
+[ext_resource type="Script" uid="uid://bi4xe3k763id5" path="res://scene/play_state.gd" id="4_0g8r3"]
+[ext_resource type="Script" uid="uid://bt2qdir04qfjw" path="res://money_system.gd" id="4_cxisf"]
+[ext_resource type="Script" uid="uid://t4hyss56u1or" path="res://scene/gameover_state.gd" id="5_nl3on"]
+[ext_resource type="Script" uid="uid://gdxci1xh3ufw" path="res://minion_map.gd" id="7_mpuhk"]
+[ext_resource type="Texture2D" uid="uid://18dcamykgkdc" path="res://art/empty.png" id="7_su6sf"]
+[ext_resource type="Texture2D" uid="uid://dwrwslc4vqk7k" path="res://art/minion.png" id="8_nl3on"]
+[ext_resource type="Script" uid="uid://m6xfrndftlpg" path="res://button_signal_set.gd" id="8_ssc4f"]
+[ext_resource type="Texture2D" uid="uid://b4x130fr1u16c" path="res://art/binion.png" id="9_mpuhk"]
+[ext_resource type="Texture2D" uid="uid://b3q2ijnvp5kss" path="res://art/upgrade.png" id="9_s0fja"]
+[ext_resource type="PackedScene" uid="uid://ctuv1ou4cgov3" path="res://scene/spwan_unit_button.tscn" id="10_el7ve"]
+[ext_resource type="Texture2D" uid="uid://cpk6aigxp4nmm" path="res://art/boxer.png" id="10_ssc4f"]
+[ext_resource type="Texture2D" uid="uid://boojvl3rf1re8" path="res://art/snow_b_s.png" id="11_s0fja"]
+[ext_resource type="Texture2D" uid="uid://1fsfpkgncr3b" path="res://art/background.png" id="11_yfstv"]
+[ext_resource type="Texture2D" uid="uid://beh7q7npd5fjt" path="res://art/castle.png" id="12_bapa2"]
+[ext_resource type="Script" uid="uid://bq6jelu08e04t" path="res://unit_spawner.gd" id="13_drt2y"]
+[ext_resource type="Script" uid="uid://3a083idnpn5a" path="res://enemy_spawner.gd" id="14_5n7tr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x0ka3"]
+bg_color = Color(0.6901961, 0.5921569, 0.27058825, 0.6431373)
+
+[node name="GM" type="Node2D"]
+script = ExtResource("1_123pn")
+
+[node name="GMStateMachine" type="Node" parent="."]
+script = ExtResource("2_3u7g2")
+default_state = "play"
+
+[node name="init_state" type="Node" parent="GMStateMachine"]
+script = ExtResource("3_f08rc")
+state_name = "init"
+
+[node name="play_state" type="Node" parent="GMStateMachine"]
+script = ExtResource("4_0g8r3")
+state_name = "play"
+metadata/_custom_type_script = "uid://bwl6ui5vt1xmi"
+
+[node name="gameover_state" type="Node" parent="GMStateMachine"]
+script = ExtResource("5_nl3on")
+state_name = "gameover"
+metadata/_custom_type_script = "uid://bwl6ui5vt1xmi"
+
+[node name="Money_system" type="Node" parent="."]
+script = ExtResource("4_cxisf")
+
+[node name="minion_map" type="Node" parent="."]
+script = ExtResource("7_mpuhk")
+mm = {
+"base": {
+&"ability": ["empty"],
+&"att": 0,
+&"att_CD": 9999,
+&"att_r": 0,
+&"cost": 0,
+&"image": ExtResource("7_su6sf"),
+&"max_hp": 2000,
+&"name": "base",
+&"size": 1,
+&"speed": 0
+},
+"blue": {
+&"ability": ["empty"],
+&"att": 5,
+&"att_CD": 0.9,
+&"att_r": 50,
+&"cost": 15,
+&"image": ExtResource("9_mpuhk"),
+&"max_hp": 60,
+&"name": "blue",
+&"size": 0,
+&"speed": 100
+},
+"boxer": {
+&"ability": ["empty"],
+&"att": 50,
+&"att_CD": 0.7,
+&"att_r": 50,
+&"cost": 40,
+&"image": ExtResource("10_ssc4f"),
+&"max_hp": 180,
+&"name": "boxer",
+&"size": 0,
+&"speed": 50
+},
+"red": {
+&"ability": ["empty"],
+&"att": 15,
+&"att_CD": 1,
+&"att_r": 30,
+&"cost": 25,
+&"image": ExtResource("8_nl3on"),
+&"max_hp": 250,
+&"name": "red",
+&"size": 0.2,
+&"speed": 40
+},
+"snow_ball_shooter": {
+&"ability": ["apply_slow"],
+&"att": 20,
+&"att_CD": 0.6,
+&"att_r": 250,
+&"cost": 70,
+&"image": ExtResource("11_s0fja"),
+&"max_hp": 80,
+&"name": "snow_ball_shooter",
+&"size": -0.1,
+&"speed": 70
+}
+}
+
+[node name="button_signal_set" type="Node" parent="."]
+script = ExtResource("8_ssc4f")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Money_text" type="Label" parent="CanvasLayer/HBoxContainer2"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_x0ka3")
+text = "$:0"
+vertical_alignment = 1
+
+[node name="money_upgrade" type="TextureButton" parent="CanvasLayer/HBoxContainer2"]
+layout_mode = 2
+texture_normal = ExtResource("9_s0fja")
+
+[node name="money_upgrade_text" type="Label" parent="CanvasLayer/HBoxContainer2/money_upgrade"]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 13.0
+offset_right = 127.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 25
+text = "50"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 40.0
+offset_top = 567.0
+offset_right = 207.0
+offset_bottom = 607.0
+theme_override_constants/separation = 50
+
+[node name="spwan_unit_1" parent="CanvasLayer/HBoxContainer" instance=ExtResource("10_el7ve")]
+layout_mode = 2
+unit_name = "red"
+
+[node name="spwan_unit_2" parent="CanvasLayer/HBoxContainer" instance=ExtResource("10_el7ve")]
+layout_mode = 2
+unit_name = "blue"
+
+[node name="spwan_unit_3" parent="CanvasLayer/HBoxContainer" instance=ExtResource("10_el7ve")]
+layout_mode = 2
+
+[node name="spwan_unit_4" parent="CanvasLayer/HBoxContainer" instance=ExtResource("10_el7ve")]
+layout_mode = 2
+unit_name = "snow_ball_shooter"
+
+[node name="background" type="Node" parent="."]
+
+[node name="bg" type="Sprite2D" parent="background"]
+position = Vector2(575.5, 323.5)
+scale = Vector2(0.59843755, 0.6009259)
+texture = ExtResource("11_yfstv")
+
+[node name="castle1" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(73.00001, 363.5)
+scale = Vector2(1.96875, 3.7343748)
+texture = ExtResource("12_bapa2")
+
+[node name="Castle2" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(1077, 344)
+scale = Vector2(1.921875, 3.7031248)
+texture = ExtResource("12_bapa2")
+
+[node name="unit spawner" type="Node" parent="."]
+script = ExtResource("13_drt2y")
+
+[node name="enemy spawner" type="Node" parent="."]
+script = ExtResource("14_5n7tr")
+spec_unit = "snow_ball_shooter"
+
+[connection signal="pressed" from="CanvasLayer/HBoxContainer2/money_upgrade" to="button_signal_set" method="_on_money_upgrade_pressed"]

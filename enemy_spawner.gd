@@ -76,7 +76,7 @@ func spawn_level_1():
 
 func spawn_enemy_1(s_name):
 	
-	var new_enemy = GM.minion_precast.instantiate()
+	var new_enemy = Global.minion_scene.instantiate()
 
 	new_enemy.ini_w_dic(GM.mm.mm[s_name])
 
@@ -87,4 +87,10 @@ func spawn_enemy_1(s_name):
 	new_enemy.add_to_group("unit")
 	new_enemy.add_to_group("enemy")
 	GM.add_child(new_enemy)
-	
+
+func reset_level():
+	count = 0
+	pass
+func reset_whole():
+	count = 0
+	pass

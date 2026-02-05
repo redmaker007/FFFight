@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://lj33bbvnuyxx"]
+
+[ext_resource type="Script" uid="uid://drmvg1iwmu2yq" path="res://hex_select_button.gd" id="1_w38gu"]
+
+[node name="hex_select_button" type="Button"]
+custom_minimum_size = Vector2(200, 400)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Hex"
+script = ExtResource("1_w38gu")

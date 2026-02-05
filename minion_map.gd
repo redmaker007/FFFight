@@ -1,6 +1,6 @@
 extends Node
 
-var mm = {
+var mm :Dictionary= {
 	"base":{
 		"name"="base",
 		
@@ -11,8 +11,23 @@ var mm = {
 		"att" = 0,
 		"att_r" = 0,
 		"att_CD" = 9999,
-		"image" = preload("res://empty.png"),
+		"image" = preload("res://art/empty.png"),
 		"size" = 1,
+		
+		"ability" = ["empty"],
+	},
+	"super_boss":{
+		"name"="super_boss",
+		
+		"cost"= 25,
+		
+		"speed" = 400,
+		"max_hp" = 999,
+		"att" = 200,
+		"att_r" = 100,
+		"att_CD" = 0.2,
+		"image" = preload("res://art/minion.png"),
+		"size" = 0.5,
 		
 		"ability" = ["empty"],
 	},
@@ -26,7 +41,7 @@ var mm = {
 		"att" = 15,
 		"att_r" = 30,
 		"att_CD" = 1,
-		"image" = preload("res://minion.png"),
+		"image" = preload("res://art/minion.png"),
 		"size" = 0.2,
 		
 		"ability" = ["empty"],
@@ -41,7 +56,7 @@ var mm = {
 		"att" = 5,
 		"att_r" = 50,
 		"att_CD" = 0.9,
-		"image" = preload("res://binion.png"),
+		"image" = preload("res://art/binion.png"),
 		"size" = 0,
 		
 		"ability" = ["empty"],
@@ -56,7 +71,7 @@ var mm = {
 		"att" = 50,
 		"att_r" = 50,
 		"att_CD" = 0.7,
-		"image" = preload("res://boxer.png"),
+		"image" = preload("res://art/boxer.png"),
 		"size" = 0,
 		
 		"ability" = ["empty"],
@@ -71,7 +86,7 @@ var mm = {
 		"att" = 20,
 		"att_r" = 250,
 		"att_CD" = 0.6,
-		"image" = preload("res://snow_b_s.png"),
+		"image" = preload("res://art/snow_b_s.png"),
 		"size" = -0.1,
 		
 		"ability" = ["apply_slow"],

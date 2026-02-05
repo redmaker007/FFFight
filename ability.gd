@@ -7,8 +7,7 @@ var ability_map = {
 	"empty":[Callable(self,"empty"),"null"]
 }
 
-func _ready() -> void:
-	print(ability_name)
+
 
 #常規觸發前提
 func on_spawn(owner): pass

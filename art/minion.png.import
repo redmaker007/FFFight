@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://boojvl3rf1re8"
-path="res://.godot/imported/snow_b_s.png-148f9cd865a609dbc9d08797fc0dfc6c.ctex"
+uid="uid://dwrwslc4vqk7k"
+path="res://.godot/imported/minion.png-79ba399442ae00b17c6d1666c8035d1c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://snow_b_s.png"
-dest_files=["res://.godot/imported/snow_b_s.png-148f9cd865a609dbc9d08797fc0dfc6c.ctex"]
+source_file="res://art/minion.png"
+dest_files=["res://.godot/imported/minion.png-79ba399442ae00b17c6d1666c8035d1c.ctex"]
 
 [params]
 
