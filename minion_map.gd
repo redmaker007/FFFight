@@ -53,7 +53,7 @@ var mm :Dictionary= {
 		
 		"speed" = 100,
 		"max_hp" = 60,
-		"att" = 5,
+		"att" = 10,
 		"att_r" = 50,
 		"att_CD" = 0.9,
 		"image" = preload("res://art/binion.png"),

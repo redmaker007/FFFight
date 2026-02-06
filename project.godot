@@ -24,6 +24,15 @@ Global="*res://global/Global.gd"
 
 window/stretch/scale_mode="integer"
 
+[file_customization]
+
+folder_colors={
+"res://art/": "purple",
+"res://global/": "blue",
+"res://resources/": "green",
+"res://scene/": "yellow"
+}
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
