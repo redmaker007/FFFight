@@ -1,6 +1,8 @@
 extends Resource
 class_name minion_data
 
+@export var minion_id:String
+
 @export var minion_name:String
 
 @export var cost:int

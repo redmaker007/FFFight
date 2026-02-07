@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_21les")
+minion_id = "snow_b_s"
 minion_name = "snow_ball_shooter"
 cost = 70
 speed = 70.0

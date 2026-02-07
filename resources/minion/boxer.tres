@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_hmhub")
+minion_id = "boxer"
 minion_name = "boxer"
 cost = 40
 speed = 40.0

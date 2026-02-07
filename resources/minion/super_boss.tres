@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_hqtx0")
+minion_id = "s_s"
 minion_name = "super_boss"
 cost = 25
 speed = 400.0
