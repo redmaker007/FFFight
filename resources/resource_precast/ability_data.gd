@@ -1,1 +1,2 @@
-extends Node
+extends Resource
+class_name ability_data

@@ -7,13 +7,13 @@
 script = ExtResource("1_21les")
 minion_id = "snow_b_s"
 minion_name = "snow_ball_shooter"
-cost = 70
+cost = 65
 speed = 70.0
 max_hp = 80.0
-att = 20.0
+att = 26.0
 att_r = 250.0
-att_CD = 0.6
+att_CD = 0.55
 image = ExtResource("1_fgek5")
 size = -0.1
-ability = [null]
+ability = ["apply_slow"]
 metadata/_custom_type_script = "uid://dw6wb6dt8h3n5"

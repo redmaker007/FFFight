@@ -27,7 +27,7 @@ func _ready() -> void:
 
 func spawn_base(side_n):
 	var new_unit = Global.minion_scene.instantiate()
-	new_unit.ini_w_dic(mm.mm["base"])
+	new_unit.ini_w_data(UnitAutoload.unit_dic["base"])
 	new_unit.add_to_group("base_tower")
 	
 	new_unit.z_index = 3

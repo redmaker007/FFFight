@@ -48,10 +48,10 @@ func get_fund(amount):
 	money_amount += amount
 	money_text.text = "$: "+str(money_amount)
 
-func buy_unit(unit_name):
-	var cost = GM.mm.mm[unit_name]["cost"]
+func buy_unit(unit_id):
+	var cost = UnitAutoload.unit_dic[unit_id].cost
 	if money_amount >= cost:
-		SignalBus.emit_signal("spawn_unit_by_name",unit_name)
+		SignalBus.emit_signal("spawn_unit_by_name",unit_id)
 		money_amount -= cost
 		money_text.text = "$: "+str(money_amount)
 

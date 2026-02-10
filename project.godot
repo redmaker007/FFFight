@@ -19,6 +19,7 @@ config/icon="res://art/icon.svg"
 
 SignalBus="*res://global/Signal_Bus.gd"
 Global="*res://global/Global.gd"
+UnitAutoload="*res://global/unit_autoload.gd"
 
 [display]
 

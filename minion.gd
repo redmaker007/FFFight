@@ -101,19 +101,19 @@ func set_png(png):
 	$Minion.texture = png
 	pass
 
-func ini_w_dic(dic):
-	unit_name = dic["name"]
-	speed = dic["speed"]
-	hp = dic["max_hp"]
-	max_hp = dic["max_hp"]
-	att = dic["att"]
-	att_r = dic["att_r"]
-	att_CD = dic["att_CD"]
-	set_png(dic["image"])
-	scale = Vector2(1,1)*(1+dic["size"])
-	size = dic["size"]
+func ini_w_data(data:minion_data):
+	unit_name =data.minion_name
+	speed = data.speed
+	hp = data.max_hp
+	max_hp = data.max_hp
+	att = data.att
+	att_r = data.att_r
+	att_CD = data.att_CD
+	set_png(data.image)
+	scale = Vector2(1,1)*(1+data.size)
+	size = data.size
 	att_CD_sec = att_CD
-	abilities = dic["ability"]
+	abilities = data.ability
 	
 	pass
 

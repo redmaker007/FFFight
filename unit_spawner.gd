@@ -15,11 +15,11 @@ func function_switch(v:bool):
 
 
 
-func on_spwan_unit_pressed(name):
+func on_spwan_unit_pressed(minion_id):
 	if not functioning:
 		return
 	var new_unit = Global.minion_scene.instantiate()
-	new_unit.ini_w_dic(GM.mm.mm[name])
+	new_unit.ini_w_data(UnitAutoload.unit_dic[minion_id])
 	
 	new_unit.z_index = 3
 	new_unit.position = Vector2(50,425)

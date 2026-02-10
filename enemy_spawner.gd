@@ -8,7 +8,7 @@ extends Node
 
 var GM
 
-var pool = ["red","blue","boxer","snow_ball_shooter"]
+var pool = ["red","blue","boxer","snow_b_s","butterfly_k"]
 var u_name
 
 var functioning
@@ -58,7 +58,7 @@ func spawn_level_1():
 		time_int = 1
 	elif count < 75:
 		if count %10 == 0:
-			unit_name = "snow_ball_shooter"
+			unit_name = "snow_b_s"
 			time_int = 3
 		else:
 			unit_name = ["red","blue"].pick_random()
@@ -74,11 +74,11 @@ func spawn_level_1():
 	count +=1
 	return [unit_name,time_int]
 
-func spawn_enemy_1(s_name):
+func spawn_enemy_1(s_id:String):
 	
 	var new_enemy = Global.minion_scene.instantiate()
 
-	new_enemy.ini_w_dic(GM.mm.mm[s_name])
+	new_enemy.ini_w_data(UnitAutoload.unit_dic[s_id])
 
 	
 	new_enemy.z_index = 3

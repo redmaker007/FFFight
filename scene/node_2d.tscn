@@ -88,22 +88,23 @@ theme_override_constants/separation = 50
 
 [node name="spwan_unit_1" parent="CanvasLayer/HBoxContainer" instance=ExtResource("10_el7ve")]
 layout_mode = 2
-unit_name = "red"
+unit_id = "red"
 
 [node name="spwan_unit_2" parent="CanvasLayer/HBoxContainer" instance=ExtResource("10_el7ve")]
 layout_mode = 2
-unit_name = "blue"
+unit_id = "blue"
 
 [node name="spwan_unit_3" parent="CanvasLayer/HBoxContainer" instance=ExtResource("10_el7ve")]
 layout_mode = 2
+unit_id = "boxer"
 
 [node name="spwan_unit_4" parent="CanvasLayer/HBoxContainer" instance=ExtResource("10_el7ve")]
 layout_mode = 2
-unit_name = "snow_ball_shooter"
+unit_id = "snow_b_s"
 
 [node name="spwan_unit_5" parent="CanvasLayer/HBoxContainer" instance=ExtResource("10_el7ve")]
 layout_mode = 2
-unit_name = "super_boss"
+unit_id = "butterfly_k"
 
 [node name="background" type="Node" parent="."]
 
