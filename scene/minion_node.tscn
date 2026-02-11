@@ -51,7 +51,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_fwx2u")
 value = 100.0
 show_percentage = false
 
-[node name="ability_slot" type="Node" parent="."]
-
 [node name="debuff_map" type="Node" parent="."]
 script = ExtResource("5_483qr")
+
+[node name="debuff_slot" type="Node" parent="."]

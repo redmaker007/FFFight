@@ -9,9 +9,6 @@ class_name game_manager
 #canvaslayer
 @onready var cl = $CanvasLayer
 
-#unit data
-@onready var mm:Node = $minion_map
-
 #money system
 @onready var ms = $Money_system
 

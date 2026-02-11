@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ability_data" load_steps=9 format=3 uid="uid://c6jvmwwut4vdx"]
+
+[ext_resource type="Script" uid="uid://dv6ph7x3xbuk3" path="res://resources/resource_precast/ability_data.gd" id="1_hwpen"]
+[ext_resource type="Script" uid="uid://cgqftjykmifcv" path="res://resources/helper_scripts_precast/ability_condition.gd" id="1_onx7h"]
+[ext_resource type="Script" uid="uid://bkvu377m8ee7b" path="res://resources/ability_condition/empty_con.gd" id="2_4h0ld"]
+[ext_resource type="Script" uid="uid://dicf2r5ngefao" path="res://resources/ability_process/apply _debuff_to_target_pro.gd" id="3_8iypp"]
+[ext_resource type="Script" uid="uid://soiitbl61ak0" path="res://resources/ability_target_selector/default_ts.gd" id="4_2awa2"]
+
+[sub_resource type="Resource" id="Resource_8iypp"]
+script = ExtResource("2_4h0ld")
+metadata/_custom_type_script = "uid://bkvu377m8ee7b"
+
+[sub_resource type="Resource" id="Resource_j0fak"]
+script = ExtResource("4_2awa2")
+metadata/_custom_type_script = "uid://soiitbl61ak0"
+
+[sub_resource type="Resource" id="Resource_2awa2"]
+script = ExtResource("3_8iypp")
+target = SubResource("Resource_j0fak")
+metadata/_custom_type_script = "uid://dicf2r5ngefao"
+
+[resource]
+script = ExtResource("1_hwpen")
+ability_id = "a_slow"
+ability_name = "apply slow"
+cons = Array[ExtResource("1_onx7h")]([SubResource("Resource_8iypp")])
+pro = SubResource("Resource_2awa2")
+metadata/_custom_type_script = "uid://dv6ph7x3xbuk3"

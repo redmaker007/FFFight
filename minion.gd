@@ -43,9 +43,7 @@ func _ready() -> void:
 	switch_state(state.walk)
 	position = self.position - Vector2(0,size*50)
 	$health.value = 100
-	
-	for a in abilities:
-		add_abilities(a)
+
 
 
 
@@ -117,19 +115,21 @@ func ini_w_data(data:minion_data):
 	
 	pass
 
-func add_abilities(ab_name):
-	var new_ab = Global.ability_preload.instantiate()
-	new_ab.ability_name = ab_name
-	$ability_slot.add_child(new_ab)
+
 
 func attack_t():
+	#攻击时没有目标就回到走路state
 	if not target:
 		switch_state(state.walk)
 		return
+	#不然就造成伤害
 	target.take_damage(att)
-	for a in $ability_slot.get_children():
+	#尝试使用所有攻击时触发的技能
+	for a in abilities:
 		a.on_attack(self,target)
 		pass
+	
+	#简易攻击动画 -之后改
 	attack_animation()
 	pass
 
