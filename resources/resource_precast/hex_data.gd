@@ -10,7 +10,7 @@ class_name hex_data
 func get_pos_des():
 	var text =""
 	for i in positive_hex_list:
-		text += i.get_description()
+		text += i.get_description()+"\n"
 	return text
 
 func get_neg_des():

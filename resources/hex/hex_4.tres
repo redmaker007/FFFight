@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="hex_data" load_steps=3 format=3 uid="uid://ckm6vnbaroat7"]
+
+[ext_resource type="Script" uid="uid://bewmmuup735ge" path="res://resources/resource_precast/sub_hex_data.gd" id="1_nfvdu"]
+[ext_resource type="Script" uid="uid://cn1vb61dhtl1b" path="res://resources/resource_precast/hex_data.gd" id="2_pck2e"]
+
+[resource]
+script = ExtResource("2_pck2e")
+hex_id = "moremoney_n_expensive"
+metadata/_custom_type_script = "uid://cn1vb61dhtl1b"

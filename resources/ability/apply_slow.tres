@@ -1,30 +1,30 @@
 [gd_resource type="Resource" script_class="ability_data" load_steps=10 format=3 uid="uid://c6jvmwwut4vdx"]
 
-[ext_resource type="Script" uid="uid://cgqftjykmifcv" path="res://resources/ability/helper_scripts_precast/ability_condition.gd" id="1_2awa2"]
 [ext_resource type="Script" uid="uid://dv6ph7x3xbuk3" path="res://resources/resource_precast/ability_data.gd" id="1_hwpen"]
-[ext_resource type="Script" uid="uid://bkvu377m8ee7b" path="res://resources/ability/ability_condition/empty_con.gd" id="2_j0fak"]
-[ext_resource type="Resource" uid="uid://duhnm8thkessq" path="res://resources/ability/debuff/slow.tres" id="3_j0fak"]
-[ext_resource type="Script" uid="uid://dicf2r5ngefao" path="res://resources/ability/ability_process/apply _debuff_to_target_pro.gd" id="3_vpbb2"]
-[ext_resource type="Script" uid="uid://soiitbl61ak0" path="res://resources/ability/ability_target_selector/default_ts.gd" id="4_2rsdv"]
+[ext_resource type="Script" uid="uid://cgqftjykmifcv" path="res://resources/ability/helper_scripts_precast/ability_condition.gd" id="1_onx7h"]
+[ext_resource type="Script" uid="uid://bkvu377m8ee7b" path="res://resources/ability/ability_condition/empty_con.gd" id="2_2awa2"]
+[ext_resource type="Script" uid="uid://dicf2r5ngefao" path="res://resources/ability/ability_process/apply _debuff_to_target_pro.gd" id="3_j0fak"]
+[ext_resource type="Resource" uid="uid://duhnm8thkessq" path="res://resources/ability/debuff/slow.tres" id="3_vpbb2"]
+[ext_resource type="Script" uid="uid://soiitbl61ak0" path="res://resources/ability/ability_target_selector/default_ts.gd" id="4_vpbb2"]
 
-[sub_resource type="Resource" id="Resource_8iypp"]
-script = ExtResource("2_j0fak")
+[sub_resource type="Resource" id="Resource_2rsdv"]
+script = ExtResource("2_2awa2")
 metadata/_custom_type_script = "uid://bkvu377m8ee7b"
 
-[sub_resource type="Resource" id="Resource_j0fak"]
-script = ExtResource("4_2rsdv")
+[sub_resource type="Resource" id="Resource_s2aig"]
+script = ExtResource("4_vpbb2")
 metadata/_custom_type_script = "uid://soiitbl61ak0"
 
-[sub_resource type="Resource" id="Resource_2awa2"]
-script = ExtResource("3_vpbb2")
-target = SubResource("Resource_j0fak")
-_debuff = ExtResource("3_j0fak")
+[sub_resource type="Resource" id="Resource_pohsl"]
+script = ExtResource("3_j0fak")
+target = SubResource("Resource_s2aig")
+_debuff = ExtResource("3_vpbb2")
 metadata/_custom_type_script = "uid://dicf2r5ngefao"
 
 [resource]
 script = ExtResource("1_hwpen")
 ability_id = "a_slow"
 ability_name = "apply slow"
-cons = Array[ExtResource("1_2awa2")]([SubResource("Resource_8iypp")])
-pro = SubResource("Resource_2awa2")
+cons = Array[ExtResource("1_onx7h")]([SubResource("Resource_2rsdv")])
+pro = SubResource("Resource_pohsl")
 metadata/_custom_type_script = "uid://dv6ph7x3xbuk3"

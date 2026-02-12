@@ -3,6 +3,7 @@ extends Node
 var default_money_amount =100
 var default_bank_level = 1
 var income_multiplyer = 1
+var upgrade_multiplayer = 1
 
 #机制参数
 var bank_active = false
@@ -58,21 +59,21 @@ func buy_unit(unit_id):
 
 func upgrade_bank():
 	var cost =bank_upgrade_map[current_bank_level][1]
-	if money_amount >= cost:
-		money_amount -=cost
+	if money_amount >= cost*upgrade_multiplayer:
+		money_amount -=cost*upgrade_multiplayer
 		money_text.text = "$: "+str(money_amount)
 		current_bank_level+=1
-		get_parent().get_node("CanvasLayer/HBoxContainer2/money_upgrade/money_upgrade_text").text = str(bank_upgrade_map[current_bank_level][1])
+		get_parent().get_node("CanvasLayer/HBoxContainer2/money_upgrade/money_upgrade_text").text = str(bank_upgrade_map[current_bank_level][1]*upgrade_multiplayer)
 
 func start_level():
 	money_amount += default_money_amount
 	current_bank_level = default_bank_level
 	money_text.text = "$: "+str(money_amount)
-	get_parent().get_node("CanvasLayer/HBoxContainer2/money_upgrade/money_upgrade_text").text = str(bank_upgrade_map[current_bank_level][1])
+	get_parent().get_node("CanvasLayer/HBoxContainer2/money_upgrade/money_upgrade_text").text = str(bank_upgrade_map[current_bank_level][1]*upgrade_multiplayer)
 
 
 func reset_bank():
 	current_bank_level = default_bank_level
 	money_amount = 0
 	money_text.text = "$: "+str(money_amount)
-	get_parent().get_node("CanvasLayer/HBoxContainer2/money_upgrade/money_upgrade_text").text = str(bank_upgrade_map[current_bank_level][1])
+	get_parent().get_node("CanvasLayer/HBoxContainer2/money_upgrade/money_upgrade_text").text = str(bank_upgrade_map[current_bank_level][1]*upgrade_multiplayer)

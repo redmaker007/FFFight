@@ -24,7 +24,7 @@ metadata/_custom_type_script = "uid://bdmyolyttc2sg"
 [sub_resource type="Resource" id="Resource_jgs5o"]
 script = ExtResource("2_bmtxh")
 stat_str = "max_hp"
-addition_change = 200.0
+addition_change = 100.0
 target_selec = SubResource("Resource_ioepy")
 metadata/_custom_type_script = "uid://b03112umjschj"
 
@@ -35,7 +35,7 @@ metadata/_custom_type_script = "uid://bdmyolyttc2sg"
 [sub_resource type="Resource" id="Resource_murnx"]
 script = ExtResource("2_bmtxh")
 stat_str = "hp"
-addition_change = 200.0
+addition_change = 100.0
 target_selec = SubResource("Resource_bmtxh")
 metadata/_custom_type_script = "uid://b03112umjschj"
 
