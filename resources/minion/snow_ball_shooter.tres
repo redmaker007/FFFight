@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="minion_data" load_steps=3 format=3 uid="uid://ph6hld5vjlt2"]
+[gd_resource type="Resource" script_class="minion_data" load_steps=4 format=3 uid="uid://ph6hld5vjlt2"]
 
 [ext_resource type="Script" uid="uid://dw6wb6dt8h3n5" path="res://resources/resource_precast/minion_data.gd" id="1_21les"]
 [ext_resource type="Texture2D" uid="uid://boojvl3rf1re8" path="res://art/snow_b_s.png" id="1_fgek5"]
+[ext_resource type="Resource" uid="uid://c6jvmwwut4vdx" path="res://resources/ability/apply_slow.tres" id="1_ymcjq"]
 
 [resource]
 script = ExtResource("1_21les")
@@ -15,5 +16,5 @@ att_r = 250.0
 att_CD = 0.55
 image = ExtResource("1_fgek5")
 size = -0.1
-ability = ["apply_slow"]
+ability = [ExtResource("1_ymcjq")]
 metadata/_custom_type_script = "uid://dw6wb6dt8h3n5"

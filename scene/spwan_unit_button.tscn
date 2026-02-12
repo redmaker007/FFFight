@@ -10,4 +10,3 @@ offset_right = 105.0
 offset_bottom = 595.0
 text = "unit 1"
 script = ExtResource("1_lv4kh")
-unit_name = "boxer"

@@ -87,6 +87,8 @@ func spawn_enemy_1(s_id:String):
 	new_enemy.add_to_group("unit")
 	new_enemy.add_to_group("enemy")
 	GM.add_child(new_enemy)
+	SignalBus.unit_spawned.emit(new_enemy)
+	new_enemy.refresh()
 
 func reset_level():
 	count = 0

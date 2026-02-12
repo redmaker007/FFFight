@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhrsjn0eldohq"]
+[gd_scene load_steps=3 format=3 uid="uid://dhrsjn0eldohq"]
 
 [ext_resource type="Script" uid="uid://dpyqrl00ixgra" path="res://scene/hex_select_window.gd" id="1_hn7vx"]
-[ext_resource type="PackedScene" uid="uid://lj33bbvnuyxx" path="res://scene/hex_select_button.tscn" id="2_dws2p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hn7vx"]
 bg_color = Color(0.6, 0.6, 0.6, 0.29411766)
@@ -24,12 +23,3 @@ size_flags_horizontal = 4
 layout_mode = 2
 size_flags_vertical = 6
 theme_override_constants/separation = 40
-
-[node name="hex_select_button" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_dws2p")]
-layout_mode = 2
-
-[node name="hex_select_button2" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_dws2p")]
-layout_mode = 2
-
-[node name="hex_select_button3" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_dws2p")]
-layout_mode = 2

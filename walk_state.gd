@@ -1,5 +1,6 @@
 extends Node
 
+@onready var mn = get_parent()
 func state_ready():
 	pass
 
@@ -7,8 +8,11 @@ func state_ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func state_process(delta: float) -> void:
-	if get_parent().side == "ally":
-		get_parent().position.x +=get_parent().speed*delta
+	var calculated_speed
+	
+	calculated_speed = mn.get_moded_stat("speed")
+	if mn.side == "ally":
+		mn.position.x +=(calculated_speed)*delta
 	else:
-		get_parent().position.x -=get_parent().speed*delta
+		mn.position.x -=(calculated_speed)*delta
 	pass

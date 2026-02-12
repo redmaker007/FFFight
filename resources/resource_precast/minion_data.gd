@@ -14,4 +14,4 @@ class_name minion_data
 @export var att_CD:float
 @export var image:Texture2D
 @export var size:float
-@export var ability:Array
+@export var ability:Array[ability_data]

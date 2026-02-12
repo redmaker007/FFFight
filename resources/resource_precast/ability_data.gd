@@ -13,7 +13,7 @@ enum trigger_way{on_attack,death,X_times,get_hit,get_damage}
 @export var pro:ability_process
 
 
-func condtion_then_process(minion:Node2D):
+func condition_then_process(minion:Node2D):
 	for c in cons:
 		if not(c.condition(minion)):
 			return

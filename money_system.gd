@@ -2,6 +2,7 @@ extends Node
 #公开参数
 var default_money_amount =100
 var default_bank_level = 1
+var income_multiplyer = 1
 
 #机制参数
 var bank_active = false
@@ -45,7 +46,7 @@ func _process(delta: float) -> void:
 
 #直接打款
 func get_fund(amount):
-	money_amount += amount
+	money_amount += amount*income_multiplyer
 	money_text.text = "$: "+str(money_amount)
 
 func buy_unit(unit_id):

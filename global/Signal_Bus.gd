@@ -14,3 +14,6 @@ signal try_upgrade_bank
 
 @warning_ignore("unused_signal")
 signal hex_select
+
+@warning_ignore("unused_signal")
+signal unit_spawned

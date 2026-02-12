@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="debuff" load_steps=2 format=3 uid="uid://duhnm8thkessq"]
+
+[ext_resource type="Script" uid="uid://cmcvig25x4al7" path="res://resources/ability/helper_scripts_precast/debuff.gd" id="1_8moro"]
+
+[resource]
+script = ExtResource("1_8moro")
+debuff_id = "slow"
+stat_str = "speed"
+duration = 2.0
+percentage_change = -0.4
+metadata/_custom_type_script = "uid://cmcvig25x4al7"

@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://beh7q7npd5fjt" path="res://art/castle.png" id="12_bapa2"]
 [ext_resource type="Script" uid="uid://bq6jelu08e04t" path="res://unit_spawner.gd" id="13_drt2y"]
 [ext_resource type="Script" uid="uid://3a083idnpn5a" path="res://enemy_spawner.gd" id="14_5n7tr"]
-[ext_resource type="Script" uid="uid://7i2l43s7nnwr" path="res://scene/hex_map.gd" id="16_f08rc"]
+[ext_resource type="Script" uid="uid://j06vnrgftic5" path="res://scene/hex_manager.gd" id="16_f08rc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x0ka3"]
 bg_color = Color(0.6901961, 0.5921569, 0.27058825, 0.6431373)
@@ -104,7 +104,7 @@ unit_id = "snow_b_s"
 
 [node name="spwan_unit_5" parent="CanvasLayer/HBoxContainer" instance=ExtResource("10_el7ve")]
 layout_mode = 2
-unit_id = "butterfly_k"
+unit_id = "s_s"
 
 [node name="background" type="Node" parent="."]
 
@@ -138,8 +138,6 @@ spec_unit = "snow_ball_shooter"
 [node name="level_manager" type="Node" parent="."]
 
 [node name="hex_manager" type="Node" parent="."]
-
-[node name="hex_map" type="Node" parent="hex_manager"]
 script = ExtResource("16_f08rc")
 
 [connection signal="pressed" from="CanvasLayer/HBoxContainer2/money_upgrade" to="button_signal_set" method="_on_money_upgrade_pressed"]

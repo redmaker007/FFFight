@@ -1,10 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://cjm0nj26a41bk"]
+[gd_scene load_steps=12 format=3 uid="uid://cjm0nj26a41bk"]
 
 [ext_resource type="Script" uid="uid://nri6rxqxptwd" path="res://minion.gd" id="1_g426k"]
 [ext_resource type="Script" uid="uid://dxdl67sg02lqg" path="res://walk_state.gd" id="2_mgw1k"]
 [ext_resource type="Script" uid="uid://b0k5fb6t88m0" path="res://att_state.gd" id="3_25jae"]
+[ext_resource type="Shader" uid="uid://rqcnr6mxctpc" path="res://scene/minion_node.gdshader" id="4_25jae"]
 [ext_resource type="Texture2D" uid="uid://dwrwslc4vqk7k" path="res://art/minion.png" id="4_xwy43"]
 [ext_resource type="Script" uid="uid://daeo56rcyrgfn" path="res://debuff_map.gd" id="5_483qr"]
+[ext_resource type="Script" uid="uid://depepjwkj5rfx" path="res://scene/debuff_slot.gd" id="6_mgw1k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xwy43"]
+shader = ExtResource("4_25jae")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_modifier = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fwx2u"]
 radius = 30.066593
@@ -33,6 +40,7 @@ script = ExtResource("2_mgw1k")
 script = ExtResource("3_25jae")
 
 [node name="Minion" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_xwy43")
 texture = ExtResource("4_xwy43")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -55,3 +63,4 @@ show_percentage = false
 script = ExtResource("5_483qr")
 
 [node name="debuff_slot" type="Node" parent="."]
+script = ExtResource("6_mgw1k")

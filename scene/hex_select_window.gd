@@ -1,12 +1,17 @@
 extends PanelContainer
 
+var hex :Array[hex_data]=[]
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	#position = Vector2(1152,648)
-	pass
+var select_butts=[]
+
+var hex_select_button = preload("res://scene/hex_select_button.tscn")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+
+
+func set_hex(h_list):
+	for i in range(len(h_list)):
+		var b = hex_select_button.instantiate()
+		b.h = h_list[i]
+		$VBoxContainer/HBoxContainer.add_child(b)
 	pass

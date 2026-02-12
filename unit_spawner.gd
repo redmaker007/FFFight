@@ -27,4 +27,6 @@ func on_spwan_unit_pressed(minion_id):
 	new_unit.add_to_group("unit")
 	new_unit.add_to_group("ally")
 	GM.add_child(new_unit)
+	SignalBus.unit_spawned.emit(new_unit)
+	new_unit.refresh()
 	return new_unit
