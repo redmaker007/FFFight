@@ -7,5 +7,5 @@ class_name apply_debuff_to_target_pro
 
 func process(m):
 	for t in target.tar_select(m):
-		t.apply_debuff(_debuff)
+		t.apply_debuff(_debuff,m)
 	pass

@@ -11,7 +11,7 @@ class_name minion_data
 @export var max_hp:float
 @export var att:float
 @export var att_r:float
-@export var att_CD:float
+@export var att_spd:float
 @export var image:Texture2D
 @export var size:float
 @export var ability:Array[ability_data]

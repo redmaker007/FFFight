@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="ability_data" load_steps=11 format=3 uid="uid://dksmeb22gl1et"]
+
+[ext_resource type="Script" uid="uid://cgqftjykmifcv" path="res://resources/ability/helper_scripts_precast/ability_condition.gd" id="1_x8ros"]
+[ext_resource type="Script" uid="uid://dv6ph7x3xbuk3" path="res://resources/resource_precast/ability_data.gd" id="2_86ujs"]
+[ext_resource type="Script" uid="uid://bkvu377m8ee7b" path="res://resources/ability/ability_condition/empty_con.gd" id="2_nn6h6"]
+[ext_resource type="Script" uid="uid://bre3b7pjo0lsm" path="res://resources/ability/ability_process/due_X_damage_pro.gd" id="3_qut6n"]
+[ext_resource type="Script" uid="uid://ddacx1apud8as" path="res://resources/ability/ability_target_selector/self_ts.gd" id="4_cm1u6"]
+[ext_resource type="Script" uid="uid://soiitbl61ak0" path="res://resources/ability/ability_target_selector/default_ts.gd" id="4_er6li"]
+
+[sub_resource type="Resource" id="Resource_qut6n"]
+script = ExtResource("2_nn6h6")
+metadata/_custom_type_script = "uid://bkvu377m8ee7b"
+
+[sub_resource type="Resource" id="Resource_h1bo1"]
+script = ExtResource("4_cm1u6")
+metadata/_custom_type_script = "uid://ddacx1apud8as"
+
+[sub_resource type="Resource" id="Resource_cm1u6"]
+script = ExtResource("4_er6li")
+aoe = true
+aoe_range = 150.0
+aoe_central_target = SubResource("Resource_h1bo1")
+side = 1
+metadata/_custom_type_script = "uid://soiitbl61ak0"
+
+[sub_resource type="Resource" id="Resource_yp6a8"]
+script = ExtResource("3_qut6n")
+target = SubResource("Resource_cm1u6")
+constant_damage_value = 50.0
+metadata/_custom_type_script = "uid://bre3b7pjo0lsm"
+
+[resource]
+script = ExtResource("2_86ujs")
+ability_id = "death_bomb"
+ability_name = "Death Bomb"
+trigger = 1
+cons = Array[ExtResource("1_x8ros")]([SubResource("Resource_qut6n")])
+pro = SubResource("Resource_yp6a8")
+metadata/_custom_type_script = "uid://dv6ph7x3xbuk3"

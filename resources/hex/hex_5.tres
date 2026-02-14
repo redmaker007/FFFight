@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="hex_data" load_steps=12 format=3 uid="uid://i7mu6j85fra1"]
+
+[ext_resource type="Script" uid="uid://bewmmuup735ge" path="res://resources/resource_precast/sub_hex_data.gd" id="1_d28xr"]
+[ext_resource type="Script" uid="uid://cn1vb61dhtl1b" path="res://resources/resource_precast/hex_data.gd" id="2_n0rn3"]
+[ext_resource type="Script" uid="uid://dv6ph7x3xbuk3" path="res://resources/resource_precast/ability_data.gd" id="2_wqrmn"]
+[ext_resource type="Resource" uid="uid://dksmeb22gl1et" path="res://resources/ability/death_bomb.tres" id="3_7aput"]
+[ext_resource type="Script" uid="uid://d2by18j5333ew" path="res://resources/hex/sub_hex/grant_ability_hex.gd" id="4_07cdg"]
+[ext_resource type="Script" uid="uid://bdmyolyttc2sg" path="res://resources/ability/ability_target_selector/all_unit_type_ts.gd" id="5_wskqq"]
+[ext_resource type="Script" uid="uid://b03112umjschj" path="res://resources/hex/sub_hex/give_target_stat.gd" id="6_w3c1q"]
+
+[sub_resource type="Resource" id="Resource_2gq5l"]
+script = ExtResource("5_wskqq")
+pick_side = 1
+metadata/_custom_type_script = "uid://bdmyolyttc2sg"
+
+[sub_resource type="Resource" id="Resource_kdqnx"]
+script = ExtResource("4_07cdg")
+ability_l = Array[ExtResource("2_wqrmn")]([ExtResource("3_7aput")])
+target_selec = SubResource("Resource_2gq5l")
+one_time = false
+metadata/_custom_type_script = "uid://d2by18j5333ew"
+
+[sub_resource type="Resource" id="Resource_61dnx"]
+script = ExtResource("5_wskqq")
+metadata/_custom_type_script = "uid://bdmyolyttc2sg"
+
+[sub_resource type="Resource" id="Resource_855u1"]
+script = ExtResource("6_w3c1q")
+stat_str = "att_spd"
+addition_change = 0.2
+target_selec = SubResource("Resource_61dnx")
+one_time = false
+metadata/_custom_type_script = "uid://b03112umjschj"
+
+[resource]
+script = ExtResource("2_n0rn3")
+hex_id = "zombie_fight"
+positive_hex_list = Array[ExtResource("1_d28xr")]([SubResource("Resource_855u1")])
+negative_hex_list = Array[ExtResource("1_d28xr")]([SubResource("Resource_kdqnx")])
+metadata/_custom_type_script = "uid://cn1vb61dhtl1b"

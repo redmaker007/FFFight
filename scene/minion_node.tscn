@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cjm0nj26a41bk"]
+[gd_scene load_steps=15 format=3 uid="uid://cjm0nj26a41bk"]
 
 [ext_resource type="Script" uid="uid://nri6rxqxptwd" path="res://minion.gd" id="1_g426k"]
 [ext_resource type="Script" uid="uid://dxdl67sg02lqg" path="res://walk_state.gd" id="2_mgw1k"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://dwrwslc4vqk7k" path="res://art/minion.png" id="4_xwy43"]
 [ext_resource type="Script" uid="uid://daeo56rcyrgfn" path="res://debuff_map.gd" id="5_483qr"]
 [ext_resource type="Script" uid="uid://depepjwkj5rfx" path="res://scene/debuff_slot.gd" id="6_mgw1k"]
+[ext_resource type="Script" uid="uid://bejkep8kkk58e" path="res://scene/stat_component.gd" id="8_07p27"]
+[ext_resource type="Script" uid="uid://cjbsj7qvcof25" path="res://scene/visual.gd" id="9_wky7f"]
+[ext_resource type="Script" uid="uid://cqod45sb820xc" path="res://scene/detector.gd" id="10_x8bxv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xwy43"]
 shader = ExtResource("4_25jae")
@@ -64,3 +67,12 @@ script = ExtResource("5_483qr")
 
 [node name="debuff_slot" type="Node" parent="."]
 script = ExtResource("6_mgw1k")
+
+[node name="stat_component" type="Node" parent="."]
+script = ExtResource("8_07p27")
+
+[node name="visual" type="Node" parent="."]
+script = ExtResource("9_wky7f")
+
+[node name="detector" type="Node" parent="."]
+script = ExtResource("10_x8bxv")
