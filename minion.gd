@@ -56,7 +56,7 @@ var unit_name
 var att_CD_sec
 
 #技能槽
-var abilities = []
+var abilities = {}
 
 
 #狀態機
@@ -157,10 +157,17 @@ func ini_w_data(data:minion_data):
 	scale = Vector2(1,1)*(1+data.size)
 	size = data.size
 	att_CD_sec = stat_dic["att_CD"]
-	abilities = data.ability
+	set_abilities(data.ability)
+	
 	
 	pass
 
+func set_abilities(abilities_data):
+	for a in abilities_data:
+		var act_ab = active_ability.new()
+		act_ab.ab_data = a
+		act_ab.init()
+		abilities[a.ability_name] = act_ab
 
 
 func attack_t():
@@ -174,8 +181,9 @@ func attack_t():
 
 	#尝试使用所有攻击时触发的技能
 	for a in abilities:
-		if a.trigger == 0:
-			a.condition_then_process(self)
+		var act_ab = abilities[a].ab_data
+		if act_ab.trigger == 0:
+			act_ab.condition_then_process(self)
 		pass
 	
 	#简易攻击动画 -之后改
@@ -200,6 +208,7 @@ func attack_animation():
 	tw.tween_property($Minion,"rotation_degrees",0,0.05)
 
 func take_damage(value):
+	print(value)
 	play_hit_flash()
 	stat_dic["hp"] -= value
 	$health.value = float(get_moded_stat("hp"))/float(get_moded_stat("max_hp"))*100
@@ -231,3 +240,21 @@ func play_hit_flash():
 		# 2. 用 Tween 做一个快速的淡出动画 (0.1秒变回原色)
 		var tween = create_tween()
 		tween.tween_property(sprite.material, "shader_parameter/flash_modifier", 0.0, 0.1)
+
+func get_range_unit(t_side=0,dis:float = 0):
+	var o_side
+	if t_side == 0:
+		o_side = self.side
+	else:
+		if self.side == "ally":
+			o_side = "enemy"
+		else:
+			o_side = "ally"
+	
+	var targets = get_tree().get_nodes_in_group(o_side)
+	var results =[]
+	for t in targets:
+		if abs(t.position.x - self.position.x) <= dis:
+			results.append(t)
+			pass
+	return results

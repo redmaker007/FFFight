@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="ability_data" load_steps=12 format=3 uid="uid://g2jjv3u7b5ml"]
+
+[ext_resource type="Script" uid="uid://cgqftjykmifcv" path="res://resources/ability/helper_scripts_precast/ability_condition.gd" id="1_iblw4"]
+[ext_resource type="Script" uid="uid://dv6ph7x3xbuk3" path="res://resources/resource_precast/ability_data.gd" id="2_irejl"]
+[ext_resource type="Script" uid="uid://e47aigaveont" path="res://resources/ability/ability_condition/counter_con.gd" id="2_itp6f"]
+[ext_resource type="Script" uid="uid://b5dy1hiiijtgq" path="res://resources/ability/ability_condition/chance_con.gd" id="3_ccjfp"]
+[ext_resource type="Script" uid="uid://cmcvig25x4al7" path="res://resources/ability/helper_scripts_precast/debuff.gd" id="4_c1ewx"]
+[ext_resource type="Script" uid="uid://ctu6ea3dgd1i0" path="res://resources/ability/ability_process/Enhanced_basic_attack.gd" id="5_n1hxu"]
+[ext_resource type="Script" uid="uid://soiitbl61ak0" path="res://resources/ability/ability_target_selector/default_ts.gd" id="6_r8v0x"]
+
+[sub_resource type="Resource" id="Resource_30wgc"]
+script = ExtResource("2_itp6f")
+counter_name = "chance hit"
+target_counter_value = 1
+metadata/_custom_type_script = "uid://e47aigaveont"
+
+[sub_resource type="Resource" id="Resource_pd1h4"]
+script = ExtResource("3_ccjfp")
+chance = 0.3
+metadata/_custom_type_script = "uid://b5dy1hiiijtgq"
+
+[sub_resource type="Resource" id="Resource_drb05"]
+script = ExtResource("6_r8v0x")
+metadata/_custom_type_script = "uid://soiitbl61ak0"
+
+[sub_resource type="Resource" id="Resource_3hc3t"]
+script = ExtResource("5_n1hxu")
+target = SubResource("Resource_drb05")
+multiply_att = 2.0
+metadata/_custom_type_script = "uid://ctu6ea3dgd1i0"
+
+[resource]
+script = ExtResource("2_irejl")
+ability_id = "c_c"
+ability_name = "chance critical"
+cons = Array[ExtResource("1_iblw4")]([SubResource("Resource_30wgc"), SubResource("Resource_pd1h4")])
+pro = SubResource("Resource_3hc3t")
+metadata/_custom_type_script = "uid://dv6ph7x3xbuk3"

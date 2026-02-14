@@ -104,7 +104,7 @@ unit_id = "snow_b_s"
 
 [node name="spwan_unit_5" parent="CanvasLayer/HBoxContainer" instance=ExtResource("10_el7ve")]
 layout_mode = 2
-unit_id = "s_s"
+unit_id = "butterfly_k"
 
 [node name="background" type="Node" parent="."]
 

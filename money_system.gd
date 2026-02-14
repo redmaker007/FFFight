@@ -48,32 +48,33 @@ func _process(delta: float) -> void:
 #直接打款
 func get_fund(amount):
 	money_amount += amount*income_multiplyer
-	money_text.text = "$: "+str(money_amount)
+	update_text()
 
 func buy_unit(unit_id):
 	var cost = UnitAutoload.unit_dic[unit_id].cost
 	if money_amount >= cost:
 		SignalBus.emit_signal("spawn_unit_by_name",unit_id)
 		money_amount -= cost
-		money_text.text = "$: "+str(money_amount)
+		update_text()
 
 func upgrade_bank():
 	var cost =bank_upgrade_map[current_bank_level][1]
 	if money_amount >= cost*upgrade_multiplayer:
 		money_amount -=cost*upgrade_multiplayer
-		money_text.text = "$: "+str(money_amount)
+		
 		current_bank_level+=1
-		get_parent().get_node("CanvasLayer/HBoxContainer2/money_upgrade/money_upgrade_text").text = str(bank_upgrade_map[current_bank_level][1]*upgrade_multiplayer)
-
+		update_text()
+		
 func start_level():
 	money_amount += default_money_amount
 	current_bank_level = default_bank_level
-	money_text.text = "$: "+str(money_amount)
-	get_parent().get_node("CanvasLayer/HBoxContainer2/money_upgrade/money_upgrade_text").text = str(bank_upgrade_map[current_bank_level][1]*upgrade_multiplayer)
-
+	update_text()
 
 func reset_bank():
 	current_bank_level = default_bank_level
 	money_amount = 0
-	money_text.text = "$: "+str(money_amount)
+	update_text()
+	
+func update_text():
 	get_parent().get_node("CanvasLayer/HBoxContainer2/money_upgrade/money_upgrade_text").text = str(bank_upgrade_map[current_bank_level][1]*upgrade_multiplayer)
+	money_text.text = "$: "+str(snapped(money_amount, 0.01))
