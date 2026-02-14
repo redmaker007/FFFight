@@ -3,6 +3,6 @@ class_name ability_condition
 
 
 
-func condition(m):pass
+func condition(m,ref):pass
 
-func init(act_ab):pass
+func init(ref):pass

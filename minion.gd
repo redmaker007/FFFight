@@ -181,9 +181,9 @@ func attack_t():
 
 	#尝试使用所有攻击时触发的技能
 	for a in abilities:
-		var act_ab = abilities[a].ab_data
-		if act_ab.trigger == 0:
-			act_ab.condition_then_process(self)
+		var act_ab = abilities[a]
+		if act_ab.ab_data.trigger == 0:
+			act_ab.use_ability(self)
 		pass
 	
 	#简易攻击动画 -之后改
@@ -208,12 +208,9 @@ func attack_animation():
 	tw.tween_property($Minion,"rotation_degrees",0,0.05)
 
 func take_damage(value):
-	print(value)
 	play_hit_flash()
 	stat_dic["hp"] -= value
 	$health.value = float(get_moded_stat("hp"))/float(get_moded_stat("max_hp"))*100
-
-
 	if ( get_moded_stat("hp") <= 0):
 		death()
 

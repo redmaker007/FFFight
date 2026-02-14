@@ -14,7 +14,8 @@ var debuff_mod
 
 func start(tar):
 	time_left = data.duration
-	
+	if !data.stat_change:
+		return
 	if data.percentage_change:
 		var m = tar.add_mod(data.stat_str,data.percentage_change,false)
 		mods.append(m)

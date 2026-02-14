@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ability_data" load_steps=11 format=3 uid="uid://c1d07gdkoy8yb"]
+[gd_resource type="Resource" script_class="ability_data" load_steps=12 format=3 uid="uid://c1d07gdkoy8yb"]
 
 [ext_resource type="Script" uid="uid://cgqftjykmifcv" path="res://resources/ability/helper_scripts_precast/ability_condition.gd" id="1_turuq"]
 [ext_resource type="Script" uid="uid://e47aigaveont" path="res://resources/ability/ability_condition/counter_con.gd" id="2_pd75t"]
@@ -7,24 +7,26 @@
 [ext_resource type="Script" uid="uid://ctu6ea3dgd1i0" path="res://resources/ability/ability_process/Enhanced_basic_attack.gd" id="4_122yt"]
 [ext_resource type="Resource" uid="uid://duhnm8thkessq" path="res://resources/ability/debuff/slow.tres" id="4_wvrgp"]
 [ext_resource type="Script" uid="uid://soiitbl61ak0" path="res://resources/ability/ability_target_selector/default_ts.gd" id="5_4cr7e"]
+[ext_resource type="Resource" uid="uid://ww7dfa2o1cfu" path="res://resources/ability/debuff/burn.tres" id="5_wvrgp"]
 
 [sub_resource type="Resource" id="Resource_wvrgp"]
 script = ExtResource("2_pd75t")
 counter_name = "fire_burn"
-target_counter_value = 2
+target_counter_value = 3
 metadata/_custom_type_script = "uid://e47aigaveont"
 
 [sub_resource type="Resource" id="Resource_122yt"]
 script = ExtResource("5_4cr7e")
 aoe = true
 aoe_range = 200.0
-side = "ally"
 metadata/_custom_type_script = "uid://soiitbl61ak0"
 
 [sub_resource type="Resource" id="Resource_ptbbd"]
 script = ExtResource("4_122yt")
 target = SubResource("Resource_122yt")
-debuff_l = Array[ExtResource("3_4cr7e")]([ExtResource("4_wvrgp")])
+debuff_l = Array[ExtResource("3_4cr7e")]([ExtResource("4_wvrgp"), ExtResource("5_wvrgp")])
+addition_att = 5.0
+multiply_att = 0.0
 metadata/_custom_type_script = "uid://ctu6ea3dgd1i0"
 
 [resource]

@@ -3,5 +3,5 @@ class_name empty_con
 
 
 
-func condition(m):
+func condition(m,ref):
 	return true

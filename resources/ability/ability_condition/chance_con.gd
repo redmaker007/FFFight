@@ -3,7 +3,7 @@ class_name chance_con
 
 @export var chance:float = 0.0
 
-func condition(m):
+func condition(m,ref):
 	if randf()<chance:
 		return true
 	return false

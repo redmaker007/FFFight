@@ -3,6 +3,7 @@ class_name debuff
 
 @export_group("基础")
 @export var debuff_id:String
+@export var stat_change:bool = false
 @export var stat_str:String
 @export var duration:float
 @export var percentage_change:float = 1

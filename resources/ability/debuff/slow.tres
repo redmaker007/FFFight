@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_8moro")
 debuff_id = "slow"
+stat_change = true
 stat_str = "speed"
 duration = 2.0
 percentage_change = -0.4

@@ -29,6 +29,8 @@ func _process(delta: float) -> void:
 	var temp_l = []
 	for i in current_debuff_dict:
 		current_debuff_dict[i].time_left -= delta
+		if current_debuff_dict[i].data.continue_harm_stat:
+			mn.take_damage(current_debuff_dict[i].data.continue_harm_stat*delta)
 		if current_debuff_dict[i].time_left <= 0:
 			temp_l.append(i)
 	for i in temp_l:
