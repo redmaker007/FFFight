@@ -190,6 +190,9 @@ func play_hit_flash(t):
 
 
 func attack_animation():
+	if unit_name == "boxer":
+		play_anim("attack",get_moded_stat("att_spd"))
+		return
 	var side_sign
 	var base_pos = $Minion.position
 	if side == "ally":
@@ -205,6 +208,16 @@ func attack_animation():
 
 func refresh():
 	$health.value = float(get_moded_stat("hp"))/float(get_moded_stat("max_hp"))*100
+	if unit_name == "boxer":
+		$AnimatedSprite2D.visible = true
+		$Minion.visible = false
+
+func play_anim(anim_name,speed):
+	
+	if $AnimatedSprite2D.animation != anim_name:
+		$AnimatedSprite2D.speed_scale = speed
+		$AnimatedSprite2D.play(anim_name)
+
 #endregion
 
 #region 4. 战斗核心 (Combat)
@@ -262,6 +275,7 @@ func apply_debuff(debf_re:debuff,tar):
 # Godot 引擎生命周期函数
 # ------------------------------------------------------------------------------
 func _ready() -> void:
+	
 	state_map = {
 	0:$walk_state,
 	1:$att_state,
@@ -271,6 +285,7 @@ func _ready() -> void:
 	
 	if side == "enemy":
 		$Minion.flip_h = true
+		$AnimatedSprite2D.flip_h = true
 
 	stat_dic["hp"] = stat_dic["max_hp"]
 

@@ -2,6 +2,9 @@ extends Node
 
 @onready var mn = get_parent()
 func state_ready():
+	
+	if mn.unit_name == "boxer":
+		mn.play_anim("walk",mn.get_moded_stat("speed")/50)
 	pass
 
 
