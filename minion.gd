@@ -60,7 +60,8 @@ var size = 1
 var unit_name
 var att_CD_sec
 var target_scan_timer: float = 0.0
-var scan_interval: float = 0.1 # 0.2秒索敌一次 (也就是每秒5次)
+var scan_interval: float = 0.06 # 0.2秒索敌一次 (也就是每秒5次)
+var is_dead:bool = false
 
 func ini_w_data(data:minion_data):
 	unit_name =data.minion_name
@@ -134,6 +135,8 @@ func find_target():
 	if get_tree().get_first_node_in_group(target_group):
 		max_x_target= get_tree().get_first_node_in_group(target_group)
 		for t in get_tree().get_nodes_in_group(target_group):
+			if t.is_dead:
+				break
 			if side == "enemy":
 				if t.position.x > max_x_target.position.x:
 					max_x_target = t
@@ -190,6 +193,8 @@ func play_hit_flash(t):
 
 
 func attack_animation():
+	if is_dead:
+		return
 	if unit_name == "boxer":
 		play_anim("attack",get_moded_stat("att_spd"))
 		return
@@ -206,6 +211,57 @@ func attack_animation():
 	tw.tween_property($Minion,"position",base_pos,0.05)
 	tw.tween_property($Minion,"rotation_degrees",0,0.05)
 
+func death_animation():
+	$health.visible = false
+	# 视觉层级调整 (让尸体跳到最前面，不要被地板遮住)
+	z_index = 100
+	# 🎲 1. 随机决定方向 (左还是右)
+	# randf() > 0.5 返回 1 (右)，否则返回 -1 (左)
+	var dir = 1 if randf() > 0.5 else -1
+	
+	# 📏 定义跳跃力度
+	var jump_height = 150.0  # 跳多高
+	var side_dist = 100.0    # 横向飞多远 (总距离)
+	var jump_time = 0.35
+	
+	var tw = create_tween()
+	
+	# ==============================
+	# 阶段 A：起跳 (上升 + 往斜上方飞)
+	# ==============================
+	tw.set_parallel(true) # 让下面的动作同时发生
+	
+	# 1. Y轴：向上跳 (模拟重力减速：Ease Out)
+	tw.tween_property(sprite, "position:y", -jump_height, jump_time).as_relative().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	
+	# 2. X轴：横向移动总距离的 40% (线性移动，模拟惯性)
+	tw.tween_property(sprite, "position:x", side_dist * 0.4 * dir, jump_time).as_relative().set_trans(Tween.TRANS_LINEAR)
+	
+	# 3. 旋转：开始疯狂旋转
+	tw.tween_property(sprite, "rotation_degrees", 360.0 * dir, jump_time).as_relative()
+	
+	
+	# ==============================
+	# 阶段 B：下坠 (下落 + 继续往侧面飞)
+	# ==============================
+	# 🔗 .chain() 的作用是：必须等上面所有 parallel 的动画都播完了，才执行下面的
+	tw.set_parallel(false)
+	tw.tween_interval(jump_time)
+	tw.set_parallel(true)
+	# 1. Y轴：掉出屏幕 (模拟重力加速：Ease In)
+	tw.tween_property(sprite, "position:y", 1000.0, 0.5).as_relative().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	
+	# 2. X轴：继续横向移动剩下的 60% (保持线性，让弧线圆润)
+	tw.tween_property(sprite, "position:x", side_dist * 0.6 * dir, 0.5).as_relative().set_trans(Tween.TRANS_LINEAR)
+	
+	# 3. 旋转：继续旋转 (防止空中停转)
+	tw.tween_property(sprite, "rotation_degrees", 360.0 * dir, 0.5).as_relative()
+	
+	
+	
+	
+	await tw.finished
+	pass
 func refresh():
 	$health.value = float(get_moded_stat("hp"))/float(get_moded_stat("max_hp"))*100
 	if unit_name == "boxer":
@@ -228,32 +284,39 @@ func play_anim(anim_name,speed):
 
 func attack_t():
 	#攻击时没有目标就回到走路state
-	if not target:
+	if not target or target.is_dead:
+
 		switch_state(state.walk)
 		return
 	#不然就造成伤害
 	
 	target.take_damage(get_moded_stat("att"),self)
-
+	
 	#尝试使用所有攻击时触发的技能
 	for a in abilities:
 		var act_ab = abilities[a]
 		if act_ab.ab_data.trigger == 0:
 			act_ab.use_ability(self)
-		pass
-	
-	#简易攻击动画 -之后改
 	attack_animation()
-	pass
+
 
 func take_damage(value,tar,time =0.1):
+	if is_dead:
+		return
 	play_hit_flash(time)
 	stat_dic["hp"] -= value
 	$health.value = float(get_moded_stat("hp"))/float(get_moded_stat("max_hp"))*100
 	if ( get_moded_stat("hp") <= 0):
+		is_dead = true
 		death()
 
 func death():
+	
+	is_dead = true
+	if is_in_group("ally"): remove_from_group("ally")
+	if is_in_group("enemy"): remove_from_group("enemy")
+	if is_in_group("unit"): remove_from_group("unit")
+	
 	SignalBus.emit_signal("unit_death",self)
 	#尝试使用所有死亡时触发的技能
 	for a in abilities:
@@ -261,6 +324,8 @@ func death():
 		if act_ab.ab_data.trigger == 1:
 			act_ab.use_ability(self)
 		pass
+	
+	await death_animation()
 	queue_free()
 
 func apply_debuff(debf_re:debuff,tar):
@@ -304,12 +369,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if(state_map[current_state]):
 		state_map[current_state].state_process(delta)
-	if target == null:
+	if (target == null or target.is_dead) and current_state == 0:
 		# 倒计时
 		target_scan_timer -= delta
 		if target_scan_timer <= 0:
-			target_scan_timer = scan_interval + randf_range(-0.05, 0.05)
+			target_scan_timer = scan_interval + randf_range(-0.05, 0.02)
 			var found = find_target()
+			if unit_name == "Butterfly kun":
+				print(found.unit_name,found.position.x)
 			if found:
 		# 只有距离够近才切换攻击状态
 				if abs(found.position.x - self.position.x) <= stat_dic["att_r"]:
