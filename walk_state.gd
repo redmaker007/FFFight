@@ -3,8 +3,8 @@ extends Node
 @onready var mn = get_parent()
 func state_ready():
 	
-	if mn.unit_name == "boxer":
-		mn.play_anim("walk",mn.get_moded_stat("speed")/50)
+	if mn.unit_id in ["boxer","snow_b_s"]:
+		mn.play_anim(mn.unit_id+" "+"walk",mn.get_moded_stat("speed")/50)
 	pass
 
 

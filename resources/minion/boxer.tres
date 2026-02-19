@@ -16,5 +16,6 @@ att = 50.0
 att_r = 50.0
 att_spd = 1.4
 image = ExtResource("1_hs3yi")
+size = 0.2
 ability = Array[ExtResource("1_twtls")]([ExtResource("2_tg386")])
 metadata/_custom_type_script = "uid://dw6wb6dt8h3n5"

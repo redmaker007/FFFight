@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cjm0nj26a41bk"]
+[gd_scene load_steps=49 format=3 uid="uid://cjm0nj26a41bk"]
 
 [ext_resource type="Script" uid="uid://nri6rxqxptwd" path="res://minion.gd" id="1_g426k"]
 [ext_resource type="Script" uid="uid://dxdl67sg02lqg" path="res://walk_state.gd" id="2_mgw1k"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://cqod45sb820xc" path="res://scene/detector.gd" id="10_x8bxv"]
 [ext_resource type="Texture2D" uid="uid://d3j01nbl7m6fs" path="res://art/unit_animation/boxer/boxer_attack.png" id="11_x8bxv"]
 [ext_resource type="Texture2D" uid="uid://g4rtccotv2ig" path="res://art/unit_animation/boxer/boxer_walk.png" id="12_kplco"]
+[ext_resource type="Texture2D" uid="uid://di4ghp0fbifck" path="res://art/unit_animation/snow_ball_shooter/sn_b_s_sprite.png" id="13_kplco"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xwy43"]
 shader = ExtResource("4_25jae")
@@ -91,6 +92,70 @@ region = Rect2(256, 0, 64, 64)
 atlas = ExtResource("12_kplco")
 region = Rect2(320, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_gx10k"]
+atlas = ExtResource("13_kplco")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iw2kd"]
+atlas = ExtResource("13_kplco")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xlnbr"]
+atlas = ExtResource("13_kplco")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0m4c5"]
+atlas = ExtResource("13_kplco")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mag2p"]
+atlas = ExtResource("13_kplco")
+region = Rect2(768, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qvypu"]
+atlas = ExtResource("13_kplco")
+region = Rect2(832, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68xlh"]
+atlas = ExtResource("13_kplco")
+region = Rect2(896, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4rhy"]
+atlas = ExtResource("13_kplco")
+region = Rect2(960, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8n143"]
+atlas = ExtResource("13_kplco")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vb5u"]
+atlas = ExtResource("13_kplco")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vuyac"]
+atlas = ExtResource("13_kplco")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pek35"]
+atlas = ExtResource("13_kplco")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1i3iv"]
+atlas = ExtResource("13_kplco")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqs22"]
+atlas = ExtResource("13_kplco")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rct78"]
+atlas = ExtResource("13_kplco")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igk71"]
+atlas = ExtResource("13_kplco")
+region = Rect2(448, 0, 64, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_gx10k"]
 animations = [{
 "frames": [{
@@ -119,7 +184,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_4t1tr")
 }],
 "loop": true,
-"name": &"attack",
+"name": &"boxer attack",
 "speed": 8.0
 }, {
 "frames": [{
@@ -142,8 +207,66 @@ animations = [{
 "texture": SubResource("AtlasTexture_bcxgq")
 }],
 "loop": true,
-"name": &"walk",
+"name": &"boxer walk",
 "speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gx10k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iw2kd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xlnbr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0m4c5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mag2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qvypu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_68xlh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g4rhy")
+}],
+"loop": true,
+"name": &"snow_b_s attack",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8n143")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0vb5u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vuyac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pek35")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1i3iv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kqs22")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rct78")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igk71")
+}],
+"loop": true,
+"name": &"snow_b_s walk",
+"speed": 8.0
 }]
 
 [node name="minion_node" type="Node2D"]
@@ -193,5 +316,5 @@ script = ExtResource("10_x8bxv")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("SpriteFrames_gx10k")
-animation = &"attack"
+animation = &"snow_b_s attack"
 speed_scale = 2.0

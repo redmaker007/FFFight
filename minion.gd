@@ -58,6 +58,7 @@ var target = null
 var side = "ally"
 var size = 1
 var unit_name
+var unit_id
 var att_CD_sec
 var target_scan_timer: float = 0.0
 var scan_interval: float = 0.06 # 0.2秒索敌一次 (也就是每秒5次)
@@ -82,6 +83,7 @@ func ini_w_data(data:minion_data):
 	att_CD_sec = 0
 	set_abilities(data.ability)
 	
+	unit_id = data.minion_id
 	
 	pass
 
@@ -174,6 +176,7 @@ func get_range_unit(t_side=0,dis:float = 0):
 # ------------------------------------------------------------------------------
 #预引用
 @onready var sprite = $Minion
+@onready var anim_sprite = $AnimatedSprite2D
 
 func set_png(png):
 	$Minion.texture = png
@@ -195,8 +198,8 @@ func play_hit_flash(t):
 func attack_animation():
 	if is_dead:
 		return
-	if unit_name == "boxer":
-		play_anim("attack",get_moded_stat("att_spd"))
+	if unit_id in ["boxer","snow_b_s"]:
+		play_anim(unit_id+" "+"attack",get_moded_stat("att_spd"))
 		return
 	var side_sign
 	var base_pos = $Minion.position
@@ -212,6 +215,11 @@ func attack_animation():
 	tw.tween_property($Minion,"rotation_degrees",0,0.05)
 
 func death_animation():
+	var imag
+	if anim_sprite.visible == true:
+		imag = anim_sprite
+	else:
+		imag = sprite
 	$health.visible = false
 	# 视觉层级调整 (让尸体跳到最前面，不要被地板遮住)
 	z_index = 100
@@ -232,13 +240,13 @@ func death_animation():
 	tw.set_parallel(true) # 让下面的动作同时发生
 	
 	# 1. Y轴：向上跳 (模拟重力减速：Ease Out)
-	tw.tween_property(sprite, "position:y", -jump_height, jump_time).as_relative().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tw.tween_property(imag, "position:y", -jump_height, jump_time).as_relative().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	
 	# 2. X轴：横向移动总距离的 40% (线性移动，模拟惯性)
-	tw.tween_property(sprite, "position:x", side_dist * 0.4 * dir, jump_time).as_relative().set_trans(Tween.TRANS_LINEAR)
+	tw.tween_property(imag, "position:x", side_dist * 0.4 * dir, jump_time).as_relative().set_trans(Tween.TRANS_LINEAR)
 	
 	# 3. 旋转：开始疯狂旋转
-	tw.tween_property(sprite, "rotation_degrees", 360.0 * dir, jump_time).as_relative()
+	tw.tween_property(imag, "rotation_degrees", 360.0 * dir, jump_time).as_relative()
 	
 	
 	# ==============================
@@ -249,13 +257,13 @@ func death_animation():
 	tw.tween_interval(jump_time)
 	tw.set_parallel(true)
 	# 1. Y轴：掉出屏幕 (模拟重力加速：Ease In)
-	tw.tween_property(sprite, "position:y", 1000.0, 0.5).as_relative().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	tw.tween_property(imag, "position:y", 1000.0, 0.5).as_relative().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	
 	# 2. X轴：继续横向移动剩下的 60% (保持线性，让弧线圆润)
-	tw.tween_property(sprite, "position:x", side_dist * 0.6 * dir, 0.5).as_relative().set_trans(Tween.TRANS_LINEAR)
+	tw.tween_property(imag, "position:x", side_dist * 0.6 * dir, 0.5).as_relative().set_trans(Tween.TRANS_LINEAR)
 	
 	# 3. 旋转：继续旋转 (防止空中停转)
-	tw.tween_property(sprite, "rotation_degrees", 360.0 * dir, 0.5).as_relative()
+	tw.tween_property(imag, "rotation_degrees", 360.0 * dir, 0.5).as_relative()
 	
 	
 	
@@ -264,7 +272,7 @@ func death_animation():
 	pass
 func refresh():
 	$health.value = float(get_moded_stat("hp"))/float(get_moded_stat("max_hp"))*100
-	if unit_name == "boxer":
+	if unit_id in ["boxer","snow_b_s"]:
 		$AnimatedSprite2D.visible = true
 		$Minion.visible = false
 
@@ -375,8 +383,7 @@ func _process(delta: float) -> void:
 		if target_scan_timer <= 0:
 			target_scan_timer = scan_interval + randf_range(-0.05, 0.02)
 			var found = find_target()
-			if unit_name == "Butterfly kun":
-				print(found.unit_name,found.position.x)
+			
 			if found:
 		# 只有距离够近才切换攻击状态
 				if abs(found.position.x - self.position.x) <= stat_dic["att_r"]:
