@@ -11,10 +11,12 @@ func state_ready():
 
 
 func state_process(delta: float) -> void:
+	
 	if not p.target or p.target.is_dead:
 		p.switch_state(p.state.walk)
 	# 为了代码整洁，建议把 get_parent() 存个变量，不然调用太频繁了
-
+	if p.is_dead:
+		return
 	
 	if p.att_CD_sec <= 0:
 		

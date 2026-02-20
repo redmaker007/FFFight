@@ -26,7 +26,8 @@ func is_debuffed(debf_id):
 	return false
 
 func _process(delta: float) -> void:
-	
+	if mn.is_dead:
+		return
 	if current_debuff_dict.is_empty():
 		return
 	var temp_l = []

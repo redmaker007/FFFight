@@ -15,5 +15,5 @@ att = 10.0
 att_r = 30.0
 att_spd = 0.7
 image = ExtResource("1_ydb8h")
-size = 0.4
+size = 0.5
 metadata/_custom_type_script = "uid://dw6wb6dt8h3n5"

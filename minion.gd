@@ -198,21 +198,8 @@ func play_hit_flash(t):
 func attack_animation():
 	if is_dead:
 		return
-	if unit_id in ["boxer","snow_b_s"]:
-		play_anim(unit_id+" "+"attack",get_moded_stat("att_spd"))
-		return
-	var side_sign
-	var base_pos = $Minion.position
-	if side == "ally":
-		side_sign = 1
-	else:
-		side_sign = -1
-	var tw = create_tween()
-	tw.parallel().tween_property($Minion,"position",base_pos +Vector2(side_sign*10,0),0.1)
-	tw.parallel().tween_property($Minion,"rotation_degrees",side_sign*20,0.1)
-	
-	tw.tween_property($Minion,"position",base_pos,0.05)
-	tw.tween_property($Minion,"rotation_degrees",0,0.05)
+
+	play_anim(unit_id+" "+"attack",get_moded_stat("att_spd"))
 
 func death_animation():
 	var imag
@@ -272,9 +259,9 @@ func death_animation():
 	pass
 func refresh():
 	$health.value = float(get_moded_stat("hp"))/float(get_moded_stat("max_hp"))*100
-	if unit_id in ["boxer","snow_b_s"]:
-		$AnimatedSprite2D.visible = true
-		$Minion.visible = false
+	
+	$AnimatedSprite2D.visible = true
+	$Minion.visible = false
 
 func play_anim(anim_name,speed):
 	

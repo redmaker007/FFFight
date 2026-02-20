@@ -7,7 +7,7 @@
 
 [resource]
 script = ExtResource("1_o4lgc")
-minion_id = "butterfly_k"
+minion_id = "bf_k"
 minion_name = "Butterfly kun"
 cost = 35
 speed = 100.0
