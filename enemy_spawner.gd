@@ -8,7 +8,7 @@ extends Node
 
 var GM
 
-var pool = ["red","blue","boxer","snow_b_s","butterfly_k"]
+var pool = ["red","blue","boxer","snow_b_s","bf_k"]
 var u_name
 
 var functioning

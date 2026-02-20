@@ -17,7 +17,7 @@ metadata/_custom_type_script = "uid://bdmyolyttc2sg"
 script = ExtResource("4_07cdg")
 ability_l = Array[ExtResource("2_wqrmn")]([ExtResource("3_7aput")])
 target_selec = SubResource("Resource_2gq5l")
-one_time = false
+one_time = null
 metadata/_custom_type_script = "uid://d2by18j5333ew"
 
 [sub_resource type="Resource" id="Resource_61dnx"]

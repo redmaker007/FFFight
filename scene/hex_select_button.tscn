@@ -16,24 +16,30 @@ layout_mode = 2
 size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(250, 30)
 layout_mode = 2
 text = "aa"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="Label3" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(250, 50)
 layout_mode = 2
 text = "
 and
 "
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="Label2" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(250, 30)
 layout_mode = 2
 text = "hh"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="button" type="Button" parent="."]
 layout_mode = 2

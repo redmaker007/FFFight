@@ -10,5 +10,12 @@ func hex_process(gm):
 func hex_process_take_back(gm):
 	gm.ms.income_multiplyer = 1
 
-func get_description():
-	return "Gain "+str(X*100)+"% more money from bank."
+func get_description() -> String:
+	# 1. 组装基础句子
+	var base_desc = "Gain " + str(X * 100) + "% more money from the bank"
+	
+	# 2. 根据 one_time 添加时间后缀
+	if one_time:
+		return base_desc + " for the next round only."
+	else:
+		return base_desc + " permanently."

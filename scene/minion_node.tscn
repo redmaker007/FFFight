@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://cjm0nj26a41bk"]
+[gd_scene load_steps=101 format=3 uid="uid://cjm0nj26a41bk"]
 
 [ext_resource type="Script" uid="uid://nri6rxqxptwd" path="res://minion.gd" id="1_g426k"]
 [ext_resource type="Script" uid="uid://dxdl67sg02lqg" path="res://walk_state.gd" id="2_mgw1k"]
@@ -38,6 +38,11 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xfq3f"]
+shader = ExtResource("4_25jae")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_modifier = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1uwkn"]
 atlas = ExtResource("11_xfq3f")
@@ -648,6 +653,7 @@ script = ExtResource("2_mgw1k")
 script = ExtResource("3_25jae")
 
 [node name="Minion" type="Sprite2D" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_xwy43")
 texture = ExtResource("4_xwy43")
 
@@ -684,6 +690,7 @@ script = ExtResource("10_x8bxv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
+material = SubResource("ShaderMaterial_xfq3f")
 sprite_frames = SubResource("SpriteFrames_gx10k")
 animation = &"bf_k attack"
 speed_scale = 2.0

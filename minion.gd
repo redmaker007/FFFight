@@ -186,13 +186,13 @@ func set_png(png):
 func play_hit_flash(t):
 	# 确保材质是唯一的 (Resource是共享的，不加这就所有怪一起闪)
 	# 注意：最好在 _ready 里做 duplicate，这里为了演示写在这里
-	if sprite.material:
+	if anim_sprite.material:
 		# 1. 设置为纯白
-		sprite.material.set_shader_parameter("flash_modifier", 0.5)
+		anim_sprite.material.set_shader_parameter("flash_modifier", 0.5)
 		
 		# 2. 用 Tween 做一个快速的淡出动画 (0.1秒变回原色)
 		var tween = create_tween()
-		tween.tween_property(sprite.material, "shader_parameter/flash_modifier", 0.0, t)
+		tween.tween_property(anim_sprite.material, "shader_parameter/flash_modifier", 0.0, t)
 
 
 func attack_animation():
@@ -354,8 +354,8 @@ func _ready() -> void:
 	
 	position = self.position - Vector2(0,size*50)
 	$health.value = 100
-	if sprite.material:
-		sprite.material = sprite.material.duplicate()
+	if anim_sprite.material:
+		anim_sprite.material = anim_sprite.material.duplicate()
 
 
 
