@@ -17,8 +17,11 @@ class_name game_manager
 
 #level system
 @onready var ls = $level_manager
+@onready var wave_number_label = $CanvasLayer/VBoxContainer/wave_number
+
 
 func _ready() -> void:
+	
 	pass
 
 

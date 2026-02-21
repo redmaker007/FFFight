@@ -54,9 +54,28 @@ script = ExtResource("8_ssc4f")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="VBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(0, 64)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 64.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+
+[node name="wave_number" type="Label" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 64)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 30
+text = "wave: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_top = 64.0
+offset_right = 1149.0
+offset_bottom = 128.0
+size_flags_horizontal = 3
 
 [node name="Money_text" type="Label" parent="CanvasLayer/HBoxContainer2"]
 custom_minimum_size = Vector2(128, 64)

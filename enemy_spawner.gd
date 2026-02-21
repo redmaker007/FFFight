@@ -8,6 +8,8 @@ extends Node
 
 var GM
 
+var wave_number_label 
+
 var pool = ["red","blue","boxer","snow_b_s","bf_k"]
 var u_name
 
@@ -18,9 +20,13 @@ var count = 0
 var spawn_t_time = 1
 
 func _ready() -> void:
+	await get_tree().process_frame
 	GM = get_parent()
+	wave_number_label = GM.wave_number_label
 	count = 0
-	functioning = true
+	update_wave_number_label()
+	
+
 
 
 
@@ -36,6 +42,7 @@ func _process(delta: float) -> void:
 		spawn_enemy_1(ab[0])
 		spawn_t_time = ab[1]
 		spawn_CD = 0
+		update_wave_number_label()
 	else:
 		spawn_CD += delta
 	pass
@@ -52,7 +59,7 @@ func spawn_level_1():
 		if count%2 ==0:
 			time_int = 1
 		else:
-			time_int = 3
+			time_int = 4.5
 	elif count < 20:
 		unit_name = "blue"
 		time_int = 1
@@ -62,16 +69,16 @@ func spawn_level_1():
 			time_int = 3
 		else:
 			unit_name = ["red","blue"].pick_random()
-			time_int = 2
+			time_int = 3
 	elif count < 80:
 		unit_name = "boxer"
 		time_int = 0.1
 	elif count < 200:
 		unit_name = pool.pick_random()
-		time_int = 2
+		time_int = 2.5
 	else:
 		unit_name = pool.pick_random()
-		time_int = 1
+		time_int = 2
 	
 	
 	count +=1
@@ -99,3 +106,7 @@ func reset_level():
 func reset_whole():
 	count = 0
 	pass
+
+func update_wave_number_label():
+	wave_number_label.text = "wave difficulty: "+str(count/10+1)
+	

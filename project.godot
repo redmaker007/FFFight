@@ -27,6 +27,10 @@ HexAutoload="*res://global/hex_autoload.gd"
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_sfxr/plugin.cfg")
+
 [file_customization]
 
 folder_colors={
