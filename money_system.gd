@@ -76,5 +76,12 @@ func reset_bank():
 	update_text()
 	
 func update_text():
-	get_parent().get_node("CanvasLayer/HBoxContainer2/money_upgrade/money_upgrade_text").text = str(bank_upgrade_map[current_bank_level][1]*upgrade_multiplayer)
-	money_text.text = "$: "+str(snapped(money_amount, 0.01))
+	# 升级费用的 UI 更新保持不变
+	get_parent().get_node("CanvasLayer/HBoxContainer2/money_upgrade/money_upgrade_text").text = str(bank_upgrade_map[current_bank_level][1] * upgrade_multiplayer)
+	
+	# 💡 计算当前的实际秒收 (基础秒收 * 收入倍率)
+	var current_income = bank_upgrade_map[current_bank_level][0] * income_multiplyer
+	
+	# 💡 拼接字符串，加入了 (+X/s) 的显示。
+	# 为了防止倍率导致出现长小数，给 current_income 也加上了 snapped 处理
+	money_text.text = "$: " + str(snapped(money_amount, 0.01)) + " (+" + str(snapped(current_income, 0.01)) + "/s)"

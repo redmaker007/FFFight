@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=3 uid="uid://b5dxtpt2t7423"]
+[gd_scene load_steps=91 format=3 uid="uid://b5dxtpt2t7423"]
 
 [ext_resource type="Script" uid="uid://c1qos2c0lkau" path="res://scene/unit_gallery.gd" id="1_81t2n"]
 [ext_resource type="Shader" uid="uid://rqcnr6mxctpc" path="res://scene/minion_node.gdshader" id="2_xs86c"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://dqrhckdbkji5c" path="res://art/unit_animation/red/red.png" id="7_ymq41"]
 [ext_resource type="Texture2D" uid="uid://di4ghp0fbifck" path="res://art/unit_animation/snow_ball_shooter/sn_b_s_sprite.png" id="8_j0ig0"]
 [ext_resource type="Texture2D" uid="uid://1fsfpkgncr3b" path="res://art/background.png" id="9_0numi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0numi"]
+bg_color = Color(0.6, 0.6, 0.6, 0.6666667)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j3srw"]
 shader = ExtResource("2_xs86c")
@@ -621,6 +624,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0numi")
 script = ExtResource("1_81t2n")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
