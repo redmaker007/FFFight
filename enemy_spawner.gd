@@ -76,10 +76,14 @@ func spawn_level_1():
 		time_int = 0.1
 	elif count < 200:
 		unit_name = pool.pick_random()
+		time_int = 3
+	elif count < 300:
+		unit_name = pool.pick_random()
 		time_int = 2.5
 	else:
 		unit_name = pool.pick_random()
 		time_int = 2
+	
 	
 	
 	count +=1

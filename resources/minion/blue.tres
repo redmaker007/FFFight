@@ -8,11 +8,12 @@
 script = ExtResource("1_pi55u")
 minion_id = "blue"
 minion_name = "blue"
-cost = 15
-speed = 100.0
-max_hp = 60.0
-att = 10.0
+cost = 10
+speed = 130.0
+max_hp = 85.0
+att = 20.0
 att_r = 50.0
-att_spd = 0.7
+att_spd = 0.95
 image = ExtResource("2_lkjqr")
+size = -0.1
 metadata/_custom_type_script = "uid://dw6wb6dt8h3n5"

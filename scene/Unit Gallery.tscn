@@ -670,7 +670,8 @@ animation = &"bf_k attack"
 speed_scale = 2.0
 
 [node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/HBoxContainer/VBoxContainer2/SubViewportContainer/SubViewport"]
-position = Vector2(-167, 21)
+position = Vector2(-123, -154)
+scale = Vector2(2, 2)
 texture = ExtResource("9_0numi")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]

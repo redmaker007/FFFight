@@ -38,7 +38,7 @@ func _on_button_pressed() -> void:
 func on_unit_select(_minion_data):
 	# 1. 更新精灵图和动画
 	# Vector2.ONE 就是 Vector2(1, 1) 的优雅写法
-	anim_sprite.scale = Vector2.ONE * (1.0 + _minion_data.size)
+	anim_sprite.scale = Vector2.ONE*2 * (1.0 + _minion_data.size)
 	anim_sprite.speed_scale = _minion_data.speed / 50.0
 	play_anime(_minion_data.minion_id + " walk")
 	
