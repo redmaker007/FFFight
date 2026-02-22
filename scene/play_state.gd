@@ -1,10 +1,6 @@
 extends GMstate
 
 func enter_state():
-	gm.clear_board_by_group("base_tower")
-	gm.spawn_base("ally")
-	gm.spawn_base("enemy")
-	gm.ms.start_level()
 	gm.group_switch_func(true)
 	SignalBus.unit_death.connect(check_base_death)
 

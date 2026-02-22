@@ -18,3 +18,6 @@ func get_neg_des():
 	for i in negative_hex_list:
 		text += i.get_description()
 	return text
+
+func get_description() -> String:
+	return ""

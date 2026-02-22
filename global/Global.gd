@@ -5,3 +5,5 @@ extends Node
 var minion_scene = preload("res://scene/minion_node.tscn")
 
 var hex_select_window = preload("res://scene/hex_select_window.tscn")
+
+var unit_gallery_window = preload("res://scene/Unit Gallery.tscn")

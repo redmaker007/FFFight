@@ -34,6 +34,7 @@ func function_switch(v:bool):
 	functioning =v
 
 func _process(delta: float) -> void:
+	
 	if not functioning:
 		return
 	if spawn_CD >= spawn_t_time:

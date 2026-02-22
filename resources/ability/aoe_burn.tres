@@ -30,7 +30,7 @@ metadata/_custom_type_script = "uid://soiitbl61ak0"
 script = ExtResource("4_122yt")
 target = SubResource("Resource_igjds")
 debuff_l = Array[ExtResource("3_4cr7e")]([ExtResource("5_wvrgp"), ExtResource("4_wvrgp")])
-addition_att = 5.0
+addition_att = 10.0
 multiply_att = 0.0
 metadata/_custom_type_script = "uid://ctu6ea3dgd1i0"
 

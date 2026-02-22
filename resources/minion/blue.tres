@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dv6ph7x3xbuk3" path="res://resources/resource_precast/ability_data.gd" id="1_nruhk"]
 [ext_resource type="Script" uid="uid://dw6wb6dt8h3n5" path="res://resources/resource_precast/minion_data.gd" id="1_pi55u"]
-[ext_resource type="Texture2D" uid="uid://b4x130fr1u16c" path="res://art/binion.png" id="1_x8vh8"]
+[ext_resource type="Texture2D" uid="uid://bdexr33vct12w" path="res://art/blue_pict.png" id="2_lkjqr"]
 
 [resource]
 script = ExtResource("1_pi55u")
@@ -14,5 +14,5 @@ max_hp = 60.0
 att = 10.0
 att_r = 50.0
 att_spd = 0.7
-image = ExtResource("1_x8vh8")
+image = ExtResource("2_lkjqr")
 metadata/_custom_type_script = "uid://dw6wb6dt8h3n5"

@@ -63,6 +63,7 @@ var att_CD_sec
 var target_scan_timer: float = 0.0
 var scan_interval: float = 0.06 # 0.2秒索敌一次 (也就是每秒5次)
 var is_dead:bool = false
+var pause:bool = false
 
 func ini_w_data(data:minion_data):
 	unit_name =data.minion_name

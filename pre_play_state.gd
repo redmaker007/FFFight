@@ -5,3 +5,4 @@ func enter_state():
 	gm.ms.reset_bank()
 	gm.clear_board()
 	gm_state_machine.switch_state("hex")
+	

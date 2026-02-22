@@ -17,3 +17,9 @@ signal hex_select
 
 @warning_ignore("unused_signal")
 signal unit_spawned
+
+@warning_ignore("unused_signal")
+signal open_unit_gallery
+
+@warning_ignore("unused_signal")
+signal gm_switch_state

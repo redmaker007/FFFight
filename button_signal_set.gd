@@ -5,3 +5,9 @@ extends Node
 
 func _on_money_upgrade_pressed() -> void:
 	SignalBus.emit_signal("try_upgrade_bank")
+
+
+
+
+func _on_unit_gallery_button_pressed() -> void:
+	SignalBus.open_unit_gallery.emit()

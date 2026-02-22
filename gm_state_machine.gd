@@ -11,6 +11,7 @@ var state_map = {}
 
 
 func _ready() -> void:
+	SignalBus.gm_switch_state.connect(switch_state)
 	await get_tree().process_frame
 	var gm = get_parent()
 	for s in get_children():

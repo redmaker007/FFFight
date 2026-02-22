@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="minion_data" load_steps=5 format=3 uid="uid://ckedwbm8nomg7"]
 
-[ext_resource type="Texture2D" uid="uid://f3eaggejvxx6" path="res://art/butterfly_kun.png" id="1_dc58l"]
 [ext_resource type="Script" uid="uid://dv6ph7x3xbuk3" path="res://resources/resource_precast/ability_data.gd" id="1_hhq3c"]
 [ext_resource type="Script" uid="uid://dw6wb6dt8h3n5" path="res://resources/resource_precast/minion_data.gd" id="1_o4lgc"]
 [ext_resource type="Resource" uid="uid://c1d07gdkoy8yb" path="res://resources/ability/aoe_burn.tres" id="2_k8add"]
+[ext_resource type="Texture2D" uid="uid://xb25qorphgjk" path="res://art/bf_k_pic.png" id="3_k8add"]
 
 [resource]
 script = ExtResource("1_o4lgc")
@@ -12,9 +12,10 @@ minion_name = "Butterfly kun"
 cost = 35
 speed = 100.0
 max_hp = 150.0
-att = 13.0
+att = 14.0
 att_r = 173.0
 att_spd = 1.4
-image = ExtResource("1_dc58l")
+image = ExtResource("3_k8add")
+size = 0.1
 ability = Array[ExtResource("1_hhq3c")]([ExtResource("2_k8add")])
 metadata/_custom_type_script = "uid://dw6wb6dt8h3n5"

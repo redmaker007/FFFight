@@ -16,3 +16,19 @@ class_name minion_data
 @export var animation:Texture2D
 @export var size:float
 @export var ability:Array[ability_data]
+
+func get_data_dic() -> Dictionary:
+	var dict = {
+		"speed" = speed,
+		"max_hp" = max_hp,
+		"att" = att,
+		"att_r" = att_r,
+		"att_spd" = att_spd,
+		"image" = image,
+		"animation" = animation,
+		"size" = size,
+		"ability" = ability
+	}
+	
+	return dict
+	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bae3kf36u3115"]
+[gd_scene load_steps=21 format=3 uid="uid://bae3kf36u3115"]
 
 [ext_resource type="Script" uid="uid://bxoj4abwmi3vj" path="res://GM.gd" id="1_123pn"]
 [ext_resource type="Script" uid="uid://4aj1roadh4qo" path="res://gm_state_machine.gd" id="2_3u7g2"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://t4hyss56u1or" path="res://scene/gameover_state.gd" id="5_nl3on"]
 [ext_resource type="Script" uid="uid://b4ueeca02hrvv" path="res://scene/hex_selected_state.gd" id="6_mpuhk"]
 [ext_resource type="Script" uid="uid://gdxci1xh3ufw" path="res://minion_map.gd" id="7_mpuhk"]
+[ext_resource type="Script" uid="uid://c7rrfjyooaf22" path="res://scene/pause_state.gd" id="7_su6sf"]
+[ext_resource type="Script" uid="uid://badhroee5v7pl" path="res://scene/round_prep_state.gd" id="8_nl3on"]
 [ext_resource type="Script" uid="uid://m6xfrndftlpg" path="res://button_signal_set.gd" id="8_ssc4f"]
 [ext_resource type="Texture2D" uid="uid://b3q2ijnvp5kss" path="res://art/upgrade.png" id="9_s0fja"]
 [ext_resource type="PackedScene" uid="uid://ctuv1ou4cgov3" path="res://scene/spwan_unit_button.tscn" id="10_el7ve"]
@@ -16,6 +18,7 @@
 [ext_resource type="Script" uid="uid://bq6jelu08e04t" path="res://unit_spawner.gd" id="13_drt2y"]
 [ext_resource type="Script" uid="uid://3a083idnpn5a" path="res://enemy_spawner.gd" id="14_5n7tr"]
 [ext_resource type="Script" uid="uid://j06vnrgftic5" path="res://scene/hex_manager.gd" id="16_f08rc"]
+[ext_resource type="Script" uid="uid://cf48qeaplh7w7" path="res://scene/pop_window_manager.gd" id="17_cxisf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x0ka3"]
 bg_color = Color(0.6901961, 0.5921569, 0.27058825, 0.6431373)
@@ -46,6 +49,14 @@ script = ExtResource("6_mpuhk")
 state_name = "hex"
 metadata/_custom_type_script = "uid://bwl6ui5vt1xmi"
 
+[node name="pause_state" type="Node" parent="GMStateMachine"]
+script = ExtResource("7_su6sf")
+state_name = "pause"
+
+[node name="round_prep_state" type="Node" parent="GMStateMachine"]
+script = ExtResource("8_nl3on")
+state_name = "prep"
+
 [node name="Money_system" type="Node" parent="."]
 script = ExtResource("4_cxisf")
 
@@ -72,9 +83,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer"]
-offset_top = 64.0
 offset_right = 1149.0
-offset_bottom = 128.0
+offset_bottom = 64.0
 size_flags_horizontal = 3
 
 [node name="Money_text" type="Label" parent="CanvasLayer/HBoxContainer2"]
@@ -97,6 +107,11 @@ offset_right = 127.0
 offset_bottom = 48.0
 theme_override_font_sizes/font_size = 25
 text = "50"
+
+[node name="unit_gallery_button" type="Button" parent="CanvasLayer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "unit gallery"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
 offset_left = 40.0
@@ -159,4 +174,8 @@ spec_unit = "snow_ball_shooter"
 [node name="hex_manager" type="Node" parent="."]
 script = ExtResource("16_f08rc")
 
+[node name="pop_window_manager" type="Node" parent="."]
+script = ExtResource("17_cxisf")
+
 [connection signal="pressed" from="CanvasLayer/HBoxContainer2/money_upgrade" to="button_signal_set" method="_on_money_upgrade_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer2/unit_gallery_button" to="button_signal_set" method="_on_unit_gallery_button_pressed"]

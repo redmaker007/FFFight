@@ -44,6 +44,7 @@ func spawn_base(side_n):
 func group_switch_func(b):
 	for node in son_node_group:
 		node.function_switch(b)
+		
 
 func clear_board():
 	get_tree().call_group("unit", "queue_free")

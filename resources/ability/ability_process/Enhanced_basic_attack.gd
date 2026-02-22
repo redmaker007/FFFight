@@ -18,38 +18,48 @@ func process(m):
 	pass
 
 func get_description() -> String:
-	# 1. 基础伤害描述 (百分比)
-	var desc = "deal " + str(multiply_att * 100) + "% ATK"
+	var desc = ""
 	
-	# 2. 如果有固定伤害加成，才显示 "+ X"
+	# 1. 🎯 精准拼接伤害部分 (屏蔽 0 的情况)
+	var dmg_parts = []
+	if multiply_att > 0:
+		dmg_parts.append(str(multiply_att * 100) + "% ATK")
 	if addition_att > 0:
-		desc += " + " + str(addition_att)
+		dmg_parts.append(str(addition_att))
+		
+	# 只有当真的有伤害时，才拼接 "deal ... damage to"
+	if not dmg_parts.is_empty():
+		desc += "deal " + " + ".join(dmg_parts) + " damage to "
+	else:
+		# 如果没有任何伤害，通常是纯辅助/控制技能
+		desc += "target " 
 	
-	desc += " damage to "
-	
-	# 3. 目标描述 (直接调用 target 刚刚写好的逻辑)
-	# 这是一个多态调用：不管它是 self_ts 还是 default_ts，都能返回正确的文本
-	if target:
-		desc += target.get_description()
+	# 2. 🎯 拼接目标
+	if target and target.has_method("get_description"):
+		var t_desc = target.get_description()
+		desc += t_desc if t_desc != "" else "target"
 	else:
 		desc += "target"
 	
-	# 4. Debuff 描述
-	if not debuff_l.is_empty():
-		desc += " and applies "
-		var d_names = []
-		for d in debuff_l:
-			# 这里用了一个安全检查：
-			# 如果你的 debuff 脚本里有个变量叫 name 或 debuff_name，就用它
-			# 如果都没有，就用 Godot 资源自带的文件名 (resource_name)
-			if "debuff_name" in d:
-				d_names.append(d.debuff_name)
-			elif "name" in d:
-				d_names.append(d.name)
+	# 3. 🎯 安全拼接 Debuff (防 null，且对接正确的变量名)
+	var valid_debuff_names = []
+	for d in debuff_l:
+		# 必须确保这个槽位里真的放了 Resource，而不是空的
+		if d != null:
+			# 对接我们之前写的 debuff 类的 debuff_id 属性
+			if "debuff_id" in d and d.debuff_id != "":
+				valid_debuff_names.append(d.debuff_id.replace("_", " ").capitalize())
 			else:
-				# Godot Resource 默认都有这个属性 (在 Inspector 顶部的 Name)
-				d_names.append(d.resource_name) 
+				valid_debuff_names.append("a debuff") # 终极退底保护
+				
+	# 只有提取到了真正有效的 debuff 名字，才拼上 "and applies"
+	if not valid_debuff_names.is_empty():
+		# 如果前面有伤害描述，就用 " and applies " 连起来
+		# 如果前面没有伤害，就变成 "applies ... to target"
+		if not dmg_parts.is_empty():
+			desc += " and applies " + ", ".join(valid_debuff_names)
+		else:
+			# 替换掉前面的 "target " 逻辑，重组成更通顺的英语
+			desc = "apply " + ", ".join(valid_debuff_names) + " to " + (target.get_description() if target else "target")
 		
-		desc += ", ".join(d_names) # 把数组变成 "Burn, Slow" 这样的字符串
-		
-	return desc + "."
+	return desc 

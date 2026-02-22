@@ -28,6 +28,6 @@ func on_select_hex(h:hex_data):
 		gm.hs.add_hex(sub_h)
 	for sub_h in h.negative_hex_list:
 		gm.hs.add_hex(sub_h)
-	gm_state_machine.switch_state("play")
+	gm_state_machine.switch_state("prep")
 	
 	pass
