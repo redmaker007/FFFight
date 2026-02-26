@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4x130fr1u16c"
-path="res://.godot/imported/binion.png-189a36aa48945051b4276a6427738b51.ctex"
+uid="uid://dnqdidafn8ng7"
+path="res://.godot/imported/boxer_pic.png-9194e4145ec74697b02bcd9d202fd81c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/binion.png"
-dest_files=["res://.godot/imported/binion.png-189a36aa48945051b4276a6427738b51.ctex"]
+source_file="res://art/random_art/boxer_pic.png"
+dest_files=["res://.godot/imported/boxer_pic.png-9194e4145ec74697b02bcd9d202fd81c.ctex"]
 
 [params]
 

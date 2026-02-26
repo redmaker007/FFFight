@@ -23,3 +23,6 @@ signal open_unit_gallery
 
 @warning_ignore("unused_signal")
 signal gm_switch_state
+
+@warning_ignore("unused_signal")
+signal base_hp_changed(side: String, current_hp: float, max_hp: float)

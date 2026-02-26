@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="minion_data" load_steps=4 format=3 uid="uid://b0qtemlo2y6ji"]
+
+[ext_resource type="Script" uid="uid://dv6ph7x3xbuk3" path="res://resources/resource_precast/ability_data.gd" id="1_p181i"]
+[ext_resource type="Texture2D" uid="uid://cypw45smi5wlq" path="res://art/unit_animation/soulblade/soulbalde.png" id="2_8hhfm"]
+[ext_resource type="Script" uid="uid://dw6wb6dt8h3n5" path="res://resources/resource_precast/minion_data.gd" id="2_dhp1s"]
+
+[resource]
+script = ExtResource("2_dhp1s")
+minion_id = "soul_b"
+minion_name = "Soulblade"
+cost = 55
+speed = 60.0
+max_hp = 320.0
+att = 40.0
+att_r = 70.0
+att_spd = 1.3
+image = ExtResource("2_8hhfm")
+size = 0.3
+metadata/_custom_type_script = "uid://dw6wb6dt8h3n5"

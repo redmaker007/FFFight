@@ -3,18 +3,18 @@
 [ext_resource type="Script" uid="uid://dw6wb6dt8h3n5" path="res://resources/resource_precast/minion_data.gd" id="1_21les"]
 [ext_resource type="Script" uid="uid://dv6ph7x3xbuk3" path="res://resources/resource_precast/ability_data.gd" id="1_gxrbv"]
 [ext_resource type="Resource" uid="uid://c6jvmwwut4vdx" path="res://resources/ability/apply_slow.tres" id="1_ymcjq"]
-[ext_resource type="Texture2D" uid="uid://dqh3ttaerh4f6" path="res://art/sn_b_s_pic.png" id="3_gxrbv"]
+[ext_resource type="Texture2D" uid="uid://dqh3ttaerh4f6" path="res://art/random_art/sn_b_s_pic.png" id="3_gxrbv"]
 
 [resource]
 script = ExtResource("1_21les")
 minion_id = "snow_b_s"
 minion_name = "snow ball shooter"
-cost = 65
-speed = 70.0
+cost = 35
+speed = 80.0
 max_hp = 80.0
-att = 25.0
+att = 18.0
 att_r = 250.0
-att_spd = 1.8
+att_spd = 1.4
 image = ExtResource("3_gxrbv")
 size = 0.1
 ability = Array[ExtResource("1_gxrbv")]([ExtResource("1_ymcjq")])

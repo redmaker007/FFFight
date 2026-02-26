@@ -66,8 +66,9 @@ var is_dead:bool = false
 var pause:bool = false
 
 func ini_w_data(data:minion_data):
-	unit_name =data.minion_name
 	
+	unit_name =data.minion_name
+	unit_id = data.minion_id
 
 	
 	#set_current_stat
@@ -79,12 +80,13 @@ func ini_w_data(data:minion_data):
 	stat_dic["att_r"] = data.att_r
 	stat_dic["att_spd"] = data.att_spd
 	set_png(data.image)
-	scale = Vector2(1,1)*(1+data.size)
+	scale = Vector2(1,1)*1.2*(1+data.size)
+	
 	size = data.size
 	att_CD_sec = 0
 	set_abilities(data.ability)
 	
-	unit_id = data.minion_id
+	
 	
 	pass
 
@@ -260,16 +262,21 @@ func death_animation():
 	pass
 func refresh():
 	$health.value = float(get_moded_stat("hp"))/float(get_moded_stat("max_hp"))*100
-	
+	$health.visible = true
 	$AnimatedSprite2D.visible = true
 	$Minion.visible = false
 
 func play_anim(anim_name,speed):
-	
+
 	if $AnimatedSprite2D.animation != anim_name:
 		$AnimatedSprite2D.speed_scale = speed
 		$AnimatedSprite2D.play(anim_name)
 
+func set_anim_frame(anim_name,ratio):
+	var total_frames = $AnimatedSprite2D.sprite_frames.get_frame_count(anim_name)
+	var target_frame = clampi(int(total_frames * ratio), 0, total_frames - 1)
+	$AnimatedSprite2D.frame = target_frame
+	pass
 #endregion
 
 #region 4. 战斗核心 (Combat)
@@ -297,11 +304,14 @@ func attack_t():
 
 
 func take_damage(value,tar,time =0.1):
+	
 	if is_dead:
 		return
 	play_hit_flash(time)
 	stat_dic["hp"] -= value
 	$health.value = float(get_moded_stat("hp"))/float(get_moded_stat("max_hp"))*100
+	if is_in_group("base_tower"):
+		SignalBus.base_hp_changed.emit(side, get_moded_stat("hp"), get_moded_stat("max_hp"))
 	if ( get_moded_stat("hp") <= 0):
 		is_dead = true
 		death()
@@ -336,7 +346,7 @@ func apply_debuff(debf_re:debuff,tar):
 # Godot 引擎生命周期函数
 # ------------------------------------------------------------------------------
 func _ready() -> void:
-	
+	position.y  +=size*20
 	state_map = {
 	0:$walk_state,
 	1:$att_state,
@@ -357,6 +367,8 @@ func _ready() -> void:
 	$health.value = 100
 	if anim_sprite.material:
 		anim_sprite.material = anim_sprite.material.duplicate()
+	
+	att_CD_sec = 1/ get_moded_stat("att_spd")
 
 
 
@@ -369,7 +381,7 @@ func _process(delta: float) -> void:
 		# 倒计时
 		target_scan_timer -= delta
 		if target_scan_timer <= 0:
-			target_scan_timer = scan_interval + randf_range(-0.05, 0.02)
+			target_scan_timer = scan_interval + randf_range(-0.05, 0.01)
 			var found = find_target()
 			
 			if found:

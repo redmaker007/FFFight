@@ -10,27 +10,36 @@ var bank_active = false
 var money_amount = 100
 var money_CD = 1
 
+@onready var GM:Node2D = get_parent()
+
+@onready var money_text   = GM.get_node("CanvasLayer/HUD_Root/TopBar_BG/TopBar/MoneySegment/HBoxContainer/VBoxContainer/Money_text")
+@onready var upgrade_btn  = GM.get_node("CanvasLayer/HUD_Root/TopBar_BG/TopBar/UpgradeBtn")
+@onready var income_badge = GM.get_node("CanvasLayer/HUD_Root/TopBar_BG/TopBar/MoneySegment/HBoxContainer/IncomeBadge")
+
+
 var current_bank_level = 1
 
 var bank_upgrade_map ={
 	1:[1,45],
-	2:[4,90],
-	3:[8,175],
-	4:[13,300],
-	5:[19,450],
-	6:[26,700],
-	7:[38,9999],
+	2:[3,105],
+	3:[6,200],
+	4:[11,375],
+	5:[16,550],
+	6:[22,900],
+	7:[33,9999],
+	8:[67,99999999]
 }
 
-@onready var GM:Node2D = get_parent()
-@onready var money_text = GM.get_node("CanvasLayer/HBoxContainer2/Money_text")
+
+
 
 func _ready() -> void:
+	await get_tree().process_frame
 	SignalBus.connect("buy_unit",buy_unit)
 	SignalBus.connect("try_upgrade_bank",upgrade_bank)
 	money_amount = 100
 	current_bank_level = 1
-	get_parent().get_node("CanvasLayer/HBoxContainer2/money_upgrade/money_upgrade_text").text = str(bank_upgrade_map[current_bank_level][1])
+	upgrade_btn.text = str(bank_upgrade_map[current_bank_level][1])
 
 func function_switch(b):
 	bank_active =b
@@ -67,7 +76,7 @@ func upgrade_bank():
 		
 func start_level():
 	money_amount += default_money_amount
-	current_bank_level = default_bank_level
+	current_bank_level = max(current_bank_level-1,1)
 	update_text()
 
 func reset_bank():
@@ -76,12 +85,23 @@ func reset_bank():
 	update_text()
 	
 func update_text():
-	# 升级费用的 UI 更新保持不变
-	get_parent().get_node("CanvasLayer/HBoxContainer2/money_upgrade/money_upgrade_text").text = str(bank_upgrade_map[current_bank_level][1] * upgrade_multiplayer)
-	
-	# 💡 计算当前的实际秒收 (基础秒收 * 收入倍率)
+	var upgrade_cost = bank_upgrade_map[current_bank_level][1] * upgrade_multiplayer
 	var current_income = bank_upgrade_map[current_bank_level][0] * income_multiplyer
 	
-	# 💡 拼接字符串，加入了 (+X/s) 的显示。
-	# 为了防止倍率导致出现长小数，给 current_income 也加上了 snapped 处理
-	money_text.text = "$: " + str(snapped(money_amount, 0.01)) + " (+" + str(snapped(current_income, 0.01)) + "/s)"
+	# 主金币显示（Orbitron 字体，金色）
+	money_text.text = "$"+str(snapped(money_amount, 1))
+	
+	# 收入徽章（绿色 "+X/s"）
+	
+	if income_badge:
+		income_badge.text = "+" + str(snapped(current_income, 0.1)) + "/s"
+	
+	# 升级按钮费用
+	
+	if upgrade_btn:
+		if current_bank_level >= bank_upgrade_map.size():
+			upgrade_btn.text = "⬆ max level"
+			upgrade_btn.disabled = true
+		else:
+			upgrade_btn.text = "⬆ upgrade income\n$" + str(upgrade_cost)
+			upgrade_btn.disabled = false

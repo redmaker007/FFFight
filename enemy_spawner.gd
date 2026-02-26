@@ -6,9 +6,9 @@ extends Node
 
 
 
-var GM
+@onready var GM = get_parent()
 
-var wave_number_label 
+@onready var wave_number_label = GM.wave_number_label 
 
 var pool = ["red","blue","boxer","snow_b_s","bf_k"]
 var u_name
@@ -53,18 +53,18 @@ func spawn_level_1():
 	var time_int
 	if count < 4:
 		unit_name = "red"
-		time_int = 5
+		time_int = 6
 
 	elif count < 16:
 		unit_name = "red"
 		if count%2 ==0:
 			time_int = 1
 		else:
-			time_int = 4.5
+			time_int = 5
 	elif count < 20:
 		unit_name = "blue"
 		time_int = 1
-	elif count < 75:
+	elif count < 70:
 		if count %10 == 0:
 			unit_name = "snow_b_s"
 			time_int = 3
@@ -74,15 +74,24 @@ func spawn_level_1():
 	elif count < 80:
 		unit_name = "boxer"
 		time_int = 0.1
-	elif count < 200:
+	elif count < 90:
 		unit_name = pool.pick_random()
 		time_int = 3
-	elif count < 300:
+	elif count < 105:
+		unit_name = "bf_k"
+		time_int = 0.1
+	elif count < 160:
+		unit_name = pool.pick_random()
+		time_int = 2.75
+	elif count < 200:
 		unit_name = pool.pick_random()
 		time_int = 2.5
-	else:
+	elif count < 300:
 		unit_name = pool.pick_random()
 		time_int = 2
+	else:
+		unit_name = pool.pick_random()
+		time_int = 1.5
 	
 	
 	
@@ -113,5 +122,5 @@ func reset_whole():
 	pass
 
 func update_wave_number_label():
-	wave_number_label.text = "wave difficulty: "+str(count/10+1)
+	wave_number_label.text = "wave : "+str(count/10+1)
 	

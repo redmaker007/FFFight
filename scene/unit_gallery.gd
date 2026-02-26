@@ -7,7 +7,7 @@ extends PanelContainer
 var unit_gallery_dict ={}
 
 func _ready() -> void:
-	
+	Global.slide_in(self,40.0)
 	clear_gallery()
 	load_gallery()
 	on_unit_select(UnitAutoload.unit_dic["red"])
@@ -18,9 +18,11 @@ func clear_gallery():
 		i.queue_free()
 
 func load_gallery():
+	
 	for i in UnitAutoload.unit_dic:
-		if UnitAutoload.unit_dic[i].minion_id == "s_s":
-			return
+		
+		if UnitAutoload.unit_dic[i].minion_id in ["s_s","base"] :
+			continue
 		var unit_butt = TextureButton.new()
 		unit_butt.texture_normal = UnitAutoload.unit_dic[i].image
 		unit_butt.ignore_texture_size = true
@@ -41,6 +43,7 @@ func on_unit_select(_minion_data):
 	anim_sprite.scale = Vector2.ONE*2 * (1.0 + _minion_data.size)
 	anim_sprite.speed_scale = _minion_data.speed / 50.0
 	play_anime(_minion_data.minion_id + " walk")
+	
 	
 	# 2. 🧹 清理旧 UI (非常关键！)
 	# 在添加新属性之前，必须把上一次点击生成的 Label 全都删掉
@@ -110,3 +113,4 @@ func on_unit_select(_minion_data):
 
 func play_anime(anime_name):
 	anim_sprite.play(anime_name)
+	print(anime_name)

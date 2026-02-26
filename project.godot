@@ -13,7 +13,7 @@ config_version=5
 config/name="FFFIGHT"
 run/main_scene="uid://bae3kf36u3115"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://art/icon.svg"
+config/icon="res://art/random_art/icon.svg"
 
 [autoload]
 

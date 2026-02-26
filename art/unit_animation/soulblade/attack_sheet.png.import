@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpk6aigxp4nmm"
-path="res://.godot/imported/boxer.png-e1de641e2d849570b96a4d68d0c129e0.ctex"
+uid="uid://ddnrtfuh37kf"
+path="res://.godot/imported/attack_sheet.png-35b04a4569365e5650cd19fd0eadf478.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/boxer.png"
-dest_files=["res://.godot/imported/boxer.png-e1de641e2d849570b96a4d68d0c129e0.ctex"]
+source_file="res://art/unit_animation/soulblade/attack_sheet.png"
+dest_files=["res://.godot/imported/attack_sheet.png-35b04a4569365e5650cd19fd0eadf478.ctex"]
 
 [params]
 

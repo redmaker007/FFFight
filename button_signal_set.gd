@@ -11,3 +11,7 @@ func _on_money_upgrade_pressed() -> void:
 
 func _on_unit_gallery_button_pressed() -> void:
 	SignalBus.open_unit_gallery.emit()
+
+
+func _on_upgrade_btn_pressed() -> void:
+	SignalBus.emit_signal("try_upgrade_bank")

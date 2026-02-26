@@ -27,7 +27,7 @@ metadata/_custom_type_script = "uid://bdmyolyttc2sg"
 [sub_resource type="Resource" id="Resource_855u1"]
 script = ExtResource("6_w3c1q")
 stat_str = "att_spd"
-addition_change = 0.2
+addition_change = 0.1
 target_selec = SubResource("Resource_61dnx")
 one_time = false
 metadata/_custom_type_script = "uid://b03112umjschj"

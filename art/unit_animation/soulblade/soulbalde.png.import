@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://f3eaggejvxx6"
-path="res://.godot/imported/butterfly_kun.png-e1ed9ac7e1262924d50df31c5438c1bf.ctex"
+uid="uid://cypw45smi5wlq"
+path="res://.godot/imported/soulbalde.png-c40ea7d69b2ed26a2141985f71eb75b6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/butterfly_kun.png"
-dest_files=["res://.godot/imported/butterfly_kun.png-e1ed9ac7e1262924d50df31c5438c1bf.ctex"]
+source_file="res://art/unit_animation/soulblade/soulbalde.png"
+dest_files=["res://.godot/imported/soulbalde.png-c40ea7d69b2ed26a2141985f71eb75b6.ctex"]
 
 [params]
 

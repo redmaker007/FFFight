@@ -16,6 +16,7 @@ func _ready() -> void:
 	register(preload("res://resources/minion/snow_ball_shooter.tres"))
 	register(preload("res://resources/minion/super_boss.tres"))
 	register(preload("res://resources/minion/base.tres"))
+	register(preload("res://resources/minion/soulblade.tres"))
 
 
 func register(md:minion_data):

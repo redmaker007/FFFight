@@ -4,8 +4,14 @@ extends Node
 
 
 func state_ready():
-	if p.unit_name == "boxer":
-		p.attack_animation()
+	var final_spd = p.get_moded_stat("att_spd")
+	var total_cd = 1.0 / final_spd if final_spd > 0.01 else 999.0
+	var progress_ratio = 0.0
+	if p.att_CD_sec > 0 and total_cd > 0:
+		progress_ratio = clamp(1.0 - (p.att_CD_sec / total_cd), 0.0, 1.0)
+		
+	p.attack_animation()
+	p.set_anim_frame(p.unit_id+" attack",progress_ratio)
 	
 	pass
 

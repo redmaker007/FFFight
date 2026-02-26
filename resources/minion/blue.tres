@@ -2,18 +2,18 @@
 
 [ext_resource type="Script" uid="uid://dv6ph7x3xbuk3" path="res://resources/resource_precast/ability_data.gd" id="1_nruhk"]
 [ext_resource type="Script" uid="uid://dw6wb6dt8h3n5" path="res://resources/resource_precast/minion_data.gd" id="1_pi55u"]
-[ext_resource type="Texture2D" uid="uid://bdexr33vct12w" path="res://art/blue_pict.png" id="2_lkjqr"]
+[ext_resource type="Texture2D" uid="uid://bdexr33vct12w" path="res://art/random_art/blue_pict.png" id="2_lkjqr"]
 
 [resource]
 script = ExtResource("1_pi55u")
 minion_id = "blue"
 minion_name = "blue"
-cost = 10
+cost = 13
 speed = 130.0
-max_hp = 85.0
-att = 20.0
-att_r = 50.0
-att_spd = 0.95
+max_hp = 50.0
+att = 14.0
+att_r = 40.0
+att_spd = 0.8
 image = ExtResource("2_lkjqr")
 size = -0.1
 metadata/_custom_type_script = "uid://dw6wb6dt8h3n5"

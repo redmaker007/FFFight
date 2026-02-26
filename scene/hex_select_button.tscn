@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://lj33bbvnuyxx"]
+[gd_scene load_steps=3 format=3 uid="uid://lj33bbvnuyxx"]
 
+[ext_resource type="Theme" uid="uid://7dlw0gdjkmon" path="res://art/theme/theme.tres" id="1_m14yv"]
 [ext_resource type="Script" uid="uid://drmvg1iwmu2yq" path="res://hex_select_button.gd" id="1_w38gu"]
 
 [node name="hex_select_button" type="PanelContainer"]
@@ -9,15 +10,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_m14yv")
 script = ExtResource("1_w38gu")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 custom_minimum_size = Vector2(250, 30)
 layout_mode = 2
+size_flags_vertical = 8
 text = "aa"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -26,6 +30,7 @@ autowrap_mode = 3
 [node name="Label3" type="Label" parent="VBoxContainer"]
 custom_minimum_size = Vector2(250, 50)
 layout_mode = 2
+size_flags_vertical = 3
 text = "
 and
 "
@@ -36,10 +41,19 @@ autowrap_mode = 3
 [node name="Label2" type="Label" parent="VBoxContainer"]
 custom_minimum_size = Vector2(250, 30)
 layout_mode = 2
+size_flags_vertical = 0
 text = "hh"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="button" type="Button" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
+size_flags_vertical = 8
+alignment = 1
+
+[node name="button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
