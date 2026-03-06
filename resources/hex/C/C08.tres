@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="hex_data" load_steps=7 format=3 uid="uid://d0obkbk47ig8p"]
+
+[ext_resource type="Script" uid="uid://bewmmuup735ge" path="res://resources/resource_precast/sub_hex_data.gd" id="1_0et1p"]
+[ext_resource type="Script" uid="uid://b03112umjschj" path="res://resources/hex/sub_hex/give_target_stat.gd" id="2_4wjbx"]
+[ext_resource type="Script" uid="uid://bfl0p8atapmsa" path="res://resources/hex/sub_hex/add_wave_hex.gd" id="2_kj46t"]
+[ext_resource type="Script" uid="uid://cn1vb61dhtl1b" path="res://resources/resource_precast/hex_data.gd" id="2_x2784"]
+
+[sub_resource type="Resource" id="Resource_iabui"]
+script = ExtResource("2_kj46t")
+unit_id = "blue"
+amount = 3
+metadata/_custom_type_script = "uid://bfl0p8atapmsa"
+
+[sub_resource type="Resource" id="Resource_kj46t"]
+script = ExtResource("2_4wjbx")
+stat_str = "speed"
+addition_change = 20.0
+metadata/_custom_type_script = "uid://b03112umjschj"
+
+[resource]
+script = ExtResource("2_x2784")
+hex_name = "Courier"
+positive_hex_list = Array[ExtResource("1_0et1p")]([SubResource("Resource_kj46t")])
+negative_hex_list = Array[ExtResource("1_0et1p")]([SubResource("Resource_iabui")])
+pos_descrption = "All units +20 SPD"
+neg_descrption = "Spawns 2 extra enemy unit in the first wave"
+hex_rarity = 4
+metadata/_custom_type_script = "uid://cn1vb61dhtl1b"

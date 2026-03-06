@@ -1,0 +1,254 @@
+[gd_scene load_steps=11 format=3 uid="uid://df13xhk5hnqev"]
+
+[ext_resource type="Theme" uid="uid://7dlw0gdjkmon" path="res://art/theme/theme.tres" id="1_2fwvj"]
+[ext_resource type="Shader" uid="uid://cpy6526y0blaj" path="res://scene/pixelize.gdshader" id="2_0iwki"]
+[ext_resource type="Script" uid="uid://bkavhaqwbrj38" path="res://scene/main_menu.gd" id="2_2atga"]
+[ext_resource type="Shader" uid="uid://dxsgdlmrdfdpp" path="res://scene/background.gdshader" id="3_sepwh"]
+[ext_resource type="Script" uid="uid://c114f6guuqphg" path="res://scene/coner_line.gd" id="4_0iwki"]
+[ext_resource type="Shader" uid="uid://hos0bdcfxijj" path="res://scene/shading_line.gdshader" id="4_sepwh"]
+[ext_resource type="Script" uid="uid://dc28s3wflyl3t" path="res://scene/btn.gd" id="6_2atga"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_14wem"]
+shader = ExtResource("2_0iwki")
+shader_parameter/line_spacing = 3.0
+shader_parameter/line_opacity = 0.03
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2atga"]
+shader = ExtResource("3_sepwh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_by01r"]
+shader = ExtResource("4_sepwh")
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_2fwvj")
+script = ExtResource("2_2atga")
+
+[node name="Scanline" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_14wem")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.039215688, 0.047058824, 0.0627451, 1)
+
+[node name="Background" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_2atga")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.039215688, 0.047058824, 0.0627451, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -190.0
+offset_right = 190.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+self_modulate = Color(0.9098039, 0.78431374, 0.2901961, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 120
+text = "FFFIGHT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TitleGrow" type="Label" parent="VBoxContainer/Title"]
+modulate = Color(0.8153955, 0.70215756, 0.25567645, 1)
+self_modulate = Color(18.892157, 16.427145, 6.707944, 0.003921569)
+layout_mode = 0
+offset_right = 380.0
+offset_bottom = 154.0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 18
+theme_override_font_sizes/font_size = 120
+text = "FFFIGHT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtitle" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 72
+text = "FFFIGHT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="line" type="ColorRect" parent="VBoxContainer"]
+material = SubResource("ShaderMaterial_by01r")
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+
+[node name="ButtonContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="BtnStart" type="Button" parent="VBoxContainer/ButtonContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "START_GAME"
+script = ExtResource("6_2atga")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ButtonContainer/BtnStart"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Underline" type="ColorRect" parent="VBoxContainer/ButtonContainer/BtnStart/HBoxContainer"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+size_flags_vertical = 8
+color = Color(0.9098039, 0.78431374, 0.2901961, 1)
+
+[node name="NumLabel" type="Label" parent="VBoxContainer/ButtonContainer/BtnStart/HBoxContainer"]
+layout_mode = 2
+
+[node name="Arrow" type="Label" parent="VBoxContainer/ButtonContainer/BtnStart/HBoxContainer"]
+layout_mode = 2
+text = ">"
+
+[node name="BtnLabel" type="Label" parent="VBoxContainer/ButtonContainer/BtnStart/HBoxContainer"]
+layout_mode = 2
+
+[node name="BtnAchievements" type="Button" parent="VBoxContainer/ButtonContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "ACHIEVEMENTS"
+script = ExtResource("6_2atga")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ButtonContainer/BtnAchievements"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Underline" type="ColorRect" parent="VBoxContainer/ButtonContainer/BtnAchievements/HBoxContainer"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+size_flags_vertical = 8
+color = Color(0.9098039, 0.78431374, 0.2901961, 1)
+
+[node name="NumLabel" type="Label" parent="VBoxContainer/ButtonContainer/BtnAchievements/HBoxContainer"]
+layout_mode = 2
+
+[node name="Arrow" type="Label" parent="VBoxContainer/ButtonContainer/BtnAchievements/HBoxContainer"]
+layout_mode = 2
+text = ">"
+
+[node name="BtnLabel" type="Label" parent="VBoxContainer/ButtonContainer/BtnAchievements/HBoxContainer"]
+layout_mode = 2
+
+[node name="BtnSettings" type="Button" parent="VBoxContainer/ButtonContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "SETTING"
+script = ExtResource("6_2atga")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ButtonContainer/BtnSettings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Underline" type="ColorRect" parent="VBoxContainer/ButtonContainer/BtnSettings/HBoxContainer"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+size_flags_vertical = 8
+color = Color(0.9098039, 0.78431374, 0.2901961, 1)
+
+[node name="NumLabel" type="Label" parent="VBoxContainer/ButtonContainer/BtnSettings/HBoxContainer"]
+layout_mode = 2
+
+[node name="Arrow" type="Label" parent="VBoxContainer/ButtonContainer/BtnSettings/HBoxContainer"]
+layout_mode = 2
+text = ">"
+
+[node name="BtnLabel" type="Label" parent="VBoxContainer/ButtonContainer/BtnSettings/HBoxContainer"]
+layout_mode = 2
+
+[node name="BtnQuit" type="Button" parent="VBoxContainer/ButtonContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "QUIT"
+script = ExtResource("6_2atga")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ButtonContainer/BtnQuit"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Underline" type="ColorRect" parent="VBoxContainer/ButtonContainer/BtnQuit/HBoxContainer"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+size_flags_vertical = 8
+color = Color(0.9098039, 0.78431374, 0.2901961, 1)
+
+[node name="NumLabel" type="Label" parent="VBoxContainer/ButtonContainer/BtnQuit/HBoxContainer"]
+layout_mode = 2
+
+[node name="Arrow" type="Label" parent="VBoxContainer/ButtonContainer/BtnQuit/HBoxContainer"]
+layout_mode = 2
+text = ">"
+
+[node name="BtnLabel" type="Label" parent="VBoxContainer/ButtonContainer/BtnQuit/HBoxContainer"]
+layout_mode = 2
+
+[node name="coner_line" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 60.0
+offset_top = 60.0
+offset_right = 100.0
+offset_bottom = 100.0
+script = ExtResource("4_0iwki")
+
+[node name="coner_line2" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 1858.0
+offset_top = 60.0
+offset_right = 1898.0
+offset_bottom = 100.0
+rotation = 1.5707964
+script = ExtResource("4_0iwki")
+
+[node name="coner_line3" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 60.0
+offset_top = 1018.0
+offset_right = 100.0
+offset_bottom = 1058.0
+rotation = 4.712389
+script = ExtResource("4_0iwki")
+
+[node name="coner_line4" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 1858.0
+offset_top = 1018.0
+offset_right = 1898.0
+offset_bottom = 1058.0
+rotation = 3.1415927
+script = ExtResource("4_0iwki")

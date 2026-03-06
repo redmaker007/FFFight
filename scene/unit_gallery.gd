@@ -38,75 +38,124 @@ func _on_button_pressed() -> void:
 	queue_free()
 
 func on_unit_select(_minion_data):
-	# 1. 更新精灵图和动画
-	# Vector2.ONE 就是 Vector2(1, 1) 的优雅写法
-	anim_sprite.scale = Vector2.ONE*2 * (1.0 + _minion_data.size)
+	anim_sprite.scale = Vector2.ONE * 2 * (1.0 + _minion_data.size) * 0.4
 	anim_sprite.speed_scale = _minion_data.speed / 50.0
 	play_anime(_minion_data.minion_id + " walk")
-	
-	
-	# 2. 🧹 清理旧 UI (非常关键！)
-	# 在添加新属性之前，必须把上一次点击生成的 Label 全都删掉
+
 	for child in right_info_container.get_children():
 		child.queue_free()
-	
-	# 3. 获取数据并动态生成列表
+
+	var name_label = Label.new()
+	name_label.text = _minion_data.minion_name.to_upper()  # 单位名不套tr，是数据
+	name_label.add_theme_color_override("font_color", Color("#e8c84a"))
+	name_label.add_theme_font_size_override("font_size", 28)
+	name_label.add_theme_constant_override("outline_size", 0)
+	right_info_container.add_child(name_label)
+
+	var sep = HSeparator.new()
+	sep.add_theme_color_override("separator", Color("#e8c84a", 0.3))
+	sep.custom_minimum_size = Vector2(0, 12)
+	right_info_container.add_child(sep)
+
 	var dict = _minion_data.get_data_dic()
-	for key in dict:
-		# 🚫 过滤掉不需要显示为文字的属性 (比如贴图)
-		if key == "image" or key == "animation":
+
+	var stat_display = {
+		"max_hp":    tr("STAT_HP"),
+		"att":       tr("STAT_ATK"),
+		"att_spd":   tr("STAT_ATK_SPD"),
+		"att_r":     tr("STAT_RANGE"),
+		"speed":     tr("STAT_SPEED"),
+		"deploy_cd": tr("STAT_DEPLOY_CD"),
+		"cost":      tr("STAT_COST"),
+		"size":      tr("STAT_SIZE"),
+	}
+
+	for key in stat_display:
+		if not key in dict:
 			continue
-			
-		var con = HBoxContainer.new()
-		var stat_name_label = Label.new()
-		var stat_value_label = Label.new()
-		
-		# ✨ 美化属性名字 (例如: "max_hp" -> "Max Hp: ")
-		stat_name_label.text = key.replace("_", " ").capitalize() + ":"
-		# 给名字一个固定宽度，这样后面的数值就会完美对齐，不会因为名字长短而参差不齐
-		stat_name_label.custom_minimum_size = Vector2(120, 0) 
-		
-	# 🎯 处理技能数组
-		if key == "ability":
-			var ability_texts = []
-			for x in dict[key]:
-				# 确保 x 不是空的
-				if x:
-					var a_name = x.ability_name if "ability_name" in x else "Unknown Ability"
-					var a_desc = ""
-					
-					# 调用我们刚写的绝赞积木系统！
-					if x.has_method("get_description"):
-						a_desc = x.get_description()
-						
-					# 拼接单条技能："- 技能名: 描述句子"
-					var final_line = "- " + a_name + ": " + a_desc
-					ability_texts.append(final_line)
-			
-			if ability_texts.is_empty():
-				stat_value_label.text = "None"
-			else:
-				# 用换行符 \n 把所有技能串起来，变成垂直列表
-				stat_value_label.text = "\n".join(ability_texts)
-				
-			# ⚠️ 非常关键的 UI 设置：开启自动换行和自动扩展！
-			# 因为描述句子很长，不换行的话会直接冲出屏幕
-			stat_value_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-			stat_value_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			
-			stat_value_label.custom_minimum_size = Vector2(10, 0)
-			
-			# 顺手确保它纵向也能自然撑开
-			stat_value_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
-				
-		# 🎯 处理普通数值
+		var value_str: String
+		if key == "deploy_cd":
+			value_str = str(dict[key]) + "s"
+		elif key == "att_spd":
+			value_str = str(dict[key]) + "/s"
+		elif key == "att_r":
+			value_str = str(dict[key]) + " u"
+		elif key == "cost":
+			value_str = "$" + str(dict[key])
 		else:
-			stat_value_label.text = str(dict[key])
-			
-		# 把组件组装起来
-		con.add_child(stat_name_label)
-		con.add_child(stat_value_label)
-		right_info_container.add_child(con)
+			value_str = str(dict[key])
+		_add_stat_row(right_info_container, stat_display[key], value_str)
+
+	if "ability" in dict and not dict["ability"].is_empty():
+		var ab_sep = HSeparator.new()
+		ab_sep.add_theme_color_override("separator", Color("#4a5568"))
+		ab_sep.custom_minimum_size = Vector2(0, 8)
+		right_info_container.add_child(ab_sep)
+
+		var ab_title = Label.new()
+		ab_title.text = tr("ABILITIES")
+		ab_title.add_theme_color_override("font_color", Color("#6b7280"))
+		ab_title.add_theme_font_size_override("font_size", 11)
+		right_info_container.add_child(ab_title)
+
+		for x in dict["ability"]:
+			if not x:
+				continue
+			var a_name = x.ability_name if "ability_name" in x else "?"
+			var a_desc = x.get_description() if x.has_method("get_description") else ""
+			_add_ability_row(right_info_container, a_name, a_desc)
+
+
+func _add_stat_row(container: Node, label_text: String, value_text: String):
+	var row = HBoxContainer.new()
+	row.custom_minimum_size = Vector2(0, 28)
+
+	var key_label = Label.new()
+	key_label.text = label_text
+	key_label.custom_minimum_size = Vector2(100, 0)
+	key_label.add_theme_color_override("font_color", Color("#4a5568"))
+	key_label.add_theme_font_size_override("font_size", 13)
+	key_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+
+	var sep_label = Label.new()
+	sep_label.text = "▸"
+	sep_label.add_theme_color_override("font_color", Color("#2d3748"))
+	sep_label.add_theme_font_size_override("font_size", 11)
+	sep_label.custom_minimum_size = Vector2(20, 0)
+	sep_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+
+	var val_label = Label.new()
+	val_label.text = value_text
+	val_label.add_theme_color_override("font_color", Color("#e8e8e8"))
+	val_label.add_theme_font_size_override("font_size", 15)
+	val_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	val_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+
+	row.add_child(key_label)
+	row.add_child(sep_label)
+	row.add_child(val_label)
+	container.add_child(row)
+
+func _add_ability_row(container: Node, ab_name: String, ab_desc: String):
+	var col = VBoxContainer.new()
+	col.custom_minimum_size = Vector2(0, 0)
+
+	var name_l = Label.new()
+	name_l.text = "· " + ab_name.to_upper()
+	name_l.add_theme_color_override("font_color", Color("#e8c84a", 0.8))
+	name_l.add_theme_font_size_override("font_size", 12)
+	col.add_child(name_l)
+
+	if ab_desc != "":
+		var desc_l = Label.new()
+		desc_l.text = "  " + ab_desc
+		desc_l.add_theme_color_override("font_color", Color("#6b7280"))
+		desc_l.add_theme_font_size_override("font_size", 11)
+		desc_l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		desc_l.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		col.add_child(desc_l)
+
+	container.add_child(col)
 
 
 

@@ -80,7 +80,9 @@ func ini_w_data(data:minion_data):
 	stat_dic["att_r"] = data.att_r
 	stat_dic["att_spd"] = data.att_spd
 	set_png(data.image)
-	scale = Vector2(1,1)*1.2*(1+data.size)
+	
+	scale = Vector2(1,1)*(1+data.size)*0.3
+	
 	
 	size = data.size
 	att_CD_sec = 0
@@ -202,9 +204,14 @@ func attack_animation():
 	if is_dead:
 		return
 
-	play_anim(unit_id+" "+"attack",get_moded_stat("att_spd"))
+	play_anim(unit_id+" "+"attack",get_moded_stat("att_spd")*4)
+
+func idle_animation():
+	play_anim(unit_id+" "+"idle",1)
+
 
 func death_animation():
+
 	var imag
 	if anim_sprite.visible == true:
 		imag = anim_sprite
@@ -218,8 +225,8 @@ func death_animation():
 	var dir = 1 if randf() > 0.5 else -1
 	
 	# 📏 定义跳跃力度
-	var jump_height = 150.0  # 跳多高
-	var side_dist = 100.0    # 横向飞多远 (总距离)
+	var jump_height = 550.0  # 跳多高
+	var side_dist = 400.0    # 横向飞多远 (总距离)
 	var jump_time = 0.35
 	
 	var tw = create_tween()
@@ -247,7 +254,7 @@ func death_animation():
 	tw.tween_interval(jump_time)
 	tw.set_parallel(true)
 	# 1. Y轴：掉出屏幕 (模拟重力加速：Ease In)
-	tw.tween_property(imag, "position:y", 1000.0, 0.5).as_relative().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	tw.tween_property(imag, "position:y", 2000, 0.5).as_relative().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	
 	# 2. X轴：继续横向移动剩下的 60% (保持线性，让弧线圆润)
 	tw.tween_property(imag, "position:x", side_dist * 0.6 * dir, 0.5).as_relative().set_trans(Tween.TRANS_LINEAR)
@@ -259,7 +266,6 @@ func death_animation():
 	
 	
 	await tw.finished
-	pass
 func refresh():
 	$health.value = float(get_moded_stat("hp"))/float(get_moded_stat("max_hp"))*100
 	$health.visible = true
@@ -277,6 +283,13 @@ func set_anim_frame(anim_name,ratio):
 	var target_frame = clampi(int(total_frames * ratio), 0, total_frames - 1)
 	$AnimatedSprite2D.frame = target_frame
 	pass
+
+
+func _apply_size_offset() -> void:
+	# 正值向下，负值向上
+	# size越大，脚越需要往下补偿
+	var foot_offset = size * 30  # 统一在这里调这一个数
+	position.y += foot_offset
 #endregion
 
 #region 4. 战斗核心 (Combat)
@@ -346,7 +359,7 @@ func apply_debuff(debf_re:debuff,tar):
 # Godot 引擎生命周期函数
 # ------------------------------------------------------------------------------
 func _ready() -> void:
-	position.y  +=size*20
+	
 	state_map = {
 	0:$walk_state,
 	1:$att_state,
@@ -363,7 +376,7 @@ func _ready() -> void:
 	switch_state(state.walk)
 	# 调整位置和UI
 	
-	position = self.position - Vector2(0,size*50)
+	
 	$health.value = 100
 	if anim_sprite.material:
 		anim_sprite.material = anim_sprite.material.duplicate()

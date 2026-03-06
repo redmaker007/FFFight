@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="minion_data" load_steps=4 format=3 uid="uid://3hh05e1qdcy2"]
+[gd_resource type="Resource" script_class="minion_data" load_steps=3 format=3 uid="uid://3hh05e1qdcy2"]
 
 [ext_resource type="Script" uid="uid://dw6wb6dt8h3n5" path="res://resources/resource_precast/minion_data.gd" id="1_du6xk"]
-[ext_resource type="Script" uid="uid://dv6ph7x3xbuk3" path="res://resources/resource_precast/ability_data.gd" id="1_mi3rp"]
 [ext_resource type="Texture2D" uid="uid://bi6wrix0y57ud" path="res://art/random_art/red_pic.png" id="2_mi3rp"]
 
 [resource]
@@ -9,11 +8,13 @@ script = ExtResource("1_du6xk")
 minion_id = "red"
 minion_name = "red"
 cost = 25
-speed = 40.0
+deploy_cd = 5.0
+speed = 90.0
 max_hp = 450.0
 att = 25.0
 att_r = 30.0
-att_spd = 0.7
+att_spd = 0.4
 image = ExtResource("2_mi3rp")
 size = 0.5
+ability = null
 metadata/_custom_type_script = "uid://dw6wb6dt8h3n5"

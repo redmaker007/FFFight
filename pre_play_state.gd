@@ -15,6 +15,10 @@ func enter_state():
 	gm.group_switch_func(false)
 	gm.ms.reset_bank()
 	gm.clear_board()
+	gm.hs.clear_hex()
+	
+	gm.em_reset_count()
+	gm.reset_top_bar()
 	gm_state_machine.switch_state("hex")
 	
 	

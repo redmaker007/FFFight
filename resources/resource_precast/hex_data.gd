@@ -1,23 +1,30 @@
 extends Resource
 class_name hex_data
 
-@export var hex_id:String
+
+@export var hex_name:String
 @export_group("positive_effect")
 @export var positive_hex_list:Array[sub_hex_data]
 @export_group("negative_effect")
 @export var negative_hex_list:Array[sub_hex_data]
+@export_group("general")
+@export var pos_descrption:String
+@export var neg_descrption:String = "None"
+
+enum rarity{D,S,A,B,C}
+@export var hex_rarity:rarity
 
 func get_pos_des():
-	var text =""
-	for i in positive_hex_list:
-		text += i.get_description()+"\n"
-	return text
+	#var text =""
+	#for i in positive_hex_list:
+		#text += i.get_description()+"\n"
+	return pos_descrption
 
 func get_neg_des():
-	var text =""
-	for i in negative_hex_list:
-		text += i.get_description()
-	return text
+	#var text =""
+	#for i in negative_hex_list:
+		#text += i.get_description()
+	return neg_descrption
 
 func get_description() -> String:
 	return ""

@@ -51,7 +51,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="VBoxContainer/HBoxContainer/VBoxContainer2/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(300, 288)
+size = Vector2i(300, 502)
 render_target_update_mode = 4
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="VBoxContainer/HBoxContainer/VBoxContainer2/SubViewportContainer/SubViewport"]

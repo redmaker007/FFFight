@@ -1,48 +1,33 @@
 extends Node
-
+#attack state
 @onready var p = get_parent()
 
+var _attack_triggered: bool = false
 
 func state_ready():
-	var final_spd = p.get_moded_stat("att_spd")
-	var total_cd = 1.0 / final_spd if final_spd > 0.01 else 999.0
-	var progress_ratio = 0.0
-	if p.att_CD_sec > 0 and total_cd > 0:
-		progress_ratio = clamp(1.0 - (p.att_CD_sec / total_cd), 0.0, 1.0)
-		
-	p.attack_animation()
-	p.set_anim_frame(p.unit_id+" attack",progress_ratio)
-	
-	pass
-
+	p.play_anim(p.unit_id + " idle", 1.0)
+	_attack_triggered = false
 
 func state_process(delta: float) -> void:
-	
 	if not p.target or p.target.is_dead:
 		p.switch_state(p.state.walk)
-	# 为了代码整洁，建议把 get_parent() 存个变量，不然调用太频繁了
+		return
+	
 	if p.is_dead:
 		return
 	
+	p.att_CD_sec -= delta
+	
+	var cd = 1.0 / max(p.get_moded_stat("att_spd"), 0.01)
+	
+	# 在3/4时间点播攻击动画
+	if p.att_CD_sec <= cd * 0.25 and not _attack_triggered:
+		_attack_triggered = true
+		p.play_anim(p.unit_id + " attack", p.get_moded_stat("att_spd") * 4.0)
+	
+	# CD归零时造成伤害并重置
 	if p.att_CD_sec <= 0:
-		
-		# 1. 执行攻击
+		_attack_triggered = false
 		p.attack_t()
-		
-		# === 核心修改 ===
-		# 获取经过 Buff 计算后的最终攻速 (比如 2.0)
-		# 注意：一定要用 get_moded_stat，否则你的 Buff 加成无效！
-		var final_spd = p.get_moded_stat("att_spd")
-		
-		# 防御性编程：防止攻速被减成 0 或负数导致除以零报错
-		if final_spd <= 0.01:
-			p.att_CD_sec = 999.0 # 攻速太慢，设为一个极大值
-		else:
-			# 公式：冷却时间 = 1 / 频率
-			# 攻速 2.0 -> 冷却 0.5秒
-			# 攻速 0.5 -> 冷却 2.0秒
-			p.att_CD_sec = 1.0 / final_spd
-			
-	else:
-		p.att_CD_sec -= delta
-	pass
+		p.att_CD_sec = cd
+		p.play_anim(p.unit_id + " idle", 1.0)

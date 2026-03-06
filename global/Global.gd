@@ -44,6 +44,8 @@ var hex_select_window = preload("res://scene/hex_select_window.tscn")
 
 var unit_gallery_window = preload("res://scene/Unit Gallery.tscn")
 
+var setting_window = preload("res://scene/Settings.tscn")
+
 #color
 const C_BG        = Color("0a0c10")
 const C_PANEL     = Color("111520")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bae3kf36u3115"]
+[gd_scene load_steps=37 format=3 uid="uid://bae3kf36u3115"]
 
 [ext_resource type="Script" uid="uid://bxoj4abwmi3vj" path="res://GM.gd" id="1_123pn"]
 [ext_resource type="Script" uid="uid://4aj1roadh4qo" path="res://gm_state_machine.gd" id="2_3u7g2"]
@@ -10,18 +10,21 @@
 [ext_resource type="Script" uid="uid://c7rrfjyooaf22" path="res://scene/pause_state.gd" id="7_su6sf"]
 [ext_resource type="Script" uid="uid://badhroee5v7pl" path="res://scene/round_prep_state.gd" id="8_nl3on"]
 [ext_resource type="Script" uid="uid://m6xfrndftlpg" path="res://button_signal_set.gd" id="8_ssc4f"]
-[ext_resource type="Texture2D" uid="uid://b3q2ijnvp5kss" path="res://art/random_art/upgrade.png" id="9_s0fja"]
 [ext_resource type="PackedScene" uid="uid://ctuv1ou4cgov3" path="res://scene/spwan_unit_button.tscn" id="10_el7ve"]
-[ext_resource type="Texture2D" uid="uid://1fsfpkgncr3b" path="res://art/random_art/background.png" id="11_yfstv"]
-[ext_resource type="Texture2D" uid="uid://beh7q7npd5fjt" path="res://art/random_art/castle.png" id="12_bapa2"]
+[ext_resource type="Texture2D" uid="uid://ct6kuvkmjla30" path="res://art/random_art/castle.png" id="12_bapa2"]
 [ext_resource type="FontFile" uid="uid://dk5r3itdj3mqx" path="res://art/font/Orbitron-VariableFont_wght.ttf" id="12_s0fja"]
 [ext_resource type="Theme" uid="uid://7dlw0gdjkmon" path="res://art/theme/theme.tres" id="12_ssc4f"]
 [ext_resource type="Script" uid="uid://bq6jelu08e04t" path="res://unit_spawner.gd" id="13_drt2y"]
 [ext_resource type="Shader" uid="uid://cpy6526y0blaj" path="res://scene/pixelize.gdshader" id="13_mpuhk"]
 [ext_resource type="Script" uid="uid://3a083idnpn5a" path="res://enemy_spawner.gd" id="14_5n7tr"]
 [ext_resource type="StyleBox" uid="uid://bj58r1jxaopkr" path="res://art/theme/toppanel_theme.tres" id="14_s0fja"]
+[ext_resource type="Script" uid="uid://6eydi3gfscw0" path="res://scene/result_screen.gd" id="15_s0fja"]
 [ext_resource type="Script" uid="uid://j06vnrgftic5" path="res://scene/hex_manager.gd" id="16_f08rc"]
+[ext_resource type="Texture2D" uid="uid://bq8iqam8kogxr" path="res://art/background/mountain.png" id="17_bapa2"]
 [ext_resource type="Script" uid="uid://cf48qeaplh7w7" path="res://scene/pop_window_manager.gd" id="17_cxisf"]
+[ext_resource type="Script" uid="uid://c6h8hop711g3p" path="res://scene/background.gd" id="17_drt2y"]
+[ext_resource type="Texture2D" uid="uid://dus2uqqao0nvh" path="res://art/background/road.png" id="19_5n7tr"]
+[ext_resource type="Texture2D" uid="uid://dmavd50oy5014" path="res://art/background/sun_moon.png" id="20_cw5uo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yfstv"]
 bg_color = Color(0.06666667, 0.08235294, 0.1254902, 1)
@@ -81,6 +84,13 @@ shader = ExtResource("13_mpuhk")
 shader_parameter/line_spacing = 2.7130000338675
 shader_parameter/line_opacity = 0.10000000149012
 
+[sub_resource type="Gradient" id="Gradient_x33gs"]
+colors = PackedColorArray(0.35686275, 0.56078434, 0.7882353, 1, 0.65882355, 0.8117647, 0.9411765, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2paaw"]
+gradient = SubResource("Gradient_x33gs")
+fill_to = Vector2(0, 1)
+
 [node name="GM" type="Node2D"]
 script = ExtResource("1_123pn")
 
@@ -122,6 +132,7 @@ script = ExtResource("4_cxisf")
 script = ExtResource("8_ssc4f")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
 
 [node name="HUD_Root" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -134,7 +145,7 @@ mouse_filter = 2
 theme = ExtResource("12_ssc4f")
 
 [node name="TopBar_BG" type="PanelContainer" parent="CanvasLayer/HUD_Root"]
-custom_minimum_size = Vector2(0, 48)
+custom_minimum_size = Vector2(0, 96)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -161,9 +172,11 @@ text = "💰"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/MoneySegment/HBoxContainer"]
 layout_mode = 2
+alignment = 1
 
 [node name="money" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/MoneySegment/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 2
 theme_override_colors/font_color = Color(0.3529412, 0.4392157, 0.5647059, 1)
 theme_override_font_sizes/font_size = 10
 text = "money"
@@ -173,11 +186,16 @@ vertical_alignment = 1
 [node name="Money_text" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/MoneySegment/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
+size_flags_vertical = 6
 theme_override_colors/font_color = Color(0.9098039, 0.78431374, 0.2901961, 1)
 theme_override_fonts/font = ExtResource("12_s0fja")
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 30
 text = "$:0"
 vertical_alignment = 1
+
+[node name="Control" type="Control" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/MoneySegment/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="IncomeBadge" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/MoneySegment/HBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
@@ -198,10 +216,11 @@ text = "⬆ upgrade income
 $XXX"
 
 [node name="AllySeparator" type="VSeparator" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar"]
-custom_minimum_size = Vector2(20, 0)
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
 [node name="AllyHPBarBG" type="PanelContainer" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("14_s0fja")
 
@@ -210,21 +229,21 @@ layout_mode = 2
 size_flags_horizontal = 0
 
 [node name="HPLabel" type="HBoxContainer" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/AllyHPBarBG/AllyHPBar"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/AllyHPBarBG/AllyHPBar/HPLabel"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 theme_override_colors/font_color = Color(0.3529412, 0.4392157, 0.5647059, 1)
-theme_override_font_sizes/font_size = 10
 text = "ally base"
 
 [node name="ally_hp_text" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/AllyHPBarBG/AllyHPBar/HPLabel"]
 layout_mode = 2
+size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.3529412, 0.4392157, 0.5647059, 1)
-theme_override_font_sizes/font_size = 10
 text = "2000 / 2000"
 
 [node name="ally_hp_bar" type="ProgressBar" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/AllyHPBarBG/AllyHPBar"]
@@ -235,10 +254,12 @@ value = 100.0
 show_percentage = false
 
 [node name="EnemyHPBarBG" type="PanelContainer" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("14_s0fja")
 
 [node name="EnemyHPBar" type="VBoxContainer" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/EnemyHPBarBG"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
@@ -249,15 +270,12 @@ theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/EnemyHPBarBG/EnemyHPBar/HPLabel"]
 layout_mode = 2
-size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.3529412, 0.4392157, 0.5647059, 1)
-theme_override_font_sizes/font_size = 10
 text = "enemy base"
 
 [node name="enemy_hp_text" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/EnemyHPBarBG/EnemyHPBar/HPLabel"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.3529412, 0.4392157, 0.5647059, 1)
-theme_override_font_sizes/font_size = 10
 text = "2000 / 2000"
 
 [node name="enemy_hp_bar" type="ProgressBar" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/EnemyHPBarBG/EnemyHPBar"]
@@ -280,14 +298,17 @@ layout_mode = 2
 [node name="Label" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/waveSegment/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.3529412, 0.4392157, 0.5647059, 1)
-theme_override_font_sizes/font_size = 10
 text = "difficulty level"
 
 [node name="wave_number" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/waveSegment/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9098039, 0.2901961, 0.2901961, 1)
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 30
 text = "wave 04"
+
+[node name="Control" type="Control" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
 
 [node name="SpawnPanel" type="PanelContainer" parent="CanvasLayer/HUD_Root"]
 custom_minimum_size = Vector2(0, 110)
@@ -314,11 +335,11 @@ unit_id = "blue"
 
 [node name="spwan_unit_3" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer" instance=ExtResource("10_el7ve")]
 layout_mode = 2
-unit_id = "boxer"
+unit_id = "snow_b_s"
 
 [node name="spwan_unit_4" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer" instance=ExtResource("10_el7ve")]
 layout_mode = 2
-unit_id = "snow_b_s"
+unit_id = "boxer"
 
 [node name="spwan_unit_5" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer" instance=ExtResource("10_el7ve")]
 layout_mode = 2
@@ -333,46 +354,95 @@ layout_mode = 2
 size_flags_horizontal = 10
 text = "unit gallery"
 
-[node name="VBoxContainer" type="HBoxContainer" parent="CanvasLayer/HUD_Root"]
-visible = false
-custom_minimum_size = Vector2(0, 64)
+[node name="setting_button" type="Button" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "setting"
+
+[node name="hex_show_button" type="Button" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Active Modules"
+
+[node name="Control" type="Control" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="ResultScreen" type="Control" parent="CanvasLayer/HUD_Root"]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_right = 260.0
-offset_bottom = 64.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-size_flags_horizontal = 3
-theme = ExtResource("12_ssc4f")
+grow_vertical = 2
+script = ExtResource("15_s0fja")
 
-[node name="wave_number" type="Label" parent="CanvasLayer/HUD_Root/VBoxContainer"]
-custom_minimum_size = Vector2(300, 64)
+[node name="BG" type="ColorRect" parent="CanvasLayer/HUD_Root/ResultScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.10980392, 0.10980392, 0.10980392, 0.50980395)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD_Root/ResultScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/HUD_Root/ResultScreen/VBoxContainer"]
+custom_minimum_size = Vector2(500, 300)
 layout_mode = 2
-size_flags_horizontal = 6
-theme_override_font_sizes/font_size = 30
-text = "wave: "
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/HUD_Root/ResultScreen/VBoxContainer/Panel"]
+layout_mode = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="CanvasLayer/HUD_Root/ResultScreen/VBoxContainer/Panel/VBox"]
+layout_mode = 2
 horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/HUD_Root"]
-visible = false
-layout_mode = 0
-offset_right = 1149.0
-offset_bottom = 64.0
-size_flags_horizontal = 3
-
-[node name="money_upgrade" type="TextureButton" parent="CanvasLayer/HUD_Root/HBoxContainer2"]
+[node name="Subtitle" type="Label" parent="CanvasLayer/HUD_Root/ResultScreen/VBoxContainer/Panel/VBox"]
 layout_mode = 2
-texture_normal = ExtResource("9_s0fja")
+horizontal_alignment = 1
 
-[node name="money_upgrade_text" type="Label" parent="CanvasLayer/HUD_Root/HBoxContainer2/money_upgrade"]
-layout_mode = 0
-offset_left = 84.0
-offset_top = 13.0
-offset_right = 127.0
-offset_bottom = 48.0
-theme_override_font_sizes/font_size = 25
-text = "50"
+[node name="Stats" type="HBoxContainer" parent="CanvasLayer/HUD_Root/ResultScreen/VBoxContainer/Panel/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="WaveNum" type="Label" parent="CanvasLayer/HUD_Root/ResultScreen/VBoxContainer/Panel/VBox/Stats"]
+layout_mode = 2
+
+[node name="MoneyNum" type="Label" parent="CanvasLayer/HUD_Root/ResultScreen/VBoxContainer/Panel/VBox/Stats"]
+layout_mode = 2
+
+[node name="HPNum" type="Label" parent="CanvasLayer/HUD_Root/ResultScreen/VBoxContainer/Panel/VBox/Stats"]
+layout_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="CanvasLayer/HUD_Root/ResultScreen/VBoxContainer/Panel/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="RetryBtn" type="Button" parent="CanvasLayer/HUD_Root/ResultScreen/VBoxContainer/Panel/VBox/Buttons"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "retry"
+
+[node name="MenuBtn" type="Button" parent="CanvasLayer/HUD_Root/ResultScreen/VBoxContainer/Panel/VBox/Buttons"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "menu"
+
+[node name="Control" type="Control" parent="CanvasLayer/HUD_Root/ResultScreen/VBoxContainer"]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 material = SubResource("ShaderMaterial_mpuhk")
@@ -384,23 +454,51 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
-[node name="background" type="Node" parent="."]
+[node name="background" type="Node2D" parent="."]
+scale = Vector2(1.68, 1.6000004)
+script = ExtResource("17_drt2y")
 
-[node name="bg" type="Sprite2D" parent="background"]
-position = Vector2(575.75006, 323.99997)
+[node name="sky" type="TextureRect" parent="background"]
+offset_left = -1.0000153
+offset_top = 1.999999
+offset_right = 62.999985
+offset_bottom = 66.0
+scale = Vector2(17.984375, 10.125)
+texture = SubResource("GradientTexture2D_2paaw")
+
+[node name="mountain" type="Sprite2D" parent="background"]
+position = Vector2(574.25006, 217.5)
 scale = Vector2(0.6002605, 0.6009259)
-texture = ExtResource("11_yfstv")
+texture = ExtResource("17_bapa2")
+
+[node name="ground" type="ColorRect" parent="background"]
+offset_left = -7.000061
+offset_top = 341.99994
+offset_right = 1992.9968
+offset_bottom = 891.99994
+scale = Vector2(0.6002605, 0.6009259)
+
+[node name="road" type="Sprite2D" parent="background"]
+modulate = Color(0.5411765, 0.47843137, 0.41568628, 1)
+position = Vector2(576, 450.00003)
+scale = Vector2(0.61, 1.017)
+texture = ExtResource("19_5n7tr")
+
+[node name="sun_moon" type="Sprite2D" parent="background"]
+position = Vector2(985, 111)
+scale = Vector2(0.47, 0.47)
+texture = ExtResource("20_cw5uo")
 
 [node name="castle1" type="Sprite2D" parent="."]
 z_index = 2
-position = Vector2(73.00001, 363.5)
-scale = Vector2(1.96875, 3.7343748)
+position = Vector2(170.26942, 491.25253)
+scale = Vector2(0.2449997, 0.28500003)
 texture = ExtResource("12_bapa2")
 
-[node name="Castle2" type="Sprite2D" parent="."]
+[node name="castle2" type="Sprite2D" parent="."]
 z_index = 2
-position = Vector2(1077, 344)
-scale = Vector2(1.921875, 3.7031248)
+position = Vector2(1775, 504)
+scale = Vector2(0.2449997, 0.28500003)
 texture = ExtResource("12_bapa2")
 
 [node name="unit spawner" type="Node" parent="."]
@@ -420,4 +518,5 @@ script = ExtResource("17_cxisf")
 
 [connection signal="pressed" from="CanvasLayer/HUD_Root/TopBar_BG/TopBar/UpgradeBtn" to="button_signal_set" method="_on_upgrade_btn_pressed"]
 [connection signal="pressed" from="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer/unit_gallery_button" to="button_signal_set" method="_on_unit_gallery_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/HUD_Root/HBoxContainer2/money_upgrade" to="button_signal_set" method="_on_money_upgrade_pressed"]
+[connection signal="pressed" from="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer/setting_button" to="button_signal_set" method="_on_setting_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer/hex_show_button" to="button_signal_set" method="_on_hex_show_button_pressed"]

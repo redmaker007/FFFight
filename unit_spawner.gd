@@ -22,7 +22,7 @@ func on_spwan_unit_pressed(minion_id):
 	new_unit.ini_w_data(UnitAutoload.unit_dic[minion_id])
 	
 	new_unit.z_index = 3
-	new_unit.position = Vector2(50,425)
+	new_unit.position = Vector2(165,735)
 	new_unit.side = "ally"
 	new_unit.add_to_group("unit")
 	new_unit.add_to_group("ally")

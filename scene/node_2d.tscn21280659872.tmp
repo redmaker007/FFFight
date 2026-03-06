@@ -1,0 +1,451 @@
+[gd_scene load_steps=32 format=3 uid="uid://bae3kf36u3115"]
+
+[ext_resource type="Script" uid="uid://bxoj4abwmi3vj" path="res://GM.gd" id="1_123pn"]
+[ext_resource type="Script" uid="uid://4aj1roadh4qo" path="res://gm_state_machine.gd" id="2_3u7g2"]
+[ext_resource type="Script" uid="uid://cnw3s12h3gech" path="res://pre_play_state.gd" id="3_f08rc"]
+[ext_resource type="Script" uid="uid://bi4xe3k763id5" path="res://scene/play_state.gd" id="4_0g8r3"]
+[ext_resource type="Script" uid="uid://bt2qdir04qfjw" path="res://money_system.gd" id="4_cxisf"]
+[ext_resource type="Script" uid="uid://t4hyss56u1or" path="res://scene/gameover_state.gd" id="5_nl3on"]
+[ext_resource type="Script" uid="uid://b4ueeca02hrvv" path="res://scene/hex_selected_state.gd" id="6_mpuhk"]
+[ext_resource type="Script" uid="uid://c7rrfjyooaf22" path="res://scene/pause_state.gd" id="7_su6sf"]
+[ext_resource type="Script" uid="uid://badhroee5v7pl" path="res://scene/round_prep_state.gd" id="8_nl3on"]
+[ext_resource type="Script" uid="uid://m6xfrndftlpg" path="res://button_signal_set.gd" id="8_ssc4f"]
+[ext_resource type="PackedScene" uid="uid://ctuv1ou4cgov3" path="res://scene/spwan_unit_button.tscn" id="10_el7ve"]
+[ext_resource type="Texture2D" uid="uid://1fsfpkgncr3b" path="res://art/random_art/background.png" id="11_yfstv"]
+[ext_resource type="Texture2D" uid="uid://beh7q7npd5fjt" path="res://art/random_art/castle.png" id="12_bapa2"]
+[ext_resource type="FontFile" uid="uid://dk5r3itdj3mqx" path="res://art/font/Orbitron-VariableFont_wght.ttf" id="12_s0fja"]
+[ext_resource type="Theme" uid="uid://7dlw0gdjkmon" path="res://art/theme/theme.tres" id="12_ssc4f"]
+[ext_resource type="Script" uid="uid://bq6jelu08e04t" path="res://unit_spawner.gd" id="13_drt2y"]
+[ext_resource type="Shader" uid="uid://cpy6526y0blaj" path="res://scene/pixelize.gdshader" id="13_mpuhk"]
+[ext_resource type="Script" uid="uid://3a083idnpn5a" path="res://enemy_spawner.gd" id="14_5n7tr"]
+[ext_resource type="StyleBox" uid="uid://bj58r1jxaopkr" path="res://art/theme/toppanel_theme.tres" id="14_s0fja"]
+[ext_resource type="Script" uid="uid://6eydi3gfscw0" path="res://scene/result_screen.gd" id="15_s0fja"]
+[ext_resource type="Script" uid="uid://j06vnrgftic5" path="res://scene/hex_manager.gd" id="16_f08rc"]
+[ext_resource type="Script" uid="uid://cf48qeaplh7w7" path="res://scene/pop_window_manager.gd" id="17_cxisf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yfstv"]
+bg_color = Color(0.06666667, 0.08235294, 0.1254902, 1)
+border_width_left = 1
+border_width_top = 3
+border_width_right = 1
+border_width_bottom = 3
+border_color = Color(0.11764706, 0.16470589, 0.22745098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bapa2"]
+bg_color = Color(0.06666667, 0.08235294, 0.1254902, 1)
+border_width_left = 1
+border_width_right = 1
+border_color = Color(0.11764706, 0.16470589, 0.22745098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_el7ve"]
+content_margin_left = 6.0
+content_margin_top = 2.0
+content_margin_right = 6.0
+content_margin_bottom = 2.0
+bg_color = Color(0.039215688, 0.11764706, 0.05882353, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.16470589, 0.3529412, 0.1882353, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5n7tr"]
+bg_color = Color(0.039215688, 0.05490196, 0.09411765, 1)
+border_width_left = 1
+border_width_right = 1
+border_color = Color(0.11764706, 0.16470589, 0.22745098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cw5uo"]
+bg_color = Color(0.08627451, 0.11764706, 0.16470589, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.6039216, 0.50980395, 0.1882353, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ssc4f"]
+bg_color = Color(0.40659848, 0, 0.07742878, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s0fja"]
+bg_color = Color(0.7489201, 0, 0.14314064, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_drt2y"]
+bg_color = Color(0.06666667, 0.08235294, 0.1254902, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mpuhk"]
+shader = ExtResource("13_mpuhk")
+shader_parameter/line_spacing = 2.7130000338675
+shader_parameter/line_opacity = 0.10000000149012
+
+[node name="GM" type="Node2D"]
+script = ExtResource("1_123pn")
+
+[node name="GMStateMachine" type="Node" parent="."]
+script = ExtResource("2_3u7g2")
+default_state = "init"
+
+[node name="init_state" type="Node" parent="GMStateMachine"]
+script = ExtResource("3_f08rc")
+state_name = "init"
+
+[node name="play_state" type="Node" parent="GMStateMachine"]
+script = ExtResource("4_0g8r3")
+state_name = "play"
+metadata/_custom_type_script = "uid://bwl6ui5vt1xmi"
+
+[node name="gameover_state" type="Node" parent="GMStateMachine"]
+script = ExtResource("5_nl3on")
+state_name = "gameover"
+metadata/_custom_type_script = "uid://bwl6ui5vt1xmi"
+
+[node name="hex_selected_state" type="Node" parent="GMStateMachine"]
+script = ExtResource("6_mpuhk")
+state_name = "hex"
+metadata/_custom_type_script = "uid://bwl6ui5vt1xmi"
+
+[node name="pause_state" type="Node" parent="GMStateMachine"]
+script = ExtResource("7_su6sf")
+state_name = "pause"
+
+[node name="round_prep_state" type="Node" parent="GMStateMachine"]
+script = ExtResource("8_nl3on")
+state_name = "prep"
+
+[node name="Money_system" type="Node" parent="."]
+script = ExtResource("4_cxisf")
+
+[node name="button_signal_set" type="Node" parent="."]
+script = ExtResource("8_ssc4f")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD_Root" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("12_ssc4f")
+
+[node name="TopBar_BG" type="PanelContainer" parent="CanvasLayer/HUD_Root"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yfstv")
+
+[node name="TopBar" type="HBoxContainer" parent="CanvasLayer/HUD_Root/TopBar_BG"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MoneySegment" type="PanelContainer" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bapa2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/MoneySegment"]
+layout_mode = 2
+alignment = 1
+
+[node name="Icon" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/MoneySegment/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "💰"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/MoneySegment/HBoxContainer"]
+layout_mode = 2
+
+[node name="money" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/MoneySegment/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3529412, 0.4392157, 0.5647059, 1)
+theme_override_font_sizes/font_size = 10
+text = "money"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Money_text" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/MoneySegment/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9098039, 0.78431374, 0.2901961, 1)
+theme_override_fonts/font = ExtResource("12_s0fja")
+theme_override_font_sizes/font_size = 18
+text = "$:0"
+vertical_alignment = 1
+
+[node name="IncomeBadge" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/MoneySegment/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2901961, 0.9098039, 0.5686275, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_el7ve")
+text = "+X/s"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="UpgradeBtn" type="Button" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("14_s0fja")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5n7tr")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cw5uo")
+text = "⬆ upgrade income
+$XXX"
+
+[node name="AllySeparator" type="VSeparator" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="AllyHPBarBG" type="PanelContainer" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("14_s0fja")
+
+[node name="AllyHPBar" type="VBoxContainer" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/AllyHPBarBG"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="HPLabel" type="HBoxContainer" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/AllyHPBarBG/AllyHPBar"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/AllyHPBarBG/AllyHPBar/HPLabel"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.3529412, 0.4392157, 0.5647059, 1)
+theme_override_font_sizes/font_size = 10
+text = "ally base"
+
+[node name="ally_hp_text" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/AllyHPBarBG/AllyHPBar/HPLabel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3529412, 0.4392157, 0.5647059, 1)
+theme_override_font_sizes/font_size = 10
+text = "2000 / 2000"
+
+[node name="ally_hp_bar" type="ProgressBar" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/AllyHPBarBG/AllyHPBar"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_vertical = 2
+value = 100.0
+show_percentage = false
+
+[node name="EnemyHPBarBG" type="PanelContainer" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("14_s0fja")
+
+[node name="EnemyHPBar" type="VBoxContainer" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/EnemyHPBarBG"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HPLabel" type="HBoxContainer" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/EnemyHPBarBG/EnemyHPBar"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/EnemyHPBarBG/EnemyHPBar/HPLabel"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.3529412, 0.4392157, 0.5647059, 1)
+theme_override_font_sizes/font_size = 10
+text = "enemy base"
+
+[node name="enemy_hp_text" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/EnemyHPBarBG/EnemyHPBar/HPLabel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3529412, 0.4392157, 0.5647059, 1)
+theme_override_font_sizes/font_size = 10
+text = "2000 / 2000"
+
+[node name="enemy_hp_bar" type="ProgressBar" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/EnemyHPBarBG/EnemyHPBar"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_ssc4f")
+theme_override_styles/fill = SubResource("StyleBoxFlat_s0fja")
+value = 100.0
+show_percentage = false
+
+[node name="waveSegment" type="PanelContainer" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_styles/panel = SubResource("StyleBoxFlat_drt2y")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/waveSegment"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/waveSegment/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3529412, 0.4392157, 0.5647059, 1)
+theme_override_font_sizes/font_size = 10
+text = "difficulty level"
+
+[node name="wave_number" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/waveSegment/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9098039, 0.2901961, 0.2901961, 1)
+theme_override_font_sizes/font_size = 16
+text = "wave 04"
+
+[node name="SpawnPanel" type="PanelContainer" parent="CanvasLayer/HUD_Root"]
+custom_minimum_size = Vector2(0, 110)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -110.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HUD_Root/SpawnPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="spwan_unit_1" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer" instance=ExtResource("10_el7ve")]
+layout_mode = 2
+unit_id = "red"
+
+[node name="spwan_unit_2" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer" instance=ExtResource("10_el7ve")]
+layout_mode = 2
+unit_id = "blue"
+
+[node name="spwan_unit_3" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer" instance=ExtResource("10_el7ve")]
+layout_mode = 2
+unit_id = "boxer"
+
+[node name="spwan_unit_4" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer" instance=ExtResource("10_el7ve")]
+layout_mode = 2
+unit_id = "snow_b_s"
+
+[node name="spwan_unit_5" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer" instance=ExtResource("10_el7ve")]
+layout_mode = 2
+unit_id = "soul_b"
+
+[node name="spwan_unit_6" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer" instance=ExtResource("10_el7ve")]
+layout_mode = 2
+unit_id = "bf_k"
+
+[node name="unit_gallery_button" type="Button" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "unit gallery"
+
+[node name="ResultScreen" type="Control" parent="CanvasLayer/HUD_Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15_s0fja")
+
+[node name="BG" type="ColorRect" parent="CanvasLayer/HUD_Root/ResultScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.10980392, 0.10980392, 0.10980392, 0.50980395)
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/HUD_Root/ResultScreen"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.5
+offset_top = -49.0
+offset_right = 35.5
+offset_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/HUD_Root/ResultScreen/Panel"]
+layout_mode = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="CanvasLayer/HUD_Root/ResultScreen/Panel/VBox"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="CanvasLayer/HUD_Root/ResultScreen/Panel/VBox"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="Stats" type="HBoxContainer" parent="CanvasLayer/HUD_Root/ResultScreen/Panel/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="WaveNum" type="Label" parent="CanvasLayer/HUD_Root/ResultScreen/Panel/VBox/Stats"]
+layout_mode = 2
+
+[node name="MoneyNum" type="Label" parent="CanvasLayer/HUD_Root/ResultScreen/Panel/VBox/Stats"]
+layout_mode = 2
+
+[node name="HPNum" type="Label" parent="CanvasLayer/HUD_Root/ResultScreen/Panel/VBox/Stats"]
+layout_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="CanvasLayer/HUD_Root/ResultScreen/Panel/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="RetryBtn" type="Button" parent="CanvasLayer/HUD_Root/ResultScreen/Panel/VBox/Buttons"]
+layout_mode = 2
+text = "retry"
+
+[node name="MenuBtn" type="Button" parent="CanvasLayer/HUD_Root/ResultScreen/Panel/VBox/Buttons"]
+layout_mode = 2
+text = "menu"
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_mpuhk")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="background" type="Node" parent="."]
+
+[node name="bg" type="Sprite2D" parent="background"]
+position = Vector2(575.75006, 323.99997)
+scale = Vector2(0.6002605, 0.6009259)
+texture = ExtResource("11_yfstv")
+
+[node name="castle1" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(73.00001, 363.5)
+scale = Vector2(1.96875, 3.7343748)
+texture = ExtResource("12_bapa2")
+
+[node name="Castle2" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(1077, 344)
+scale = Vector2(1.921875, 3.7031248)
+texture = ExtResource("12_bapa2")
+
+[node name="unit spawner" type="Node" parent="."]
+script = ExtResource("13_drt2y")
+
+[node name="enemy spawner" type="Node" parent="."]
+script = ExtResource("14_5n7tr")
+spec_unit = "snow_ball_shooter"
+
+[node name="level_manager" type="Node" parent="."]
+
+[node name="hex_manager" type="Node" parent="."]
+script = ExtResource("16_f08rc")
+
+[node name="pop_window_manager" type="Node" parent="."]
+script = ExtResource("17_cxisf")
+
+[connection signal="pressed" from="CanvasLayer/HUD_Root/TopBar_BG/TopBar/UpgradeBtn" to="button_signal_set" method="_on_upgrade_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer/unit_gallery_button" to="button_signal_set" method="_on_unit_gallery_button_pressed"]

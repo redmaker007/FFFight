@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="hex_data" load_steps=9 format=3 uid="uid://bcsab1hdgruou"]
+
+[ext_resource type="Script" uid="uid://bewmmuup735ge" path="res://resources/resource_precast/sub_hex_data.gd" id="1_xi25r"]
+[ext_resource type="Script" uid="uid://cn1vb61dhtl1b" path="res://resources/resource_precast/hex_data.gd" id="2_bd0ag"]
+[ext_resource type="Script" uid="uid://bfl0p8atapmsa" path="res://resources/hex/sub_hex/add_wave_hex.gd" id="2_j4mt1"]
+[ext_resource type="Script" uid="uid://b03112umjschj" path="res://resources/hex/sub_hex/give_target_stat.gd" id="3_gr2h5"]
+[ext_resource type="Script" uid="uid://bdmyolyttc2sg" path="res://resources/ability/ability_target_selector/all_unit_type_ts.gd" id="4_g44m8"]
+
+[sub_resource type="Resource" id="Resource_iibuu"]
+script = ExtResource("2_j4mt1")
+unit_id = "snow_b_s"
+amount = 2
+metadata/_custom_type_script = "uid://bfl0p8atapmsa"
+
+[sub_resource type="Resource" id="Resource_20ht4"]
+script = ExtResource("4_g44m8")
+metadata/_custom_type_script = "uid://bdmyolyttc2sg"
+
+[sub_resource type="Resource" id="Resource_hstbn"]
+script = ExtResource("3_gr2h5")
+stat_str = "att"
+addition_change = 8.0
+target_selec = SubResource("Resource_20ht4")
+one_time = false
+metadata/_custom_type_script = "uid://b03112umjschj"
+
+[resource]
+script = ExtResource("2_bd0ag")
+hex_name = "Wrath"
+positive_hex_list = Array[ExtResource("1_xi25r")]([SubResource("Resource_hstbn")])
+negative_hex_list = Array[ExtResource("1_xi25r")]([SubResource("Resource_iibuu")])
+pos_descrption = "All units +8 ATK"
+neg_descrption = "Spawns 2 extra enemy unit in the first wave"
+hex_rarity = 4
+metadata/_custom_type_script = "uid://cn1vb61dhtl1b"

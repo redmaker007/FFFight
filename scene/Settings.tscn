@@ -1,0 +1,90 @@
+[gd_scene load_steps=2 format=3 uid="uid://brxj7ekmte1hj"]
+
+[ext_resource type="Script" uid="uid://dtinxsen073kb" path="res://scene/settings.gd" id="1_qq54q"]
+
+[node name="Settings" type="PanelContainer"]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qq54q")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(1000, 500)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TitleRow" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBox/TitleRow"]
+layout_mode = 2
+text = "SETTINGS"
+
+[node name="HSeparator2" type="HSeparator" parent="VBox"]
+layout_mode = 2
+
+[node name="MusicRow" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBox/MusicRow"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "MUSIC"
+
+[node name="HSlider" type="HSlider" parent="VBox/MusicRow"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+min_value = -60.0
+max_value = 0.0
+
+[node name="ValueLabel" type="Label" parent="VBox/MusicRow"]
+layout_mode = 2
+
+[node name="SFXRow" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBox/SFXRow"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "SFX"
+
+[node name="HSlider" type="HSlider" parent="VBox/SFXRow"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+min_value = -60.0
+max_value = 0.0
+
+[node name="ValueLabel" type="Label" parent="VBox/SFXRow"]
+layout_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="VBox"]
+layout_mode = 2
+
+[node name="WindowRow" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBox/WindowRow"]
+layout_mode = 2
+text = "DISPLATY"
+
+[node name="Fullscreen" type="Button" parent="VBox/WindowRow"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="VBox"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="VBox/HBoxContainer"]
+layout_mode = 2
+text = "QUIT GAME"
+
+[node name="CloseButton" type="Button" parent="VBox/HBoxContainer"]
+layout_mode = 2
+text = "Back"

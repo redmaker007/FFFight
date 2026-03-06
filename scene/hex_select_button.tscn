@@ -18,6 +18,16 @@ layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 
+[node name="hex_name" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(250, 30)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 20
+text = "aa"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
 [node name="Label" type="Label" parent="VBoxContainer"]
 custom_minimum_size = Vector2(250, 30)
 layout_mode = 2

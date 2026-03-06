@@ -21,4 +21,7 @@ func _ready() -> void:
 
 func register(md:minion_data):
 	unit_dic[md.minion_id] = md
+	
+	
+	
 	pass

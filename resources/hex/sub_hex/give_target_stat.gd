@@ -43,6 +43,8 @@ func get_description() -> String:
 		return base_desc + " permanently."
 
 func on_unit_spawn(m):
+	if not m or not target_selec:
+		return
 	var tar = target_selec.tar_select(m)
 	if m in tar:
 		if percentage_change:

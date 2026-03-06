@@ -1,5 +1,5 @@
 extends Node
-
+#walk state
 @onready var mn = get_parent()
 func state_ready():
 	

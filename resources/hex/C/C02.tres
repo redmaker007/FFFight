@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="hex_data" load_steps=11 format=3 uid="uid://cf13ev7emeyxo"]
+
+[ext_resource type="Script" uid="uid://bewmmuup735ge" path="res://resources/resource_precast/sub_hex_data.gd" id="1_fsffs"]
+[ext_resource type="Script" uid="uid://cn1vb61dhtl1b" path="res://resources/resource_precast/hex_data.gd" id="2_nmhgo"]
+[ext_resource type="Script" uid="uid://iy57l8nhpr3n" path="res://resources/hex/sub_hex/empty_hex.gd" id="2_pe8b7"]
+[ext_resource type="Script" uid="uid://b03112umjschj" path="res://resources/hex/sub_hex/give_target_stat.gd" id="3_7sv6x"]
+[ext_resource type="Script" uid="uid://bdmyolyttc2sg" path="res://resources/ability/ability_target_selector/all_unit_type_ts.gd" id="4_dra4s"]
+
+[sub_resource type="Resource" id="Resource_fess8"]
+script = ExtResource("2_pe8b7")
+metadata/_custom_type_script = "uid://iy57l8nhpr3n"
+
+[sub_resource type="Resource" id="Resource_l6fbt"]
+script = ExtResource("4_dra4s")
+metadata/_custom_type_script = "uid://bdmyolyttc2sg"
+
+[sub_resource type="Resource" id="Resource_knr8l"]
+script = ExtResource("3_7sv6x")
+stat_str = "hp"
+addition_change = 20.0
+target_selec = SubResource("Resource_l6fbt")
+one_time = false
+metadata/_custom_type_script = "uid://b03112umjschj"
+
+[sub_resource type="Resource" id="Resource_xmyyx"]
+script = ExtResource("4_dra4s")
+metadata/_custom_type_script = "uid://bdmyolyttc2sg"
+
+[sub_resource type="Resource" id="Resource_isugl"]
+script = ExtResource("3_7sv6x")
+stat_str = "max_hp"
+addition_change = 20.0
+target_selec = SubResource("Resource_xmyyx")
+one_time = false
+metadata/_custom_type_script = "uid://b03112umjschj"
+
+[resource]
+script = ExtResource("2_nmhgo")
+hex_name = "Tough kin"
+positive_hex_list = Array[ExtResource("1_fsffs")]([SubResource("Resource_knr8l"), SubResource("Resource_isugl")])
+negative_hex_list = Array[ExtResource("1_fsffs")]([SubResource("Resource_fess8")])
+pos_descrption = "All units +20 HP"
+hex_rarity = 4
+metadata/_custom_type_script = "uid://cn1vb61dhtl1b"

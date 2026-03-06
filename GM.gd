@@ -1,93 +1,35 @@
 extends Node2D
 class_name game_manager
 
-#region description
-#这段代码是你游戏中最顶层的“中央大脑”（Game Manager）。它本身并不负责处理具体的伤害计算或具体的 UI 动画，而是作为一个总调度中心，把游戏里各个独立的模块完美地捏合在一起。
-#
-#从整体架构来看，这个脚本承担了以下四个极其关键的宏观职能：
-#
-#1. 核心子系统的通讯枢纽 (System Hub)
-#它通过 @onready 在游戏初始化时，牢牢抓取并掌管了游戏所有的命脉模块。
-#你能看到它汇集了：状态机（GMStateMachine）、
-#实体生成器（unit spawner 和 enemy spawner）、
-#经济系统（Money_system）、蜂窝网格系统（hex_manager）、
-#关卡与波次系统（level_manager）以及顶层 UI（CanvasLayer）。
-#这种设计确立了 GM 作为最高权限节点的地位，方便后续进行跨模块调度。
-#
-#2. 游戏阶段的“总电闸” (Master Switch)
-#group_switch_func 是一个非常实用且优雅的设计。
-#配合着 GM 的状态机，这个函数允许你仅仅通过传入一个布尔值（true 或 false），
-#就能瞬间同时开启或暂停玩家单位的生成、敌人的生成以及金币的自动增长。
-#这显然是为了在“准备阶段 (Preparation)”、“战斗阶段 (Combat)”或“游戏结束 (Game Over)”之间进行干净利落的切换而准备的。
-#
-#3. 核心据点初始化 (Base Initialization)
-#spawn_base 函数负责在战局最开始时“定海神针”。
-#它会根据传入的阵营（ally 友军 或 enemy 敌军），
-#在屏幕左右两端硬编码的固定坐标（左侧 X:115，右侧 X:1025）生成双方的主基地塔，
-#并严谨地为它们分配了对应的 Group（节点组）和底层数据。
-#
-#4. 战局重置与快速清场 (Board Management)
-#clear_board 和 clear_board_by_group 提供了极其高效的清场能力。
-#利用 Godot 强大的 Group 特性，GM 不需要去遍历复杂的节点树，只需一声令下，就能在回合结束、重新开始或特殊机制触发时，
-#瞬间清除全场所有单位或指定阵营的单位，确保下一波战斗干干净净地开始。
+#region 1. 核心組件與子系統 (Core Systems)
+@onready var gm_state_machine: Node = $GMStateMachine
+@onready var hs = $hex_manager      # Hex 系統
+@onready var ms = $Money_system     # 經濟系統
+@onready var ls = $level_manager    # 關卡數據管理
+@onready var es = $"enemy spawner"  # 敵人生成器
+@onready var us = $"unit spawner"   # 玩家單位生成器
+
+# 用於 group_switch_func 的子節點清單
+@onready var son_node_group: Array = [us, es, ms]
 #endregion
 
-
-
-#statemachine
-@onready var gm_state_machine:Node = $GMStateMachine
-
-@onready var son_node_group:Array = [$"unit spawner",$"enemy spawner",$Money_system]
-
-#canvaslayer
+#region 2. UI 引用 (UI Elements)
+@export_group("UI Containers")
 @onready var cl = $CanvasLayer
+@onready var spawn_button_container = $CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer
+@onready var result_screen = $CanvasLayer/HUD_Root/ResultScreen
 
-#money system
-@onready var ms = $Money_system
-
-#hex system
-@onready var hs = $hex_manager
-
-#level system
-@onready var ls = $level_manager
+@export_group("Status Display")
 @onready var wave_number_label = $CanvasLayer/HUD_Root/TopBar_BG/TopBar/waveSegment/VBoxContainer/wave_number
-
 @onready var ally_hp_bar = $CanvasLayer/HUD_Root/TopBar_BG/TopBar/AllyHPBarBG/AllyHPBar/ally_hp_bar
-@onready var ally_hp_text =$CanvasLayer/HUD_Root/TopBar_BG/TopBar/AllyHPBarBG/AllyHPBar/HPLabel/ally_hp_text
+@onready var ally_hp_text = $CanvasLayer/HUD_Root/TopBar_BG/TopBar/AllyHPBarBG/AllyHPBar/HPLabel/ally_hp_text
 @onready var enemy_hp_bar = $CanvasLayer/HUD_Root/TopBar_BG/TopBar/EnemyHPBarBG/EnemyHPBar/enemy_hp_bar
 @onready var enemy_hp_text = $CanvasLayer/HUD_Root/TopBar_BG/TopBar/EnemyHPBarBG/EnemyHPBar/HPLabel/enemy_hp_text
+#endregion
 
+#region 3. 初始化與信號 (Lifecycle & Signals)
 func _ready() -> void:
 	SignalBus.base_hp_changed.connect(_on_base_hp_changed)
-	pass
-
-
-func spawn_base(side_n):
-	var new_unit = Global.minion_scene.instantiate()
-	new_unit.ini_w_data(UnitAutoload.unit_dic["base"])
-	new_unit.add_to_group("base_tower")
-	
-	new_unit.z_index = 3
-	if side_n == "ally":
-		new_unit.position = Vector2(115,425)
-		new_unit.add_to_group("ally")
-	else:
-		new_unit.position = Vector2(1025,425)
-		new_unit.add_to_group("enemy")
-	new_unit.side = side_n
-	add_child(new_unit)
-
-
-func group_switch_func(b):
-	for node in son_node_group:
-		node.function_switch(b)
-		
-
-func clear_board():
-	get_tree().call_group("unit", "queue_free")
-
-func clear_board_by_group(group_n):
-	get_tree().call_group(group_n, "queue_free")
 
 func _on_base_hp_changed(side: String, current_hp: float, max_hp: float):
 	var pct = (current_hp / max_hp) * 100
@@ -97,3 +39,90 @@ func _on_base_hp_changed(side: String, current_hp: float, max_hp: float):
 	else:
 		enemy_hp_bar.value = pct
 		enemy_hp_text.text = str(snapped(current_hp, 1)) + " / " + str(snapped(max_hp, 1))
+#endregion
+
+#region 4. 戰局流程控制 (Match Controls)
+## 切換所有子系統的啟動/停止狀態 (戰鬥/準備切換)
+func group_switch_func(b: bool):
+	for node in son_node_group:
+		if node.has_method("function_switch"):
+			node.function_switch(b)
+
+## 生成雙方基地塔
+func spawn_base(side_n: String):
+	var new_unit = Global.minion_scene.instantiate()
+	# 初始化單位數據
+	new_unit.ini_w_data(UnitAutoload.unit_dic["base"])
+	new_unit.add_to_group("base_tower")
+	new_unit.z_index = 3
+	new_unit.side = side_n
+	
+	# 獲取初始 HP 數值用於 UI 顯示
+	var hp_val = str(snapped(new_unit.get_moded_stat("hp"), 1))
+	var max_hp_val = str(snapped(new_unit.get_moded_stat("max_hp"), 1))
+	var hp_string = hp_val + " / " + max_hp_val
+	
+	if side_n == "ally":
+		new_unit.position = Vector2(170, 735)
+		new_unit.add_to_group("ally")
+		# 更新盟友總部血條文字
+		if ally_hp_text:
+			ally_hp_text.text = hp_string
+	else:
+		new_unit.position = Vector2(1719, 735)
+		new_unit.add_to_group("enemy")
+		# 更新敵人總部血條文字
+		if enemy_hp_text:
+			enemy_hp_text.text = hp_string
+	
+	add_child(new_unit)
+
+## 清除場上所有單位
+func clear_board():
+	get_tree().call_group("unit", "queue_free")
+
+## 根據群組清除單位 (例如只清除 "enemy")
+func clear_board_by_group(group_n: String):
+	get_tree().call_group(group_n, "queue_free")
+
+## 重置敵人生成計數
+func em_reset_count():
+	es.reset_whole()
+
+## 重置 UI 血條顯示
+func reset_top_bar():
+	ally_hp_bar.value = 100
+	enemy_hp_bar.value = 100
+
+## 結算界面顯示
+func show_result(win: bool):
+	# 計算當前波次並顯示
+	var current_wave = es.count / 10 + 1
+	result_screen.show_result(win, current_wave, ms.money_amount, 0)
+#endregion
+
+#region 5. 刷怪按鈕 CD 控制 (Spawn Buttons API)
+## 模式定義：0 為覆蓋式 (Override), 1 為依據式/疊加式 (Add)
+enum CD_MODIFY_MODE { OVERRIDE, ADD }
+
+## 函數 1：修改全體按鈕的 CD
+func modify_all_buttons_cd(mul: float, add: float, mode: int = CD_MODIFY_MODE.ADD):
+	for btn in spawn_button_container.get_children():
+		_apply_cd_to_btn(btn, mul, add, mode)
+
+## 函數 2：修改特定按鈕的 CD (透過 unit_id 辨別)
+func modify_unit_button_cd(target_id: String, mul: float, add: float, mode: int = CD_MODIFY_MODE.ADD):
+	for btn in spawn_button_container.get_children():
+		if "unit_id" in btn and btn.unit_id == target_id:
+			_apply_cd_to_btn(btn, mul, add, mode)
+			break
+
+## 內部輔助函數：執行實際的方法調用
+func _apply_cd_to_btn(btn: Node, mul: float, add: float, mode: int):
+	if mode == CD_MODIFY_MODE.OVERRIDE:
+		if btn.has_method("override_cd_modifier"):
+			btn.override_cd_modifier(mul, add)
+	else:
+		if btn.has_method("add_cd_modifier"):
+			btn.add_cd_modifier(mul, add)
+#endregion
