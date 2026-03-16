@@ -14,15 +14,17 @@ const RARITY_CONFIG = {
 	"C": {"color": Color("7f7f7f"), "particles": 0,  "energy": 1.0}, # 普通：灰色
 }
 
-@onready var hex_name_label = $VBoxContainer/hex_name
+@onready var hex_name_label = %hex_name
 @onready var particles = $GPUParticles2D # 請在場景中添加此節點
+@onready var label_3: Label = $VBoxContainer/Label3
+
 
 func _ready() -> void:
 	# 1. 獲取稀有度字串 (假設 Enum 的名稱是 S, D, A, B, C)
 	var r_key = "C"
 	if h and h.hex_rarity != null:
 		# 將 Enum 索引轉為字串，或直接讀取屬性
-		r_key = str(h.hex_rarity).to_upper() 
+		r_key = h.hex_rarity
 
 	# 2. 應用面板與粒子樣式
 	_apply_visual_style(r_key)
@@ -34,18 +36,17 @@ func _ready() -> void:
 	
 	lab1 = $VBoxContainer/Label
 	lab2 = $VBoxContainer/Label2
+	label_3.text = tr("and")
 	
 	# 名稱翻譯與格式化
-	var display_name = tr(h.hex_name)
-	if display_name == h.hex_name:
-		display_name = h.hex_name.replace("_", " ").capitalize()
-	hex_name_label.text = display_name
+	hex_name_label.text = h.get_name_text()
 	
 	# 效果描述翻譯
-	lab1.text = "✦ " + tr(h.get_pos_des())
+	lab1.text = "> " + h.get_pos_des()
 	lab1.add_theme_color_override("font_color", Color("4ae891"))
 	
-	lab2.text = "✦ " + tr(h.get_neg_des())
+	lab2.text = "> " + h.get_neg_des()
+
 	lab2.add_theme_color_override("font_color", Color("e84a4a"))
 
 func _apply_visual_style(rarity: String):

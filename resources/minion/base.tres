@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_wogbo")
 minion_id = "base"
-minion_name = "base"
+minion_name = "BASE"
 max_hp = 1000.0
 image = ExtResource("1_47hkw")
 size = 2.0

@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_dhp1s")
 minion_id = "soul_b"
-minion_name = "Soulblade"
+minion_name = "SOUL_B"
 cost = 55
 deploy_cd = 10.0
 speed = 90.0

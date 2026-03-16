@@ -27,9 +27,7 @@ metadata/_custom_type_script = "uid://b03112umjschj"
 [resource]
 script = ExtResource("2_bd0ag")
 hex_name = "Wrath"
+hex_id = "C07"
 positive_hex_list = Array[ExtResource("1_xi25r")]([SubResource("Resource_hstbn")])
 negative_hex_list = Array[ExtResource("1_xi25r")]([SubResource("Resource_iibuu")])
-pos_descrption = "All units +8 ATK"
-neg_descrption = "Spawns 2 extra enemy unit in the first wave"
-hex_rarity = 4
 metadata/_custom_type_script = "uid://cn1vb61dhtl1b"

@@ -18,8 +18,7 @@ metadata/_custom_type_script = "uid://decabnn8g1eb4"
 [resource]
 script = ExtResource("2_po8gn")
 hex_name = "Frugality"
+hex_id = "C09"
 positive_hex_list = Array[ExtResource("1_nx2hr")]([SubResource("Resource_7ylrj")])
 negative_hex_list = Array[ExtResource("1_nx2hr")]([SubResource("Resource_5m12r")])
-pos_descrption = "All units deployment CD -0.5s"
-hex_rarity = 4
 metadata/_custom_type_script = "uid://cn1vb61dhtl1b"

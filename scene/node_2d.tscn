@@ -179,7 +179,7 @@ layout_mode = 2
 size_flags_vertical = 2
 theme_override_colors/font_color = Color(0.3529412, 0.4392157, 0.5647059, 1)
 theme_override_font_sizes/font_size = 10
-text = "money"
+text = "MONEY"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -220,7 +220,7 @@ custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
 [node name="AllyHPBarBG" type="PanelContainer" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar"]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("14_s0fja")
 
@@ -238,7 +238,11 @@ theme_override_constants/separation = 0
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_color = Color(0.3529412, 0.4392157, 0.5647059, 1)
-text = "ally base"
+text = "ALLY_BASE"
+
+[node name="Control" type="Control" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/AllyHPBarBG/AllyHPBar/HPLabel"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
 
 [node name="ally_hp_text" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/AllyHPBarBG/AllyHPBar/HPLabel"]
 layout_mode = 2
@@ -254,14 +258,14 @@ value = 100.0
 show_percentage = false
 
 [node name="EnemyHPBarBG" type="PanelContainer" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar"]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("14_s0fja")
 
 [node name="EnemyHPBar" type="VBoxContainer" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/EnemyHPBarBG"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 0
 
 [node name="HPLabel" type="HBoxContainer" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/EnemyHPBarBG/EnemyHPBar"]
 layout_mode = 2
@@ -271,7 +275,11 @@ theme_override_constants/separation = 0
 [node name="Label" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/EnemyHPBarBG/EnemyHPBar/HPLabel"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.3529412, 0.4392157, 0.5647059, 1)
-text = "enemy base"
+text = "ENEMY_BASE"
+
+[node name="Control" type="Control" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/EnemyHPBarBG/EnemyHPBar/HPLabel"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
 
 [node name="enemy_hp_text" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/EnemyHPBarBG/EnemyHPBar/HPLabel"]
 layout_mode = 2
@@ -298,7 +306,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/waveSegment/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.3529412, 0.4392157, 0.5647059, 1)
-text = "difficulty level"
+text = "DIFFICULTY"
 
 [node name="wave_number" type="Label" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar/waveSegment/VBoxContainer"]
 layout_mode = 2
@@ -307,7 +315,7 @@ theme_override_font_sizes/font_size = 30
 text = "wave 04"
 
 [node name="Control" type="Control" parent="CanvasLayer/HUD_Root/TopBar_BG/TopBar"]
-custom_minimum_size = Vector2(500, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 
 [node name="SpawnPanel" type="PanelContainer" parent="CanvasLayer/HUD_Root"]
@@ -352,17 +360,17 @@ unit_id = "bf_k"
 [node name="unit_gallery_button" type="Button" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
-text = "unit gallery"
+text = "UNIT_GALLERY"
 
 [node name="setting_button" type="Button" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "setting"
+text = "SETTINGS"
 
 [node name="hex_show_button" type="Button" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "Active Modules"
+text = "ACTIVE_MODULES"
 
 [node name="Control" type="Control" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer"]
 custom_minimum_size = Vector2(400, 0)

@@ -62,7 +62,7 @@ grow_vertical = 2
 alignment = 1
 
 [node name="Title" type="Label" parent="VBoxContainer"]
-self_modulate = Color(0.9098039, 0.78431374, 0.2901961, 1)
+modulate = Color(0.9178647, 0.80466163, 0.37659302, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 120
 text = "FFFIGHT"
@@ -70,7 +70,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TitleGrow" type="Label" parent="VBoxContainer/Title"]
-modulate = Color(0.8153955, 0.70215756, 0.25567645, 1)
+visible = false
+modulate = Color(0.8156863, 0.7019608, 0.25490198, 0.011764706)
 self_modulate = Color(18.892157, 16.427145, 6.707944, 0.003921569)
 layout_mode = 0
 offset_right = 380.0

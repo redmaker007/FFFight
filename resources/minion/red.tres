@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_du6xk")
 minion_id = "red"
-minion_name = "red"
+minion_name = "RED"
 cost = 25
 deploy_cd = 5.0
 speed = 90.0

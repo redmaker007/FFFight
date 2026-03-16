@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://c4qlwbpyxewse"
-path="res://.godot/imported/Rajdhani-SemiBold.ttf-6dfddf2841bac18afa36d82a249fab6b.fontdata"
+uid="uid://bpb86t4lf8vpy"
+path="res://.godot/imported/dingliehuobanfont20241217-2.ttf-e0b31e1e10b1206f64fed7ea94d75bd8.fontdata"
 
 [deps]
 
-source_file="res://art/font/Rajdhani-SemiBold.ttf"
-dest_files=["res://.godot/imported/Rajdhani-SemiBold.ttf-6dfddf2841bac18afa36d82a249fab6b.fontdata"]
+source_file="res://art/font/dingliehuobanfont20241217-2.ttf"
+dest_files=["res://.godot/imported/dingliehuobanfont20241217-2.ttf-e0b31e1e10b1206f64fed7ea94d75bd8.fontdata"]
 
 [params]
 
@@ -27,7 +27,7 @@ subpixel_positioning=4
 keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null
-fallbacks=[Resource("uid://bpb86t4lf8vpy", "res://art/font/dingliehuobanfont20241217-2.ttf")]
+fallbacks=[]
 Compress=null
 compress=true
 preload=[]

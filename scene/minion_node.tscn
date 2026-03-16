@@ -75,7 +75,6 @@ script = ExtResource("10_x8bxv")
 visible = false
 material = SubResource("ShaderMaterial_xfq3f")
 sprite_frames = ExtResource("11_wky7f")
-animation = &"s_s attack"
 autoplay = "default"
 speed_scale = 2.0
 offset = Vector2(-4.3880644, -118.238815)

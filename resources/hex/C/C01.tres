@@ -24,9 +24,9 @@ metadata/_custom_type_script = "uid://b03112umjschj"
 
 [resource]
 script = ExtResource("5_yr34c")
+hex_id = "C01"
 hex_name = "Sharp claw"
 positive_hex_list = Array[ExtResource("1_0kl6v")]([SubResource("Resource_kd58c")])
 negative_hex_list = Array[ExtResource("1_0kl6v")]([SubResource("Resource_p7285")])
-pos_descrption = "All units +5 ATK"
 hex_rarity = 4
 metadata/_custom_type_script = "uid://cn1vb61dhtl1b"

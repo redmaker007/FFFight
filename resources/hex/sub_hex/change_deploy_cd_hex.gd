@@ -34,6 +34,7 @@ func hex_process_take_back(gm):
 	# 使用覆蓋模式 (模式 0 為 OVERRIDE)，將倍率設為 1，偏移量設為 0
 	if target_mode == 0:
 		gm.modify_all_buttons_cd(1.0, 0.0, 0)
+		
 	else:
 		if target_unit_id != "":
 			gm.modify_unit_button_cd(target_unit_id, 1.0, 0.0, 0)

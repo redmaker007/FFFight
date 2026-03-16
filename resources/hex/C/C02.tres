@@ -36,9 +36,9 @@ metadata/_custom_type_script = "uid://b03112umjschj"
 
 [resource]
 script = ExtResource("2_nmhgo")
+hex_id = "C02"
 hex_name = "Tough kin"
 positive_hex_list = Array[ExtResource("1_fsffs")]([SubResource("Resource_knr8l"), SubResource("Resource_isugl")])
 negative_hex_list = Array[ExtResource("1_fsffs")]([SubResource("Resource_fess8")])
-pos_descrption = "All units +20 HP"
 hex_rarity = 4
 metadata/_custom_type_script = "uid://cn1vb61dhtl1b"

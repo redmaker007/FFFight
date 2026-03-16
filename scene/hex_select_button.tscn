@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://lj33bbvnuyxx"]
+[gd_scene load_steps=4 format=3 uid="uid://lj33bbvnuyxx"]
 
 [ext_resource type="Theme" uid="uid://7dlw0gdjkmon" path="res://art/theme/theme.tres" id="1_m14yv"]
 [ext_resource type="Script" uid="uid://drmvg1iwmu2yq" path="res://hex_select_button.gd" id="1_w38gu"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m14yv"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
 
 [node name="hex_select_button" type="PanelContainer"]
 custom_minimum_size = Vector2(200, 400)
@@ -19,6 +23,7 @@ size_flags_vertical = 4
 mouse_filter = 2
 
 [node name="hex_name" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 30)
 layout_mode = 2
 size_flags_vertical = 8
@@ -41,8 +46,7 @@ autowrap_mode = 3
 custom_minimum_size = Vector2(250, 50)
 layout_mode = 2
 size_flags_vertical = 3
-text = "
-and
+text = "and
 "
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -67,3 +71,6 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+process_material = SubResource("ParticleProcessMaterial_m14yv")

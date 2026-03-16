@@ -37,7 +37,7 @@ func _ready() -> void:
 	# --- 初始化測試數據 (實際使用時可從外部 JSON 或 Resource 載入) ---
 	setup_test_level()
 	# -------------------------------------------------------
-	
+	SignalBus.on_language_change.connect(update_wave_number_label)
 	count = 0
 	update_wave_number_label()
 
@@ -183,7 +183,7 @@ func spawn_enemy_1(s_id: String):
 func update_wave_number_label():
 	if wave_number_label:
 		# 這裡維持原本的顯示邏輯，或者你可以改為顯示 level_wave_array 的剩餘進度
-		wave_number_label.text = "wave : " + str(count / 10 + 1)
+		wave_number_label.text = tr("WAVE")+" : " + str(count / 10 + 1)
 #endregion
 
 #region 外部接口 (Public API)

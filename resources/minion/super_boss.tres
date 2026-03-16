@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_hqtx0")
 minion_id = "s_s"
-minion_name = "super_boss"
+minion_name = "S_S"
 cost = 120
 deploy_cd = 20.0
 speed = 100.0

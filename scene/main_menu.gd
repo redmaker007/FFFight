@@ -17,8 +17,6 @@ func _ready() -> void:
 func _on_start() -> void:
 	_play_exit_animation(func(): get_tree().change_scene_to_file(GAME_SCENE))
 
-# func _on_achievements() -> void:
-# 	pass
 
 
 

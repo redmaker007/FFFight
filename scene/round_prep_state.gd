@@ -11,6 +11,7 @@ func enter_state():
 	gm.clear_board_by_group("base_tower")
 	# 重置顶部血条 UI 到 100% 状态
 	gm.reset_top_bar()
+	gm.reset_all_buttons_cd()
 	
 	# --- 2. 核心实体生成 (Base Spawning) ---
 	# 在固定位置生成双方大本营

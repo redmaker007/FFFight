@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=10 format=3 uid="uid://7dlw0gdjkmon"]
 
-[ext_resource type="FontFile" uid="uid://c4qlwbpyxewse" path="res://art/font/Rajdhani-SemiBold.ttf" id="1_v6yco"]
+[ext_resource type="FontFile" uid="uid://cvxfhsmyvottp" path="res://art/font/Rajdhani-Medium.ttf" id="1_v6yco"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0a7vf"]
 bg_color = Color(0.08627451, 0.11764706, 0.16470589, 1)
@@ -91,13 +91,13 @@ Button/colors/font_color = Color(0.78431374, 0.84705883, 0.9098039, 1)
 Button/colors/font_disabled_color = Color(0.22745098, 0.2901961, 0.3529412, 1)
 Button/colors/font_hover_color = Color(0.9098039, 0.78431374, 0.2901961, 1)
 Button/colors/font_pressed_color = Color(1, 1, 1, 1)
-Button/font_sizes/font_size = 18
+Button/font_sizes/font_size = 22
 Button/fonts/font = ExtResource("1_v6yco")
 Button/styles/hover = SubResource("StyleBoxFlat_0a7vf")
 Button/styles/normal = SubResource("StyleBoxFlat_v6yco")
 Button/styles/pressed = SubResource("StyleBoxFlat_d4yll")
 Label/colors/font_color = Color(0.78431374, 0.84705883, 0.9098039, 1)
-Label/font_sizes/font_size = 18
+Label/font_sizes/font_size = 22
 Label/fonts/font = ExtResource("1_v6yco")
 Panel/styles/panel = SubResource("StyleBoxFlat_24gl7")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_umgnn")

@@ -33,12 +33,15 @@ func _ready() -> void:
 
 func _on_base_hp_changed(side: String, current_hp: float, max_hp: float):
 	var pct = (current_hp / max_hp) * 100
+	# 格式化數字通常不需要 tr()，但如果未來有 "HP: " 等前綴，則需要
+	var hp_display_text = str(snapped(current_hp, 1)) + " / " + str(snapped(max_hp, 1))
+	
 	if side == "ally":
 		ally_hp_bar.value = pct
-		ally_hp_text.text = str(snapped(current_hp, 1)) + " / " + str(snapped(max_hp, 1))
+		ally_hp_text.text = hp_display_text
 	else:
 		enemy_hp_bar.value = pct
-		enemy_hp_text.text = str(snapped(current_hp, 1)) + " / " + str(snapped(max_hp, 1))
+		enemy_hp_text.text = hp_display_text
 #endregion
 
 #region 4. 戰局流程控制 (Match Controls)
@@ -50,14 +53,15 @@ func group_switch_func(b: bool):
 
 ## 生成雙方基地塔
 func spawn_base(side_n: String):
+	# 注意：這裡的 "base" 是 Key，對應翻譯文件中的單位名稱
+	var unit_data = UnitAutoload.unit_dic["base"]
 	var new_unit = Global.minion_scene.instantiate()
-	# 初始化單位數據
-	new_unit.ini_w_data(UnitAutoload.unit_dic["base"])
+	
+	new_unit.ini_w_data(unit_data)
 	new_unit.add_to_group("base_tower")
 	new_unit.z_index = 3
 	new_unit.side = side_n
 	
-	# 獲取初始 HP 數值用於 UI 顯示
 	var hp_val = str(snapped(new_unit.get_moded_stat("hp"), 1))
 	var max_hp_val = str(snapped(new_unit.get_moded_stat("max_hp"), 1))
 	var hp_string = hp_val + " / " + max_hp_val
@@ -65,13 +69,13 @@ func spawn_base(side_n: String):
 	if side_n == "ally":
 		new_unit.position = Vector2(170, 735)
 		new_unit.add_to_group("ally")
-		# 更新盟友總部血條文字
+		new_unit.add_to_group("base")
 		if ally_hp_text:
 			ally_hp_text.text = hp_string
 	else:
 		new_unit.position = Vector2(1719, 735)
 		new_unit.add_to_group("enemy")
-		# 更新敵人總部血條文字
+		new_unit.add_to_group("base")
 		if enemy_hp_text:
 			enemy_hp_text.text = hp_string
 	
@@ -96,8 +100,9 @@ func reset_top_bar():
 
 ## 結算界面顯示
 func show_result(win: bool):
-	# 計算當前波次並顯示
 	var current_wave = es.count / 10 + 1
+	# 這裡建議將 win/loss 的標題判斷交給 result_screen 內部處理
+	# 如果要在這裡處理，可以使用 tr("KEY_WIN") 或 tr("KEY_LOSE")
 	result_screen.show_result(win, current_wave, ms.money_amount, 0)
 #endregion
 
@@ -120,9 +125,13 @@ func modify_unit_button_cd(target_id: String, mul: float, add: float, mode: int 
 ## 內部輔助函數：執行實際的方法調用
 func _apply_cd_to_btn(btn: Node, mul: float, add: float, mode: int):
 	if mode == CD_MODIFY_MODE.OVERRIDE:
-		if btn.has_method("override_cd_modifier"):
-			btn.override_cd_modifier(mul, add)
+		if btn.has_method("apply_cd_modifier"):
+			btn.apply_cd_modifier(mul, add)
 	else:
 		if btn.has_method("add_cd_modifier"):
 			btn.add_cd_modifier(mul, add)
+func reset_all_buttons_cd():
+	for btn in spawn_button_container.get_children():
+		if btn.has_method("reset_cd"):
+			btn.reset_cd()
 #endregion

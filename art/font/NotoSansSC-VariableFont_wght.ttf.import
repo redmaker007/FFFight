@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://c4qlwbpyxewse"
-path="res://.godot/imported/Rajdhani-SemiBold.ttf-6dfddf2841bac18afa36d82a249fab6b.fontdata"
+uid="uid://nq1lay7gaxyr"
+path="res://.godot/imported/NotoSansSC-VariableFont_wght.ttf-269fe4151722e33eca554d0fa52c8514.fontdata"
 
 [deps]
 
-source_file="res://art/font/Rajdhani-SemiBold.ttf"
-dest_files=["res://.godot/imported/Rajdhani-SemiBold.ttf-6dfddf2841bac18afa36d82a249fab6b.fontdata"]
+source_file="res://art/font/NotoSansSC-VariableFont_wght.ttf"
+dest_files=["res://.godot/imported/NotoSansSC-VariableFont_wght.ttf-269fe4151722e33eca554d0fa52c8514.fontdata"]
 
 [params]
 
@@ -27,7 +27,7 @@ subpixel_positioning=4
 keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null
-fallbacks=[Resource("uid://bpb86t4lf8vpy", "res://art/font/dingliehuobanfont20241217-2.ttf")]
+fallbacks=[]
 Compress=null
 compress=true
 preload=[]

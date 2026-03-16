@@ -24,9 +24,9 @@ metadata/_custom_type_script = "uid://b03112umjschj"
 
 [resource]
 script = ExtResource("2_6w38v")
+hex_id = "C04"
 hex_name = "Quick hands"
 positive_hex_list = Array[ExtResource("1_7ocae")]([SubResource("Resource_qdi66")])
 negative_hex_list = Array[ExtResource("1_7ocae")]([SubResource("Resource_7hxdv")])
-pos_descrption = "All units +0.05 Attack Speed"
 hex_rarity = 4
 metadata/_custom_type_script = "uid://cn1vb61dhtl1b"

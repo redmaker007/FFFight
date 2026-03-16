@@ -1,0 +1,100 @@
+id,zh_CN,en
+SETTINGS,设置,SETTINGS
+SETTING,设置,SETTING
+MUSIC,音乐,MUSIC
+SFX,音效,SFX
+QUIT_GAME,退出游戏,QUIT GAME
+QUIT,退出,QUIT
+CLOSE,关闭,CLOSE
+BACK,返回,BACK
+DISPLAY,显示,DISPLAY
+WINDOW_MODE,窗口模式,WINDOW MODE
+WINDOWED,窗口模式,WINDOWED
+FULLSCREEN,全屏,FULLSCREEN
+LANGUAGE,语言,LANGUAGE
+ACHIEVEMENTS,成就,ACHIEVEMENTS
+START_GAME,开始游戏,START GAME
+UNIT_GALLERY,单位图鉴,Unit Gallery
+ACTIVE_MODULES,生效模块,Active Modules
+MONEY,资金,Money
+BANK_MAX_LEVEL,最高等级,MAX LEVEL
+BANK_UPGRADE_INCOME,升级收入,Upgrade Income
+BANK_LEVEL_CAPPED,银行等级已达到当前上限,Bank level is currently capped!
+BACK_TO_BATTLE,返回战斗,Back to Battle
+PROTOCOL,协议,Protocol
+
+and,并且,and
+None,无,None
+choose,选择,choose
+
+C01_NAME,利爪,Sharp Claw
+C01_POS,所有友军获得5攻击,All units +5 ATK
+C01_NEG,无,None
+
+C02_NAME,坚韧同盟,Tough Kin
+C02_POS,所有友军获得20生命,All units +20 HP
+C02_NEG,无,None
+
+C03_NAME,轻步,Light Steps
+C03_POS,所有友军获得15速度,All units +15 SPD
+C03_NEG,无,None
+
+C04_NAME,快手,Quick Hands
+C04_POS,所有友军获得0.05攻击速度,All units +0.05 Attack Speed
+C04_NEG,无,None
+
+C05_NAME,零花钱,Pocket Money
+C05_POS,银行每秒额外获得1金币,Bank gains +1 extra income per second
+C05_NEG,无,None
+
+C06_NAME,坚固构造,Solid Build
+C06_POS,所有友军获得30生命,All units +30 HP
+C06_NEG,第一波额外生成2个敌人,Spawns 2 extra enemies in the first wave
+
+C07_NAME,愤怒,Wrath
+C07_POS,所有友军获得8攻击,All units +8 ATK
+C07_NEG,第一波额外生成2个敌方单位,Spawns 2 extra enemy units in the first wave
+
+C08_NAME,信使,Courier
+C08_POS,所有友军获得20速度,All units +20 SPD
+C08_NEG,第一波额外生成2个敌方单位,Spawns 2 extra enemy units in the first wave
+
+C09_NAME,节俭,Frugality
+C09_POS,所有友军部署冷却减少0.5秒,All units deployment CD -0.5s
+C09_NEG,无,None
+
+C10_NAME,小金库,Small Vault
+C10_POS,银行升级花费降低10%,Bank upgrade cost -10%
+C10_NEG,无,None
+
+B01_NAME,铁甲军团,Ironclad Legion
+B01_POS,所有友军获得80生命,All ally units +80 HP
+B01_NEG,每2波额外生成1个敌方单位,Spawns 1 extra Red unit every 2 waves
+
+B02_NAME,嗜血,Hemorrhage
+B02_POS,所有友军获得15攻击,All ally units +15 ATK
+B02_NEG,每1波额外生成2个敌方单位,Spawns 2 extra enemy units every wave
+
+RESULT_VICTORY,胜利,VICTORY
+RESULT_VICTORY_SUB,波次已清除，干得漂亮，指挥官,WAVE CLEARED — WELL DONE， COMMANDER
+RESULT_DEFEATED,战败,DEFEATED
+RESULT_DEFEATED_SUB,你的基地已沦陷，再试一次,YOUR BASE HAS FALLEN — TRY AGAIN
+RESULT_WAVE,波次,Wave
+RESULT_MONEY,金币,Money
+RESULT_HP,生命,HP
+RESULT_RETRY,重试,Retry
+RESULT_MENU,主菜单,Menu
+
+UNIT_RED_NAME,红色的家伙,Red
+UNIT_BLUE_NAME,蓝色的家伙,Blue
+UNIT_BOXER_NAME,拳击手,Boxer
+UNIT_SNOW_B_S_NAME,雪球投手,Snow Ball Shooter
+UNIT_BF_K_NAME,蝶蝶君,Butterfly kun
+UNIT_SOUL_B_NAME,噬魂骑士,Soulblade
+UNIT_S_S_NAME,超级首领,Super Boss
+UNIT_BASE_NAME,基地,Base
+
+ALLY_BASE,我方基地,Ally Base
+ENEMY_BASE,敌方基地,Enemy Base
+DIFFICULTY,难度,Difficulty
+WAVE,波次,Wave

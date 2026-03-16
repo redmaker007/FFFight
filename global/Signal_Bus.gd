@@ -32,3 +32,5 @@ signal bg_theme_change
 signal open_setting
 
 signal open_hex_show_window
+
+signal on_language_change

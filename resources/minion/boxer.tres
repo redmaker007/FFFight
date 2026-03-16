@@ -8,7 +8,7 @@
 [resource]
 script = ExtResource("1_hmhub")
 minion_id = "boxer"
-minion_name = "boxer"
+minion_name = "BOXER"
 cost = 35
 deploy_cd = 8.0
 speed = 90.0

@@ -24,9 +24,9 @@ metadata/_custom_type_script = "uid://b03112umjschj"
 
 [resource]
 script = ExtResource("4_f7qck")
+hex_id = "C03"
 hex_name = "Light steps"
 positive_hex_list = Array[ExtResource("1_pyudm")]([SubResource("Resource_2f0ew")])
 negative_hex_list = Array[ExtResource("1_pyudm")]([SubResource("Resource_f7qck")])
-pos_descrption = "All units +15 SPD"
 hex_rarity = 4
 metadata/_custom_type_script = "uid://cn1vb61dhtl1b"

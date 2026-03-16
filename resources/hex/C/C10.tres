@@ -12,7 +12,6 @@ metadata/_custom_type_script = "uid://d0jfhbkrcy1xb"
 [resource]
 script = ExtResource("2_7pvl1")
 hex_name = "Small Vault"
+hex_id = "C10"
 positive_hex_list = Array[ExtResource("1_whbut")]([SubResource("Resource_soubk")])
-pos_descrption = "Bank upgrade cost -10%"
-hex_rarity = 4
 metadata/_custom_type_script = "uid://cn1vb61dhtl1b"

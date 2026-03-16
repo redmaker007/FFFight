@@ -142,9 +142,9 @@ func update_text():
 	if upgrade_btn:
 		# 修改：如果達到鎖定上限，同樣顯示 MAX LEVEL 並禁用按鈕
 		if current_bank_level >= max_bank_level_limit or current_bank_level >= bank_upgrade_map.size():
-			upgrade_btn.text = "⬆ " + tr("MAX LEVEL")
+			upgrade_btn.text = "⬆ " + tr("BANK_MAX_LEVEL")
 			upgrade_btn.disabled = true
 		else:
-			upgrade_btn.text = "⬆ " + tr("Upgrade Income") + "\n" + tr("$") + str(snapped(current_upgrade_cost, 1))
+			upgrade_btn.text = "⬆ " + tr("BANK_UPGRADE_INCOME") + "\n" + tr("$") + str(snapped(current_upgrade_cost, 1))
 			upgrade_btn.disabled = (money_amount < current_upgrade_cost)
 #endregion

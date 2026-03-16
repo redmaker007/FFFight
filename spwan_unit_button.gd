@@ -14,6 +14,7 @@ var _cd_additioner: float = 0.0  # 加法修正 (例如 -0.5 代表 CD 減 0.5�
 # ------------------
 
 var _cd_overlay: ColorRect  # 遮罩節點
+var _name_label: Label
 #endregion
 
 #region 2. 生命周期 (Lifecycle)
@@ -31,6 +32,7 @@ func _ready() -> void:
 	_cd_max = data.deploy_cd
 	
 	SignalBus.spawn_unit_by_name.connect(_on_unit_spawned)
+	SignalBus.on_language_change.connect(update_ui_texts)
 
 func _process(delta: float) -> void:
 	if _cd_timer <= 0:
@@ -88,6 +90,7 @@ func _build_ui():
 	add_child(vbox)
 	
 	var hotkey = Label.new()
+	# 熱鍵通常不需要翻譯，除非不同語系習慣不同
 	hotkey.text = _get_hotkey()
 	hotkey.add_theme_font_size_override("font_size", 9)
 	hotkey.add_theme_color_override("font_color", Color("5a7090"))
@@ -130,15 +133,18 @@ func _build_ui():
 	cd_label.visible = false
 	portrait_bg.add_child(cd_label)
 	
-	var name_label = Label.new()
-	name_label.text = data.minion_name
-	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	name_label.add_theme_font_size_override("font_size", 13)
-	name_label.add_theme_color_override("font_color", Color("c8d8e8"))
-	name_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	vbox.add_child(name_label)
+	_name_label = Label.new()
+	# 【關鍵修改】對單位名稱進行翻譯
+	# 這裡假設你的 Localization CSV 裡的 Key 就是單位的原名或 ID
+	_name_label.text = tr(data.get_name_key()) 
+	_name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_name_label.add_theme_font_size_override("font_size", 13)
+	_name_label.add_theme_color_override("font_color", Color("c8d8e8"))
+	_name_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	vbox.add_child(_name_label)
 	
 	var cost_label = Label.new()
+	# 金額符號通常不需要翻譯，但可以考慮格式化
 	cost_label.text = "$" + str(data.cost)
 	cost_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	cost_label.add_theme_font_size_override("font_size", 12)
@@ -190,4 +196,9 @@ func _on_unit_spawned(spawned_id: String) -> void:
 		# 使用計算後的生效 CD
 		_cd_timer = get_effective_cd()
 		_set_cd_active(true)
+func update_ui_texts():
+	var data = UnitAutoload.unit_dic[unit_id]
+	if _name_label:
+		# 這裡套用 tr() 確保翻譯生效
+		_name_label.text = tr(data.get_name_key())
 #endregion
