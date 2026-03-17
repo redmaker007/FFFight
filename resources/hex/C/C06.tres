@@ -38,9 +38,8 @@ metadata/_custom_type_script = "uid://b03112umjschj"
 
 [resource]
 script = ExtResource("2_f3ug8")
-hex_id = "C06"
 hex_name = "Solid Build"
+hex_id = "C06"
 positive_hex_list = Array[ExtResource("1_y6cix")]([SubResource("Resource_5b3q6"), SubResource("Resource_4okgo")])
 negative_hex_list = Array[ExtResource("1_y6cix")]([SubResource("Resource_mufjq")])
-hex_rarity = 4
 metadata/_custom_type_script = "uid://cn1vb61dhtl1b"

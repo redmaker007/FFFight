@@ -19,6 +19,7 @@ const RARITY_CONFIG = {
 
 #region 3. 生命周期 (Lifecycle)
 func _ready() -> void:
+	print("clear")
 	_apply_window_style()
 	_connect_signals()
 	_render_active_protocols()
@@ -45,46 +46,57 @@ func _connect_signals():
 func _render_active_protocols():
 	var gm = get_tree().root.get_child(get_tree().root.get_child_count() - 1)
 	if not gm or not gm.hs: return
-	
+
 	# 1. 清空舊容器
 	for child in good_container.get_children(): child.queue_free()
 	for child in bad_container.get_children(): child.queue_free()
-	
-	# 2. 遍歷 hex_history（主模塊歷史）
-	# 這樣我們可以直接拿到每個主模塊的稀有度和它包含的所有子協議
-	
-	for h_data in gm.hs.hex_history:
-		
-		if not h_data: continue
-		
-		# 獲取稀有度標籤
-		var rarity_key = str(h_data.hex_rarity).to_upper()
-		
-		# 渲染該主模塊下的所有正面子協議
-		for sub in h_data.positive_hex_list:
-			_create_entry(sub, rarity_key, good_container, true)
-			
-		# 渲染該主模塊下的所有負面子協議
-		for sub in h_data.negative_hex_list:
-			_create_entry(sub, rarity_key, bad_container, false)
 
-func _create_entry(sub_data: sub_hex_data, rarity_key: String, container: Control, is_positive: bool):
+	# 2. 建立當前仍生效的 sub_hex_data 集合（過濾已清掉的 one_time sub）
+	var active_subs = {}
+	for h in gm.hs.active_hex_list:
+		active_subs[h.data] = true
+
+	# 3. 遍歷 hex_history，每個主協議建一條描述條目
+	for h_data in gm.hs.hex_history:
+
+		if not h_data: continue
+
+		var rarity_key = str(h_data.hex_rarity).to_upper()
+		# 正面：只要有任意一個 sub 仍生效就顯示主協議正面描述
+		var show_pos = false
+		for sub in h_data.positive_hex_list:
+			
+			if not sub.one_time or active_subs.has(sub):
+				show_pos = true
+				break
+		if show_pos:
+			_create_entry(h_data.get_pos_des(), rarity_key, good_container, true)
+		# 負面：同上
+		var show_neg = false
+		for sub in h_data.negative_hex_list:
+			
+			if not sub.one_time or active_subs.has(sub):
+				show_neg = true
+				break
+		if show_neg:
+			_create_entry(h_data.get_neg_des(), rarity_key, bad_container, false)
+func _create_entry(description: String, rarity_key: String, container: Control, is_positive: bool):
 	var entry = PanelContainer.new()
 	var v_box = VBoxContainer.new()
 	entry.add_child(v_box)
 	entry.custom_minimum_size = Vector2(0,100)
 	container.add_child(entry)
-	
+
 	# 根據主模塊稀有度獲取顏色
 	var config = RARITY_CONFIG.get(rarity_key, RARITY_CONFIG["C"])
 	var theme_color = config["color"]
-	
+
 	# --- 條目樣式 ---
 	var style = StyleBoxFlat.new()
 	style.bg_color = Color(0.1, 0.1, 0.1, 0.5)
 	style.set_border_width_all(1)
-	
-	
+
+
 	# 正面色條在左，負面在右
 	if is_positive:
 		style.border_width_left = 4
@@ -92,11 +104,11 @@ func _create_entry(sub_data: sub_hex_data, rarity_key: String, container: Contro
 		style.border_width_right = 4
 	style.border_color = theme_color
 	entry.add_theme_stylebox_override("panel", style)
-	
+
 	# --- 內容文本 ---
 	var desc_label = Label.new()
-	
-	desc_label.text = "✦ " + tr(sub_data.get_description())
+
+	desc_label.text = "✦ " + description
 	desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	desc_label.add_theme_font_size_override("font_size", 20)
 	

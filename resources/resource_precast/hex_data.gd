@@ -7,8 +7,10 @@ class_name hex_data
 @export_group("positive_effect")
 @export var positive_hex_list: Array[sub_hex_data]
 
+
 @export_group("negative_effect")
 @export var negative_hex_list: Array[sub_hex_data]
+
 
 @export_group("general")
 @export var neg_has_text: bool = true #修改：如果某些卡沒有負面描述可控制

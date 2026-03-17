@@ -34,3 +34,7 @@ signal open_setting
 signal open_hex_show_window
 
 signal on_language_change
+
+signal enemy_count_changed
+
+signal wave_count_changed

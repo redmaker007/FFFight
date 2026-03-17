@@ -1,14 +1,9 @@
-[gd_resource type="Resource" script_class="hex_data" load_steps=11 format=3 uid="uid://cf13ev7emeyxo"]
+[gd_resource type="Resource" script_class="hex_data" load_steps=9 format=3 uid="uid://cf13ev7emeyxo"]
 
 [ext_resource type="Script" uid="uid://bewmmuup735ge" path="res://resources/resource_precast/sub_hex_data.gd" id="1_fsffs"]
 [ext_resource type="Script" uid="uid://cn1vb61dhtl1b" path="res://resources/resource_precast/hex_data.gd" id="2_nmhgo"]
-[ext_resource type="Script" uid="uid://iy57l8nhpr3n" path="res://resources/hex/sub_hex/empty_hex.gd" id="2_pe8b7"]
 [ext_resource type="Script" uid="uid://b03112umjschj" path="res://resources/hex/sub_hex/give_target_stat.gd" id="3_7sv6x"]
 [ext_resource type="Script" uid="uid://bdmyolyttc2sg" path="res://resources/ability/ability_target_selector/all_unit_type_ts.gd" id="4_dra4s"]
-
-[sub_resource type="Resource" id="Resource_fess8"]
-script = ExtResource("2_pe8b7")
-metadata/_custom_type_script = "uid://iy57l8nhpr3n"
 
 [sub_resource type="Resource" id="Resource_l6fbt"]
 script = ExtResource("4_dra4s")
@@ -36,9 +31,7 @@ metadata/_custom_type_script = "uid://b03112umjschj"
 
 [resource]
 script = ExtResource("2_nmhgo")
-hex_id = "C02"
 hex_name = "Tough kin"
+hex_id = "C02"
 positive_hex_list = Array[ExtResource("1_fsffs")]([SubResource("Resource_knr8l"), SubResource("Resource_isugl")])
-negative_hex_list = Array[ExtResource("1_fsffs")]([SubResource("Resource_fess8")])
-hex_rarity = 4
 metadata/_custom_type_script = "uid://cn1vb61dhtl1b"
