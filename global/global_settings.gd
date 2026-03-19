@@ -16,6 +16,17 @@ const locale_display_names: Dictionary = {
 const locale_list: Array = ["en", "zh_CN", "zh_TW", "ja", "ko", "fr", "de", "es", "pt_BR", "ru"]
 
 
+func _ready() -> void:
+	var config = ConfigFile.new()
+	if config.load("user://settings.cfg") == OK:
+		var music_db: float = config.get_value("audio", "music_db", 0.0)
+		var sfx_db: float = config.get_value("audio", "sfx_db", 0.0)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), music_db)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), sfx_db)
+		var locale: String = config.get_value("language", "locale", "en")
+		TranslationServer.set_locale(locale)
+
+
 func populate_language_options(panel) -> void:
 	panel.language_option_button.clear()
 	var saved_locale: String = TranslationServer.get_locale()
@@ -96,12 +107,3 @@ func save_settings(panel) -> void:
 	config.set_value("audio", "sfx_db", panel.sfx_slider.value)
 	config.set_value("language", "locale", TranslationServer.get_locale())
 	config.save("user://settings.cfg")
-
-
-func load_settings(panel) -> void:
-	var config = ConfigFile.new()
-	if config.load("user://settings.cfg") == OK:
-		panel.music_slider.value = config.get_value("audio", "music_db", 0.0)
-		panel.sfx_slider.value = config.get_value("audio", "sfx_db", 0.0)
-		var locale: String = config.get_value("language", "locale", "en")
-		TranslationServer.set_locale(locale)

@@ -16,7 +16,6 @@ extends PanelContainer
 @onready var quit_btn: Button = $VBox/HBoxContainer/Button
 
 func _ready() -> void:
-	GlobalSettings.load_settings(self)
 	GlobalSettings.populate_language_options(self)
 
 	music_slider.value = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music"))
