@@ -39,4 +39,4 @@ func get_data_dic() -> Dictionary:
 	return dict
 	
 func get_name_key() -> String:
-	return "UNIT_" + minion_name + "_NAME"
+	return tr("UNIT_" + minion_name + "_NAME")

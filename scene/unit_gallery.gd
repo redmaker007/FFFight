@@ -4,6 +4,15 @@ extends PanelContainer
 @onready var right_info_container = $VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/GridContainer
 @onready var anim_sprite = $VBoxContainer/HBoxContainer/VBoxContainer2/SubViewportContainer/SubViewport/AnimatedSprite2D
 
+# ===== 字体大小设置 =====
+@export var font_size_unit_name: int = 28
+@export var font_size_stat_key: int = 13
+@export var font_size_stat_value: int = 15
+@export var font_size_abilities_title: int = 11
+@export var font_size_ability_name: int = 12
+@export var font_size_ability_desc: int = 11
+# =======================
+
 var unit_gallery_dict ={}
 
 func _ready() -> void:
@@ -46,9 +55,9 @@ func on_unit_select(_minion_data):
 		child.queue_free()
 
 	var name_label = Label.new()
-	name_label.text = _minion_data.minion_name.to_upper()  # 单位名不套tr，是数据
+	name_label.text = _minion_data.get_name_key()
 	name_label.add_theme_color_override("font_color", Color("#e8c84a"))
-	name_label.add_theme_font_size_override("font_size", 28)
+	name_label.add_theme_font_size_override("font_size", font_size_unit_name)
 	name_label.add_theme_constant_override("outline_size", 0)
 	right_info_container.add_child(name_label)
 
@@ -95,14 +104,14 @@ func on_unit_select(_minion_data):
 		var ab_title = Label.new()
 		ab_title.text = tr("ABILITIES")
 		ab_title.add_theme_color_override("font_color", Color("#6b7280"))
-		ab_title.add_theme_font_size_override("font_size", 11)
+		ab_title.add_theme_font_size_override("font_size", font_size_abilities_title)
 		right_info_container.add_child(ab_title)
 
 		for x in dict["ability"]:
 			if not x:
 				continue
-			var a_name = x.ability_name if "ability_name" in x else "?"
-			var a_desc = x.get_description() if x.has_method("get_description") else ""
+			var a_name = x.get_ability_name()
+			var a_desc = x.get_description()
 			_add_ability_row(right_info_container, a_name, a_desc)
 
 
@@ -114,20 +123,20 @@ func _add_stat_row(container: Node, label_text: String, value_text: String):
 	key_label.text = label_text
 	key_label.custom_minimum_size = Vector2(100, 0)
 	key_label.add_theme_color_override("font_color", Color("#4a5568"))
-	key_label.add_theme_font_size_override("font_size", 13)
+	key_label.add_theme_font_size_override("font_size", font_size_stat_key)
 	key_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 
 	var sep_label = Label.new()
-	sep_label.text = "▸"
+	sep_label.text = ">"
 	sep_label.add_theme_color_override("font_color", Color("#2d3748"))
-	sep_label.add_theme_font_size_override("font_size", 11)
+	sep_label.add_theme_font_size_override("font_size", font_size_stat_key)
 	sep_label.custom_minimum_size = Vector2(20, 0)
 	sep_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 
 	var val_label = Label.new()
 	val_label.text = value_text
 	val_label.add_theme_color_override("font_color", Color("#e8e8e8"))
-	val_label.add_theme_font_size_override("font_size", 15)
+	val_label.add_theme_font_size_override("font_size", font_size_stat_value)
 	val_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	val_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 
@@ -143,14 +152,14 @@ func _add_ability_row(container: Node, ab_name: String, ab_desc: String):
 	var name_l = Label.new()
 	name_l.text = "· " + ab_name.to_upper()
 	name_l.add_theme_color_override("font_color", Color("#e8c84a", 0.8))
-	name_l.add_theme_font_size_override("font_size", 12)
+	name_l.add_theme_font_size_override("font_size", font_size_ability_name)
 	col.add_child(name_l)
 
 	if ab_desc != "":
 		var desc_l = Label.new()
 		desc_l.text = "  " + ab_desc
 		desc_l.add_theme_color_override("font_color", Color("#6b7280"))
-		desc_l.add_theme_font_size_override("font_size", 11)
+		desc_l.add_theme_font_size_override("font_size", font_size_ability_desc)
 		desc_l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		desc_l.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		col.add_child(desc_l)
@@ -158,8 +167,6 @@ func _add_ability_row(container: Node, ab_name: String, ab_desc: String):
 	container.add_child(col)
 
 
-
-
 func play_anime(anime_name):
 	anim_sprite.play(anime_name)
-	print(anime_name)
+	

@@ -56,8 +56,10 @@ func _ready() -> void:
 
 	setup_test_level()
 	SignalBus.on_language_change.connect(update_wave_number_label)
+
 	count = 0
 	wave_count = 1
+	SignalBus.wave_count_changed.emit(wave_count)
 	update_wave_number_label()
 
 func _process(delta: float) -> void:
@@ -73,9 +75,8 @@ func _process(delta: float) -> void:
 				count += 1
 				SignalBus.enemy_count_changed.emit(count)
 
-				if count % 10 == 0:
-					theme += 1
-					SignalBus.bg_theme_change.emit(theme % 4)
+			
+					
 
 				override_burst_cd = 0
 			else:
@@ -122,6 +123,7 @@ func _process(delta: float) -> void:
 func reset_whole():
 	count = 0
 	wave_count = 1
+	
 	spawn_CD = 0
 	burst_spawn_CD = 0
 	is_bursting = false
@@ -130,7 +132,7 @@ func reset_whole():
 	burst_override_queue.clear()
 	override_burst_cd = 0
 	is_override_bursting = false
-
+	SignalBus.wave_count_changed.emit(wave_count)
 	update_wave_number_label()
 #endregion
 
@@ -183,6 +185,8 @@ func prepare_next_wave():
 		if finished_this_wave_data and mode in [1, 2, 4]:
 			wave_count += 1
 			SignalBus.wave_count_changed.emit(wave_count)
+			
+			SignalBus.bg_theme_change.emit(wave_count % 4)
 			update_wave_number_label()
 
 # 將 wave_data 展開成單個單位隊列，供 inject_burst_wave 使用
@@ -263,7 +267,7 @@ func spawn_enemy_1(s_id: String):
 	new_enemy.ini_w_data(UnitAutoload.unit_dic[s_id])
 
 	new_enemy.z_index = 3
-	new_enemy.position = Vector2(1769, 735)
+	new_enemy.position = Vector2(1775, 735)
 	new_enemy.side = "enemy"
 	new_enemy.add_to_group("unit")
 	new_enemy.add_to_group("enemy")

@@ -28,6 +28,8 @@ func enter_state():
 	# --- 4. 状态自动流转 (Transition) ---
 	# 准备工作在同一帧完成，直接进入正式战斗阶段
 	gm_state_machine.switch_state("play")
+	
+	gm.reset_all_buttons_cd()
 
 func end_state():
 	# 准备阶段通常不需要复杂的清理逻辑

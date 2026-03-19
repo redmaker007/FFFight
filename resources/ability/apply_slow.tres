@@ -24,7 +24,6 @@ metadata/_custom_type_script = "uid://dicf2r5ngefao"
 [resource]
 script = ExtResource("1_hwpen")
 ability_id = "a_slow"
-ability_name = "apply slow"
 cons = Array[ExtResource("1_onx7h")]([SubResource("Resource_2rsdv")])
 pro = SubResource("Resource_pohsl")
 metadata/_custom_type_script = "uid://dv6ph7x3xbuk3"

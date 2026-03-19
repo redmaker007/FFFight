@@ -6,4 +6,4 @@ func tar_select(mn=null,gm=null):
 
 
 func get_description() -> String:
-	return "self"
+	return tr("TS_SELF")

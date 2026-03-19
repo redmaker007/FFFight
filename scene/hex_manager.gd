@@ -15,6 +15,10 @@ func _ready() -> void:
 	# 註冊全局信號：當單位生成時觸發相關協議
 	if not SignalBus.unit_spawned.is_connected(active_unit_spawn_hex):
 		SignalBus.unit_spawned.connect(active_unit_spawn_hex)
+	if not SignalBus.enemy_count_changed.is_connected(on_enemy_count_changed):
+		SignalBus.enemy_count_changed.connect(on_enemy_count_changed)
+	if not SignalBus.wave_count_changed.is_connected(on_wave_count_changed):
+		SignalBus.wave_count_changed.connect(on_wave_count_changed)
 #endregion
 
 #region 3. 協議添加與歷史管理 (Core Logic)
@@ -78,6 +82,19 @@ func active_unit_spawn_hex(unit):
 	for h in active_hex_list:
 		if h.data.has_method("on_unit_spawn"):
 			h.data.on_unit_spawn(unit)
+
+func on_enemy_count_changed(count):
+	if active_hex_list.is_empty():
+		return
+	for h in active_hex_list:
+		if h.data.has_method("on_enemy_count_changed"):
+			h.data.on_enemy_count_changed(count)
+func on_wave_count_changed(wave_count):
+	if active_hex_list.is_empty():
+		return
+	for h in active_hex_list:
+		if h.data.has_method("on_wave_count_changed"):
+			h.data.on_wave_count_changed(wave_count)
 
 ## 清空所有協議
 func clear_hex():

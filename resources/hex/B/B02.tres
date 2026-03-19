@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="hex_data" load_steps=9 format=3 uid="uid://b0avfa7w4x5h6"]
+
+[ext_resource type="Script" uid="uid://bewmmuup735ge" path="res://resources/resource_precast/sub_hex_data.gd" id="1_pgbha"]
+[ext_resource type="Script" uid="uid://cn1vb61dhtl1b" path="res://resources/resource_precast/hex_data.gd" id="2_53y58"]
+[ext_resource type="Script" uid="uid://bfl0p8atapmsa" path="res://resources/hex/sub_hex/add_wave_hex.gd" id="2_151lx"]
+[ext_resource type="Script" uid="uid://b03112umjschj" path="res://resources/hex/sub_hex/give_target_stat.gd" id="2_cwmjf"]
+[ext_resource type="Script" uid="uid://bdmyolyttc2sg" path="res://resources/ability/ability_target_selector/all_unit_type_ts.gd" id="4_151lx"]
+
+[sub_resource type="Resource" id="Resource_iqpmo"]
+script = ExtResource("2_151lx")
+trigger_mode = 2
+unit_id = "blue"
+amount = 2
+every_X = 1
+one_time = false
+metadata/_custom_type_script = "uid://bfl0p8atapmsa"
+
+[sub_resource type="Resource" id="Resource_dflkv"]
+script = ExtResource("4_151lx")
+metadata/_custom_type_script = "uid://bdmyolyttc2sg"
+
+[sub_resource type="Resource" id="Resource_151lx"]
+script = ExtResource("2_cwmjf")
+stat_str = "att"
+addition_change = 16.0
+target_selec = SubResource("Resource_dflkv")
+one_time = false
+metadata/_custom_type_script = "uid://b03112umjschj"
+
+[resource]
+script = ExtResource("2_53y58")
+hex_name = "Hemorrhage"
+hex_id = "B02"
+positive_hex_list = Array[ExtResource("1_pgbha")]([SubResource("Resource_151lx")])
+negative_hex_list = Array[ExtResource("1_pgbha")]([SubResource("Resource_iqpmo")])
+hex_rarity = "B"
+metadata/_custom_type_script = "uid://cn1vb61dhtl1b"

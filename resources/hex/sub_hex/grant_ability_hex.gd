@@ -15,27 +15,21 @@ func on_unit_spawn(m):
 		pass
 
 
-func get_description() -> String:
-	# 1. 优雅地获取技能名称列表 (解决多余逗号的问题)
-	var ab_names = []
+func _get_base_description() -> String:
+	# 1. 技能名称列表
+	var ab_names: Array[String] = []
 	for a in ability_l:
-		if a and "ability_name" in a:
-			ab_names.append(a.ability_name)
-	
-	var ab_str = ", ".join(ab_names) # 这样会自动拼接成 "A, B, C" 格式
-	
-	# 2. 获取目标描述
-	var tar_desc = "Units"
+		if a and a.has_method("get_ability_name"):
+			ab_names.append(a.get_ability_name())
+
+	var ab_str = ", ".join(ab_names)
+
+	# 2. 目标描述
+	var tar_desc = tr("TARGET_UNITS")
 	if target_selec and target_selec.has_method("get_description"):
 		tar_desc = target_selec.get_description()
-	
-	# 3. 拼接基础句子
-	var final_desc = tar_desc + " gain " + ab_str
-	
-	# 4. 根据 one_time 追加持续时间描述
-	if one_time:
-		final_desc += " for the next round only."
-	else:
-		final_desc += " permanently." # 如果是永久的，加上这个词会让玩家更明确
-		
-	return final_desc
+
+	# 3. 拼接
+	var base_desc = tar_desc + " " + tr("ABILITY_GAIN") + " " + ab_str
+
+	return base_desc

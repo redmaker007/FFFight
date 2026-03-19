@@ -32,7 +32,6 @@ metadata/_custom_type_script = "uid://bre3b7pjo0lsm"
 [resource]
 script = ExtResource("2_86ujs")
 ability_id = "death_bomb"
-ability_name = "Death Bomb"
 trigger = 1
 cons = Array[ExtResource("1_x8ros")]([SubResource("Resource_qut6n")])
 pro = SubResource("Resource_yp6a8")

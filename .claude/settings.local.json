@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//d/Documents/**)",
+      "Read(//c/Users/**)",
+      "Bash(find /d/Documents/FFFight_c -name *.md)",
+      "Bash(xargs grep:*)"
+    ]
+  }
+}

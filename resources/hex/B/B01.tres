@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="hex_data" load_steps=11 format=3 uid="uid://w5t5vwxgabsl"]
+
+[ext_resource type="Script" uid="uid://bewmmuup735ge" path="res://resources/resource_precast/sub_hex_data.gd" id="1_7864h"]
+[ext_resource type="Script" uid="uid://cn1vb61dhtl1b" path="res://resources/resource_precast/hex_data.gd" id="2_i0kjd"]
+[ext_resource type="Script" uid="uid://bfl0p8atapmsa" path="res://resources/hex/sub_hex/add_wave_hex.gd" id="2_mswss"]
+[ext_resource type="Script" uid="uid://b03112umjschj" path="res://resources/hex/sub_hex/give_target_stat.gd" id="2_xkudr"]
+[ext_resource type="Script" uid="uid://bdmyolyttc2sg" path="res://resources/ability/ability_target_selector/all_unit_type_ts.gd" id="3_mswss"]
+
+[sub_resource type="Resource" id="Resource_0i0eg"]
+script = ExtResource("2_mswss")
+trigger_mode = 2
+unit_id = "red"
+amount = 1
+every_X = 1
+one_time = false
+metadata/_custom_type_script = "uid://bfl0p8atapmsa"
+
+[sub_resource type="Resource" id="Resource_sxwct"]
+script = ExtResource("3_mswss")
+metadata/_custom_type_script = "uid://bdmyolyttc2sg"
+
+[sub_resource type="Resource" id="Resource_hil0x"]
+script = ExtResource("2_xkudr")
+stat_str = "hp"
+addition_change = 80.0
+target_selec = SubResource("Resource_sxwct")
+one_time = false
+metadata/_custom_type_script = "uid://b03112umjschj"
+
+[sub_resource type="Resource" id="Resource_mswss"]
+script = ExtResource("3_mswss")
+metadata/_custom_type_script = "uid://bdmyolyttc2sg"
+
+[sub_resource type="Resource" id="Resource_435qt"]
+script = ExtResource("2_xkudr")
+stat_str = "max_hp"
+addition_change = 80.0
+target_selec = SubResource("Resource_mswss")
+one_time = false
+metadata/_custom_type_script = "uid://b03112umjschj"
+
+[resource]
+script = ExtResource("2_i0kjd")
+hex_name = "Ironclad Legion"
+hex_id = "B01"
+positive_hex_list = Array[ExtResource("1_7864h")]([SubResource("Resource_hil0x"), SubResource("Resource_435qt")])
+negative_hex_list = Array[ExtResource("1_7864h")]([SubResource("Resource_0i0eg")])
+hex_rarity = "B"
+metadata/_custom_type_script = "uid://cn1vb61dhtl1b"

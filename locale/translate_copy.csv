@@ -28,24 +28,56 @@ PROTOCOL,协议,Protocol
 
 
 and,并且,and
+AND,并且,and
 None,无,None
-choose,选择,choose
+CHOOSE,选择,choose
+
+TS_SELF,自身,Self
+
+TS_ALLY,所有友方,All friendly
+TS_ENEMY,所有敌方,All enemy
+TS_ALL,所有,All
+TS_UNITS,单位,units
+
+BANK_INCOME,银行收入,Bank income
+BANK_UPGRADE_COST,升级费用,Upgrade cost
+EFFECT_ONE_TIME,仅下一回合,Next round only
+EFFECT_PERMANENT,永久,Permanent
+
+TARGET_UNITS,单位,Units
+ABILITY_GAIN,获得技能,gain
+
+DEPLOY_CD,部署冷却,Deploy CD
+TARGET_ALL,全体单位,All units
+TARGET_SINGLE,指定单位,Unit
+
+TARGET_DEFAULT,目标,Target
+STAT_NO_CHANGE,无属性变化,No stat changes
+STAT_GAIN,获得,gain
+
+MONEY_GAIN,获得,Gain
+MONEY_EVERY_ROUND,每回合,Every round
+
+TRIGGER_INSTANT,开局生效,At game start
+TRIGGER_EVERY_X_COUNT,每{X}个敌人触发,Every {X} enemies
+TRIGGER_EVERY_X_WAVE,每{X}波触发,Every {X} waves
+ADD_WAVE_SPAWN,生成,Spawn
+ADD_WAVE_UNIT,个单位,unit(s)
+ADD_WAVE_FROM_POOL_NO_REPEAT,个单位（随机池·不放回）,unit(s) from pool (no repeat)
+ADD_WAVE_FROM_POOL_REPEAT,个单位（随机池·可重复）,unit(s) from pool (with repeat)
+ADD_WAVE_BONUS_SIGNAL,触发奖励波次,Trigger bonus wave
 
 C01_NAME,利爪,Sharp Claw
-C01_POS,所有友军获得5攻击,All units +5 ATK
-C01_NEG,无,None
+
 
 C02_NAME,坚韧同盟,Tough Kin
-C02_POS,所有友军获得20生命,All units +20 HP
-C02_NEG,无,None
+
 
 C03_NAME,轻步,Light Steps
-C03_POS,所有友军获得15速度,All units +15 SPD
-C03_NEG,无,None
+
 
 C04_NAME,快手,Quick Hands
-C04_POS,所有友军获得0.05攻击速度,All units +0.05 Attack Speed
-C04_NEG,无,None
+
 
 C05_NAME,零花钱,Pocket Money
 C05_POS,银行每秒额外获得1金币,Bank gains +1 extra income per second
@@ -89,6 +121,20 @@ RESULT_HP,生命,HP
 RESULT_RETRY,重试,Retry
 RESULT_MENU,主菜单,Menu
 
+ABILITIES,技能,Abilities
+
+ICE_FLAME_NAME,冰焰,Ice Flame
+ICE_FLAME_DES,每三次攻击造成一次额外范围伤害并减速，伤害加成为10+50%ATK,Every 3rd attack deals bonus AoE damage and slows enemies; bonus damage equals 10 + 50% ATK
+
+C_C_NAME,碎骨重拳,Crushing Blow
+C_C_DES,每两次攻击有30%几率暴击，暴击造成额外150% ATK伤害,Every 2nd attack has a 30% chance to crit; crits deal bonus 150% ATK damage
+
+A_SLOW_NAME,冰霜箭,Frost Shot
+A_SLOW_DES,每次攻击使目标减速40%，持续2秒,Each attack slows the target by 40% for 2 seconds
+
+DEATH_BOMB_NAME,殉爆,Death Charge
+DEATH_BOMB_DES,死亡时对周围敌人造成20点固定伤害,Upon death deals 20 fixed damage to nearby enemies
+
 UNIT_RED_NAME,红色的家伙,Red
 UNIT_BLUE_NAME,蓝色的家伙,Blue
 UNIT_BOXER_NAME,拳击手,Boxer
@@ -97,6 +143,17 @@ UNIT_BF_K_NAME,蝶蝶君,Butterfly kun
 UNIT_SOUL_B_NAME,噬魂骑士,Soulblade
 UNIT_S_S_NAME,超级首领,Super Boss
 UNIT_BASE_NAME,基地,Base
+
+STAT_HP,生命值,HP
+STAT_MAX_HP,最大生命值,Max HP
+STAT_ATT,攻击力,ATK
+STAT_ATT_SPD,攻击速度,ATK SPD
+STAT_ATK,攻击力,ATK
+STAT_ATK_SPD,攻击速度,ATK SPD
+STAT_RANGE,攻击范围,Range
+STAT_SPEED,移动速度,Speed
+STAT_DEPLOY_CD,部署冷却,Deploy CD
+STAT_SIZE,体型,Size
 
 ALLY_BASE,我方基地,Ally Base
 ENEMY_BASE,敌方基地,Enemy Base

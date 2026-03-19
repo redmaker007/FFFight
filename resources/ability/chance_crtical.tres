@@ -32,7 +32,6 @@ metadata/_custom_type_script = "uid://ctu6ea3dgd1i0"
 [resource]
 script = ExtResource("2_irejl")
 ability_id = "c_c"
-ability_name = "chance critical"
 cons = Array[ExtResource("1_iblw4")]([SubResource("Resource_30wgc"), SubResource("Resource_pd1h4")])
 pro = SubResource("Resource_3hc3t")
 metadata/_custom_type_script = "uid://dv6ph7x3xbuk3"

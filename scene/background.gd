@@ -8,6 +8,7 @@ extends Node2D
 @onready var ground: ColorRect = $ground
 @onready var road: Sprite2D = $road
 @onready var sun_moon: Sprite2D = $sun_moon
+@onready var particle: GPUParticles2D = %particle
 
 const THEMES = [
 	{   # 主题0 · 晴天正午

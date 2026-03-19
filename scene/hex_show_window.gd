@@ -19,7 +19,6 @@ const RARITY_CONFIG = {
 
 #region 3. 生命周期 (Lifecycle)
 func _ready() -> void:
-	print("clear")
 	_apply_window_style()
 	_connect_signals()
 	_render_active_protocols()

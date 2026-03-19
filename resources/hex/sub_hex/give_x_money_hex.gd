@@ -9,12 +9,10 @@ func hex_process(gm):
 	
 	gm.ms.get_fund(X_money)
 
-func get_description() -> String:
-	# 基础描述
-	var base_desc = "gain " + str(X_money) + " money"
-	
-	# 根据 one_time 决定后缀
+func _get_base_description() -> String:
+	var base_desc = tr("MONEY_GAIN") + " $" + str(X_money)
+
 	if one_time:
-		return base_desc + " for the next round only." # 或者直接写 " once." (一次性)
+		return base_desc + " (" + tr("EFFECT_ONE_TIME") + ")"
 	else:
-		return base_desc + " every round." # 如果不是一次性，通常意味着每回合都会给钱
+		return base_desc + " (" + tr("MONEY_EVERY_ROUND") + ")"

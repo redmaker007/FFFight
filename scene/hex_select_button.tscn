@@ -1,7 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://lj33bbvnuyxx"]
+[gd_scene load_steps=8 format=3 uid="uid://lj33bbvnuyxx"]
 
 [ext_resource type="Theme" uid="uid://7dlw0gdjkmon" path="res://art/theme/theme.tres" id="1_m14yv"]
 [ext_resource type="Script" uid="uid://drmvg1iwmu2yq" path="res://hex_select_button.gd" id="1_w38gu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m14yv"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2xa6c"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dwtt3"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w6gax"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m14yv"]
 particle_flag_disable_z = true
@@ -9,13 +21,42 @@ gravity = Vector3(0, 98, 0)
 
 [node name="hex_select_button" type="PanelContainer"]
 custom_minimum_size = Vector2(200, 400)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -127.0
+offset_top = -200.0
+offset_right = 125.0
+offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(124, 191)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
 theme = ExtResource("1_m14yv")
 script = ExtResource("1_w38gu")
+font_size_hex_name = 25
+font_size_pos_des = 20
+font_size_neg_des = 20
+font_size_and = 25
+font_size_button = 25
+b_scale_min = 1.0
+b_scale_max = 2.0
+b_gravity = 50.0
+flash_duration = 0.7
+flash_peak_alpha = 0.05
+
+[node name="button" type="Button" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_m14yv")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2xa6c")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dwtt3")
+theme_override_styles/focus = SubResource("StyleBoxFlat_w6gax")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -66,11 +107,11 @@ layout_mode = 2
 size_flags_vertical = 8
 alignment = 1
 
-[node name="button" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(116, 193)
 process_material = SubResource("ParticleProcessMaterial_m14yv")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2

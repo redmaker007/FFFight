@@ -99,7 +99,7 @@ func add_ability(abd:ability_data):
 	var act_ab = active_ability.new()
 	act_ab.ab_data = abd
 	act_ab.init()
-	abilities[abd.ability_name] = act_ab
+	abilities[abd.ability_id] = act_ab
 
 func set_abilities(abilities_data):
 	for a in abilities_data:

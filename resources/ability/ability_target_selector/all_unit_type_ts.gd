@@ -32,25 +32,21 @@ func tar_select(mn=null,gm=null):
 
 
 func get_description() -> String:
-	# 1. 确定我们要称呼"谁"
-	# 如果指定了 unit_id (例如 "Archer")，就用它；否则统称为 "units"
-	var target_name = "units"
-	if unit_id != "":
-		# capitalize() 会把 "archer" 变成 "Archer"，看起来更像名字
-		target_name = unit_id.capitalize() + "s" # 加个s表示复数，如果不喜欢可以去掉
-	
-	# 2. 根据阵营拼接前缀
-	var prefix = ""
+	# 1. 阵营描述
+	var side_str: String
 	match pick_side:
 		side.ally:
-			if unit_id == "": # 特殊处理: "all allies" 比 "all friendly units" 更简短自然
-				return "all allies"
-			prefix = "all friendly "
+			side_str = tr("TS_ALLY")
 		side.enemy:
-			if unit_id == "":
-				return "all enemies"
-			prefix = "all enemy "
+			side_str = tr("TS_ENEMY")
 		side.all:
-			prefix = "all "
-	
-	return prefix + target_name
+			side_str = tr("TS_ALL")
+
+	# 2. 单位描述
+	var unit_str: String
+	if unit_id != "":
+		unit_str = unit_id
+	else:
+		unit_str = tr("TS_UNITS")
+
+	return side_str + " " + unit_str

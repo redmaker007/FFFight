@@ -36,8 +36,7 @@ metadata/_custom_type_script = "uid://ctu6ea3dgd1i0"
 
 [resource]
 script = ExtResource("2_qy71s")
-ability_id = "fire_ball"
-ability_name = "Fire Ball"
+ability_id = "Ice_Flame"
 cons = Array[ExtResource("1_turuq")]([SubResource("Resource_wvrgp")])
 pro = SubResource("Resource_ptbbd")
 metadata/_custom_type_script = "uid://dv6ph7x3xbuk3"

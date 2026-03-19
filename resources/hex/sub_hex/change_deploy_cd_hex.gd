@@ -38,3 +38,23 @@ func hex_process_take_back(gm):
 	else:
 		if target_unit_id != "":
 			gm.modify_unit_button_cd(target_unit_id, 1.0, 0.0, 0)
+
+func _get_base_description() -> String:
+	var parts: Array[String] = []
+
+	if mul_value != 1.0:
+		var sign = "+" if mul_value > 1.0 else ""
+		parts.append(tr("DEPLOY_CD") + " " + sign + str((mul_value - 1.0) * 100) + "%")
+	if add_value != 0.0:
+		var sign = "+" if add_value > 0 else ""
+		parts.append(tr("DEPLOY_CD") + " " + sign + str(add_value) + "s")
+
+	if parts.size() == 0:
+		return ""
+
+	var base_desc = ", ".join(parts)
+
+	if target_mode == 0:
+		return base_desc + " (" + tr("TARGET_ALL") + ")"
+	else:
+		return base_desc + " (" + tr("TARGET_SINGLE") + ": " + target_unit_id + ")"

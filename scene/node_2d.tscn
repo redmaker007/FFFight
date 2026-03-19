@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bae3kf36u3115"]
+[gd_scene load_steps=38 format=3 uid="uid://bae3kf36u3115"]
 
 [ext_resource type="Script" uid="uid://bxoj4abwmi3vj" path="res://GM.gd" id="1_123pn"]
 [ext_resource type="Script" uid="uid://4aj1roadh4qo" path="res://gm_state_machine.gd" id="2_3u7g2"]
@@ -90,6 +90,10 @@ colors = PackedColorArray(0.35686275, 0.56078434, 0.7882353, 1, 0.65882355, 0.81
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_2paaw"]
 gradient = SubResource("Gradient_x33gs")
 fill_to = Vector2(0, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bapa2"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
 
 [node name="GM" type="Node2D"]
 script = ExtResource("1_123pn")
@@ -496,6 +500,10 @@ texture = ExtResource("19_5n7tr")
 position = Vector2(985, 111)
 scale = Vector2(0.47, 0.47)
 texture = ExtResource("20_cw5uo")
+
+[node name="particle" type="GPUParticles2D" parent="background"]
+unique_name_in_owner = true
+process_material = SubResource("ParticleProcessMaterial_bapa2")
 
 [node name="castle1" type="Sprite2D" parent="."]
 z_index = 2

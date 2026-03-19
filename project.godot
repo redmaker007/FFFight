@@ -19,6 +19,7 @@ config/icon="res://art/random_art/icon.svg"
 
 SignalBus="*res://global/Signal_Bus.gd"
 Global="*res://global/Global.gd"
+GlobalSettings="*res://global/global_settings.gd"
 UnitAutoload="*res://global/unit_autoload.gd"
 HexAutoload="*res://global/hex_autoload.gd"
 

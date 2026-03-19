@@ -43,26 +43,28 @@ func hex_process_take_back(gm):
 
 #region 3. 描述文本 (Description)
 
-func get_description() -> String:
-	var descriptions = []
-	
+func _get_base_description() -> String:
+	var parts: Array[String] = []
+
 	# 收入描述
 	if income_mul != 0:
-		descriptions.append("Bank income " + ("+" if income_mul > 0 else "") + str(income_mul * 100) + "%")
+		var sign = "+" if income_mul > 0 else ""
+		parts.append(tr("BANK_INCOME") + " " + sign + str(income_mul * 100) + "%")
 	if income_add != 0:
-		descriptions.append("Bank income " + ("+" if income_add > 0 else "") + str(income_add) + "/s")
-	
-	# 升級費描述
-	if upgrade_mul_delta != 0:
-		descriptions.append("Bank upgrade cost " + ("-" if upgrade_mul_delta < 0 else "+") + str(abs(upgrade_mul_delta) * 100) + "%")
-	if upgrade_add_delta != 0:
-		descriptions.append("Bank upgrade cost " + ("-" if upgrade_add_delta < 0 else "+") + "$" + str(abs(upgrade_add_delta)))
-	
-	var base_desc = ", ".join(descriptions)
-	
-	if one_time:
-		return base_desc + " (Next round only)."
-	else:
-		return base_desc + " (Permanent)."
+		var sign = "+" if income_add > 0 else ""
+		parts.append(tr("BANK_INCOME") + " " + sign + str(income_add) + "/s")
 
-#endregion
+	# 升级费描述
+	if upgrade_mul_delta != 0:
+		var sign = "+" if upgrade_mul_delta > 0 else ""
+		parts.append(tr("BANK_UPGRADE_COST") + " " + sign + str(upgrade_mul_delta * 100) + "%")
+	if upgrade_add_delta != 0:
+		var sign = "+" if upgrade_add_delta > 0 else ""
+		parts.append(tr("BANK_UPGRADE_COST") + " " + sign + "$" + str(upgrade_add_delta))
+
+	if parts.size() == 0:
+		return ""
+
+	var base_desc = ", ".join(parts)
+
+	return base_desc

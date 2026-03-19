@@ -13,16 +13,37 @@ class_name hex_data
 
 
 @export_group("general")
-@export var neg_has_text: bool = true #修改：如果某些卡沒有負面描述可控制
 @export_enum("D", "S", "A", "B", "C") var hex_rarity: String = "C"
 
 func get_pos_des() -> String:
-	return tr(hex_id + "_POS") #修改
+	var parts: Array[String] = []
+	for sub in positive_hex_list:
+		if sub and sub.has_method("get_description"):
+			var desc = sub.get_description()
+			if desc != "":
+				parts.append(desc)
+	if parts.size() == 0:
+		return ""
+	elif parts.size() == 1:
+		return parts[0]
+	else:
+		return " ".join(parts.slice(0, parts.size() - 1)) + " " + tr("AND") + " " + parts[-1]
 
 func get_neg_des() -> String:
-	if not neg_has_text:
+	if negative_hex_list.is_empty():
 		return tr("None")
-	return tr(hex_id + "_NEG") #修改
+	var parts: Array[String] = []
+	for sub in negative_hex_list:
+		if sub and sub.has_method("get_description"):
+			var desc = sub.get_description()
+			if desc != "":
+				parts.append(desc)
+	if parts.size() == 0:
+		return ""
+	elif parts.size() == 1:
+		return parts[0]
+	else:
+		return " ".join(parts.slice(0, parts.size() - 1)) + " " + tr("AND") + " " + parts[-1]
 
 func get_name_text() -> String:
 	return tr(hex_id + "_NAME") #修改

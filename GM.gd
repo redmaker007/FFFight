@@ -73,7 +73,7 @@ func spawn_base(side_n: String):
 		if ally_hp_text:
 			ally_hp_text.text = hp_string
 	else:
-		new_unit.position = Vector2(1719, 735)
+		new_unit.position = Vector2(1775, 735)
 		new_unit.add_to_group("enemy")
 		new_unit.add_to_group("base")
 		if enemy_hp_text:
