@@ -24,6 +24,7 @@ func open_setting() -> void:
 		return  # 防止重复打开
 	
 	_settings_instance = SETTINGS_SCENE.instantiate()
+	_settings_instance.z_index = 100
 	add_child(_settings_instance)
 	# 监听设置界面关闭信号
 	_settings_instance.tree_exited.connect(func(): _settings_instance = null)

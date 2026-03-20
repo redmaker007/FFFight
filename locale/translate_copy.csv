@@ -120,6 +120,9 @@ RESULT_MONEY,金币,Money
 RESULT_HP,生命,HP
 RESULT_RETRY,重试,Retry
 RESULT_MENU,主菜单,Menu
+RESULT_WAVE_COUNT,波次: %d,Wave: %d
+RESULT_MONEY_COUNT,金币: %d,Money: %d
+RESULT_HP_PCT,生命: %d%%,HP: %d%%
 
 ABILITIES,技能,Abilities
 

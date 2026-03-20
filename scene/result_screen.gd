@@ -19,17 +19,17 @@ func show_result(win: bool, wave: int, money: int, hp_pct: float):
 	visible = true
 	
 	if win:
-		title_label.text = "VICTORY"
+		title_label.text = tr("RESULT_VICTORY")
 		title_label.add_theme_color_override("font_color", Color("e8c84a"))
-		sub_label.text = "WAVE CLEARED — WELL DONE, COMMANDER"
+		sub_label.text = tr("RESULT_VICTORY_SUB")
 	else:
-		title_label.text = "DEFEATED"
+		title_label.text = tr("RESULT_DEFEATED")
 		title_label.add_theme_color_override("font_color", Color("e84a4a"))
-		sub_label.text = "YOUR BASE HAS FALLEN — TRY AGAIN"
-	
-	wave_label.text = "wave:"+str(wave)
-	money_label.text = "money:"+str(money)
-	hp_label.text = "hp:"+str(int(hp_pct * 100)) + "%"
+		sub_label.text = tr("RESULT_DEFEATED_SUB")
+
+	wave_label.text = tr("RESULT_WAVE_COUNT") % wave
+	money_label.text = tr("RESULT_MONEY_COUNT") % money
+	hp_label.text = tr("RESULT_HP_PCT") % int(hp_pct * 100)
 	
 	bg_panel.modulate.a = 0
 	bg_panel.position.y = 2000  # 先把面板移到屏幕下方

@@ -185,7 +185,7 @@ func prepare_next_wave():
 		if finished_this_wave_data and mode in [1, 2, 4]:
 			wave_count += 1
 			SignalBus.wave_count_changed.emit(wave_count)
-			
+			print(wave_count)
 			SignalBus.bg_theme_change.emit(wave_count % 4)
 			update_wave_number_label()
 

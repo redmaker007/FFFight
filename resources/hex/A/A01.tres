@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="hex_data" load_steps=3 format=3 uid="uid://binad56m72rfx"]
-
-[ext_resource type="Script" uid="uid://bewmmuup735ge" path="res://resources/resource_precast/sub_hex_data.gd" id="1_axshj"]
-[ext_resource type="Script" uid="uid://cn1vb61dhtl1b" path="res://resources/resource_precast/hex_data.gd" id="2_iqtdh"]
-
-[resource]
-script = ExtResource("2_iqtdh")
-hex_rarity = "A"
-metadata/_custom_type_script = "uid://cn1vb61dhtl1b"

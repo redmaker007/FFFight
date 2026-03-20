@@ -100,7 +100,7 @@ func reset_top_bar():
 
 ## 結算界面顯示
 func show_result(win: bool):
-	var current_wave = es.count / 10 + 1
+	var current_wave = es.wave_count
 	# 這裡建議將 win/loss 的標題判斷交給 result_screen 內部處理
 	# 如果要在這裡處理，可以使用 tr("KEY_WIN") 或 tr("KEY_LOSE")
 	result_screen.show_result(win, current_wave, ms.money_amount, 0)
