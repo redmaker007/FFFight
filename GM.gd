@@ -16,7 +16,7 @@ class_name game_manager
 #region 2. UI 引用 (UI Elements)
 @export_group("UI Containers")
 @onready var cl = $CanvasLayer
-@onready var spawn_button_container = $CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer
+@onready var spawn_button_container = %spawn_button_container
 @onready var result_screen = $CanvasLayer/HUD_Root/ResultScreen
 
 @export_group("Status Display")
@@ -130,6 +130,7 @@ func _apply_cd_to_btn(btn: Node, mul: float, add: float, mode: int):
 	else:
 		if btn.has_method("add_cd_modifier"):
 			btn.add_cd_modifier(mul, add)
+
 func reset_all_buttons_cd():
 	for btn in spawn_button_container.get_children():
 		if btn.has_method("reset_cd"):

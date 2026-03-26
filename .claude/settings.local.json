@@ -4,7 +4,10 @@
       "Read(//d/Documents/**)",
       "Read(//c/Users/**)",
       "Bash(find /d/Documents/FFFight_c -name *.md)",
-      "Bash(xargs grep:*)"
+      "Bash(xargs grep:*)",
+      "Bash(find D:/Documents/redmaker_vault -type f -name *)",
+      "Bash(find D:/Documents/redmaker_vault/designathon-2026 -type f -name *.md)",
+      "Bash(find D:/Documents/redmaker_vault -type f \\\\\\(-name *.md -o -name *.txt \\\\\\))"
     ]
   }
 }

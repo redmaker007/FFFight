@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bae3kf36u3115"]
+[gd_scene load_steps=41 format=3 uid="uid://bae3kf36u3115"]
 
 [ext_resource type="Script" uid="uid://bxoj4abwmi3vj" path="res://GM.gd" id="1_123pn"]
 [ext_resource type="Script" uid="uid://4aj1roadh4qo" path="res://gm_state_machine.gd" id="2_3u7g2"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://c7rrfjyooaf22" path="res://scene/pause_state.gd" id="7_su6sf"]
 [ext_resource type="Script" uid="uid://badhroee5v7pl" path="res://scene/round_prep_state.gd" id="8_nl3on"]
 [ext_resource type="Script" uid="uid://m6xfrndftlpg" path="res://button_signal_set.gd" id="8_ssc4f"]
+[ext_resource type="Script" uid="uid://cb85hgufqr5gc" path="res://scene/shop_state.gd" id="9_drt2y"]
+[ext_resource type="Resource" uid="uid://cqgorkemymxgq" path="res://resources/shop/default_pool.tres" id="10_cw5uo"]
 [ext_resource type="PackedScene" uid="uid://ctuv1ou4cgov3" path="res://scene/spwan_unit_button.tscn" id="10_el7ve"]
 [ext_resource type="Texture2D" uid="uid://ct6kuvkmjla30" path="res://art/random_art/castle.png" id="12_bapa2"]
 [ext_resource type="FontFile" uid="uid://dk5r3itdj3mqx" path="res://art/font/Orbitron-VariableFont_wght.ttf" id="12_s0fja"]
@@ -25,6 +27,7 @@
 [ext_resource type="Script" uid="uid://c6h8hop711g3p" path="res://scene/background.gd" id="17_drt2y"]
 [ext_resource type="Texture2D" uid="uid://dus2uqqao0nvh" path="res://art/background/road.png" id="19_5n7tr"]
 [ext_resource type="Texture2D" uid="uid://dmavd50oy5014" path="res://art/background/sun_moon.png" id="20_cw5uo"]
+[ext_resource type="Script" uid="uid://c26fhs0o0j427" path="res://scene/inventory_manager.gd" id="27_5n7tr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yfstv"]
 bg_color = Color(0.06666667, 0.08235294, 0.1254902, 1)
@@ -128,6 +131,11 @@ state_name = "pause"
 [node name="round_prep_state" type="Node" parent="GMStateMachine"]
 script = ExtResource("8_nl3on")
 state_name = "prep"
+
+[node name="shop_state" type="Node" parent="GMStateMachine"]
+script = ExtResource("9_drt2y")
+pool = ExtResource("10_cw5uo")
+state_name = "shop"
 
 [node name="Money_system" type="Node" parent="."]
 script = ExtResource("4_cxisf")
@@ -322,62 +330,92 @@ text = "wave 04"
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 
-[node name="SpawnPanel" type="PanelContainer" parent="CanvasLayer/HUD_Root"]
-custom_minimum_size = Vector2(0, 110)
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -110.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="BottomBar_BG" type="PanelContainer" parent="CanvasLayer/HUD_Root"]
+custom_minimum_size = Vector2(2000, 0)
+layout_mode = 0
+offset_top = 929.0
+offset_right = 1844.0
+offset_bottom = 1074.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HUD_Root/SpawnPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HUD_Root/BottomBar_BG"]
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+current_tab = 0
+
+[node name="SPAWNPANEL" type="PanelContainer" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/TabContainer"]
+custom_minimum_size = Vector2(1250, 110)
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="spawn_button_container" type="HBoxContainer" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/TabContainer/SPAWNPANEL"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="spwan_unit_1" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer" instance=ExtResource("10_el7ve")]
+[node name="spwan_unit_1" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/TabContainer/SPAWNPANEL/spawn_button_container" instance=ExtResource("10_el7ve")]
 layout_mode = 2
 unit_id = "red"
 
-[node name="spwan_unit_2" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer" instance=ExtResource("10_el7ve")]
+[node name="spwan_unit_2" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/TabContainer/SPAWNPANEL/spawn_button_container" instance=ExtResource("10_el7ve")]
 layout_mode = 2
 unit_id = "blue"
 
-[node name="spwan_unit_3" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer" instance=ExtResource("10_el7ve")]
+[node name="spwan_unit_3" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/TabContainer/SPAWNPANEL/spawn_button_container" instance=ExtResource("10_el7ve")]
 layout_mode = 2
 unit_id = "snow_b_s"
 
-[node name="spwan_unit_4" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer" instance=ExtResource("10_el7ve")]
+[node name="spwan_unit_4" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/TabContainer/SPAWNPANEL/spawn_button_container" instance=ExtResource("10_el7ve")]
 layout_mode = 2
 unit_id = "boxer"
 
-[node name="spwan_unit_5" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer" instance=ExtResource("10_el7ve")]
+[node name="spwan_unit_5" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/TabContainer/SPAWNPANEL/spawn_button_container" instance=ExtResource("10_el7ve")]
 layout_mode = 2
 unit_id = "soul_b"
 
-[node name="spwan_unit_6" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer" instance=ExtResource("10_el7ve")]
+[node name="spwan_unit_6" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/TabContainer/SPAWNPANEL/spawn_button_container" instance=ExtResource("10_el7ve")]
 layout_mode = 2
 unit_id = "bf_k"
 
-[node name="unit_gallery_button" type="Button" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer"]
+[node name="MAGIC" type="PanelContainer" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/TabContainer"]
+visible = false
+custom_minimum_size = Vector2(1250, 110)
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="spawn_button_container" type="HBoxContainer" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/TabContainer/MAGIC"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ITEM" type="PanelContainer" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/TabContainer"]
+visible = false
+custom_minimum_size = Vector2(1250, 110)
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="spawn_button_container" type="HBoxContainer" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/TabContainer/ITEM"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="unit_gallery_button" type="Button" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "UNIT_GALLERY"
 
-[node name="setting_button" type="Button" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer"]
+[node name="setting_button" type="Button" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "SETTINGS"
 
-[node name="hex_show_button" type="Button" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer"]
+[node name="hex_show_button" type="Button" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "ACTIVE_MODULES"
 
-[node name="Control" type="Control" parent="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer"]
-custom_minimum_size = Vector2(400, 0)
+[node name="Control" type="Control" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
 [node name="ResultScreen" type="Control" parent="CanvasLayer/HUD_Root"]
@@ -505,6 +543,16 @@ texture = ExtResource("20_cw5uo")
 unique_name_in_owner = true
 process_material = SubResource("ParticleProcessMaterial_bapa2")
 
+[node name="SpawnerCDProgress" type="TextureProgressBar" parent="background"]
+unique_name_in_owner = true
+z_index = 10
+offset_left = 1019.04767
+offset_top = 166.24995
+offset_right = 1020.04767
+offset_bottom = 167.24995
+scale = Vector2(0.25, 0.25)
+fill_mode = 4
+
 [node name="castle1" type="Sprite2D" parent="."]
 z_index = 2
 position = Vector2(170.26942, 491.25253)
@@ -523,6 +571,9 @@ script = ExtResource("13_drt2y")
 [node name="enemy spawner" type="Node" parent="."]
 script = ExtResource("14_5n7tr")
 spec_unit = "snow_ball_shooter"
+progress_bar_position = Vector2(1035, 168)
+progress_bar_size = 32
+progress_bar_tint_progress = Color(0.72156864, 0.7176471, 0.7764706, 1)
 
 [node name="level_manager" type="Node" parent="."]
 
@@ -532,7 +583,12 @@ script = ExtResource("16_f08rc")
 [node name="pop_window_manager" type="Node" parent="."]
 script = ExtResource("17_cxisf")
 
+[node name="Inventory_manager" type="Node" parent="."]
+script = ExtResource("27_5n7tr")
+
+[node name="Shop_manager" type="Node" parent="."]
+
 [connection signal="pressed" from="CanvasLayer/HUD_Root/TopBar_BG/TopBar/UpgradeBtn" to="button_signal_set" method="_on_upgrade_btn_pressed"]
-[connection signal="pressed" from="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer/unit_gallery_button" to="button_signal_set" method="_on_unit_gallery_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer/setting_button" to="button_signal_set" method="_on_setting_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/HUD_Root/SpawnPanel/HBoxContainer/hex_show_button" to="button_signal_set" method="_on_hex_show_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/unit_gallery_button" to="button_signal_set" method="_on_unit_gallery_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/setting_button" to="button_signal_set" method="_on_setting_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/hex_show_button" to="button_signal_set" method="_on_hex_show_button_pressed"]

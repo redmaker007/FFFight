@@ -31,8 +31,8 @@ func on_select_hex(h: hex_data):
 	gm.hs.add_main_hex(h)
 	# ----------------------------------------------
 	
-	# 選擇完畢，切換到準備階段
-	gm_state_machine.switch_state("prep")
+	# 選擇完畢，進入商店
+	gm_state_machine.switch_state("shop")
 #endregion
 
 #region 3. 結束與清理 (Exit & Cleanup)
