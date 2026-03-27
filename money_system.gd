@@ -19,6 +19,8 @@ var bank_active: bool = false
 var money_amount: float = 0
 var money_CD: float = 0
 var current_bank_level: int = 1
+var shop_budget: float = 0  # 局間商店預算，獨立於戰鬥金幣
+var _is_first_round: bool = true
 
 @onready var GM: Node2D = get_parent()
 @onready var money_text   = GM.get_node("CanvasLayer/HUD_Root/TopBar_BG/TopBar/MoneySegment/HBoxContainer/VBoxContainer/Money_text")
@@ -121,8 +123,26 @@ func reset_bank():
 	update_text()
 
 func start_level():
-	money_amount += default_money_amount
 	current_bank_level = max(current_bank_level - 1, 1)
+	update_text()
+
+## 重置局間商店預算為初始值（每小局開始時呼叫）
+func reset_shop_budget() -> void:
+	if _is_first_round:
+		shop_budget = 150
+		_is_first_round = false
+	else:
+		shop_budget = default_money_amount
+
+## 結算商店預算：將 shop_budget 合併進戰鬥金幣（可正可負）
+func apply_shop_budget() -> void:
+	money_amount += shop_budget
+	shop_budget = 0
+	update_text()
+
+## 無條件扣款：不檢查餘額，直接從戰鬥金幣扣除
+func force_deduct(amount: float) -> void:
+	money_amount -= amount
 	update_text()
 
 func update_text():

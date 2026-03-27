@@ -326,6 +326,8 @@ func _on_wave_end() -> void:
 	spawner_cd_progress.scale    = Vector2(progress_bar_scale, progress_bar_scale)
 	spawner_cd_progress.value    = 100.0
 	spawner_cd_progress.show()
+	# 每完成一波，下次小局的商店預算基礎值 +10
+	GM.ms.default_money_amount += 10
 
 
 func _setup_progress_bar() -> void:

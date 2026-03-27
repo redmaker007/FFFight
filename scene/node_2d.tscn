@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://bae3kf36u3115"]
+[gd_scene load_steps=40 format=3 uid="uid://bae3kf36u3115"]
 
 [ext_resource type="Script" uid="uid://bxoj4abwmi3vj" path="res://GM.gd" id="1_123pn"]
 [ext_resource type="Script" uid="uid://4aj1roadh4qo" path="res://gm_state_machine.gd" id="2_3u7g2"]
@@ -12,7 +12,6 @@
 [ext_resource type="Script" uid="uid://m6xfrndftlpg" path="res://button_signal_set.gd" id="8_ssc4f"]
 [ext_resource type="Script" uid="uid://cb85hgufqr5gc" path="res://scene/shop_state.gd" id="9_drt2y"]
 [ext_resource type="Resource" uid="uid://cqgorkemymxgq" path="res://resources/shop/default_pool.tres" id="10_cw5uo"]
-[ext_resource type="PackedScene" uid="uid://ctuv1ou4cgov3" path="res://scene/spwan_unit_button.tscn" id="10_el7ve"]
 [ext_resource type="Texture2D" uid="uid://ct6kuvkmjla30" path="res://art/random_art/castle.png" id="12_bapa2"]
 [ext_resource type="FontFile" uid="uid://dk5r3itdj3mqx" path="res://art/font/Orbitron-VariableFont_wght.ttf" id="12_s0fja"]
 [ext_resource type="Theme" uid="uid://7dlw0gdjkmon" path="res://art/theme/theme.tres" id="12_ssc4f"]
@@ -333,9 +332,9 @@ layout_mode = 2
 [node name="BottomBar_BG" type="PanelContainer" parent="CanvasLayer/HUD_Root"]
 custom_minimum_size = Vector2(2000, 0)
 layout_mode = 0
-offset_top = 929.0
-offset_right = 1844.0
-offset_bottom = 1074.0
+offset_top = 770.08
+offset_right = 2000.0
+offset_bottom = 915.08044
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HUD_Root/BottomBar_BG"]
 layout_mode = 2
@@ -355,37 +354,14 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="spwan_unit_1" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/TabContainer/SPAWNPANEL/spawn_button_container" instance=ExtResource("10_el7ve")]
-layout_mode = 2
-unit_id = "red"
-
-[node name="spwan_unit_2" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/TabContainer/SPAWNPANEL/spawn_button_container" instance=ExtResource("10_el7ve")]
-layout_mode = 2
-unit_id = "blue"
-
-[node name="spwan_unit_3" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/TabContainer/SPAWNPANEL/spawn_button_container" instance=ExtResource("10_el7ve")]
-layout_mode = 2
-unit_id = "snow_b_s"
-
-[node name="spwan_unit_4" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/TabContainer/SPAWNPANEL/spawn_button_container" instance=ExtResource("10_el7ve")]
-layout_mode = 2
-unit_id = "boxer"
-
-[node name="spwan_unit_5" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/TabContainer/SPAWNPANEL/spawn_button_container" instance=ExtResource("10_el7ve")]
-layout_mode = 2
-unit_id = "soul_b"
-
-[node name="spwan_unit_6" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/TabContainer/SPAWNPANEL/spawn_button_container" instance=ExtResource("10_el7ve")]
-layout_mode = 2
-unit_id = "bf_k"
-
 [node name="MAGIC" type="PanelContainer" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/TabContainer"]
 visible = false
 custom_minimum_size = Vector2(1250, 110)
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="spawn_button_container" type="HBoxContainer" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/TabContainer/MAGIC"]
+[node name="magic_container" type="HBoxContainer" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/TabContainer/MAGIC"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 8
 
@@ -395,7 +371,8 @@ custom_minimum_size = Vector2(1250, 110)
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="spawn_button_container" type="HBoxContainer" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/TabContainer/ITEM"]
+[node name="item_container" type="HBoxContainer" parent="CanvasLayer/HUD_Root/BottomBar_BG/HBoxContainer/TabContainer/ITEM"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 8
 

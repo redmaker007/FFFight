@@ -2,37 +2,70 @@ extends Button
 
 #region 1. 變量與配置 (Properties & Settings)
 @export var unit_id: String
-const BTN_SIZE = Vector2(90, 100)
+
+@export_group("Button Size")
+@export var btn_size: Vector2 = Vector2(90, 130)
+@export var portrait_size: Vector2 = Vector2(50, 50)
+@export var upgrade_btn_size: Vector2 = Vector2(82, 18)
+@export var vbox_separation: int = 4
+@export var hover_lift: float = 3.0
+
+@export_group("Font Sizes")
+@export var font_size_hotkey: int = 9
+@export var font_size_cd: int = 18
+@export var font_size_name: int = 13
+@export var font_size_cost: int = 12
+@export var font_size_upgrade: int = 9
+@export var font_size_exp: int = 9
+
+@export_group("Upgrade")
+@export var upgrade_cost: int = 10
 
 var _origin_y: float
 var _cd_max: float = 0.0
 var _cd_timer: float = 0.0
 
 # --- CD 修正接口 ---
-var _cd_multiplyer: float = 1.0  # 乘法修正 (例如 0.8 代表 CD 變 80%)
-var _cd_additioner: float = 0.0  # 加法修正 (例如 -0.5 代表 CD 減 0.5秒)
+var _cd_multiplyer: float = 1.0
+var _cd_additioner: float = 0.0
 # ------------------
 
-var _cd_overlay: ColorRect  # 遮罩節點
+var _cd_overlay: ColorRect
 var _name_label: Label
+
+# --- 升級系統 ---
+var _gm: Node = null
+var _active_minion: ActiveMinion = null
+var _upgrade_btn: Button = null
+var _exp_label: Label = null
 #endregion
 
 #region 2. 生命周期 (Lifecycle)
 func _ready() -> void:
 	await get_tree().process_frame
-	_origin_y = position.y
+	_gm = get_tree().current_scene
 	self.connect("pressed", on_pressed)
 	self.connect("mouse_entered", on_hover_enter)
 	self.connect("mouse_exited", on_hover_exit)
-	custom_minimum_size = BTN_SIZE
+	custom_minimum_size = btn_size
 	_build_ui()
-	
-	# 讀取原始數據
+
 	var data = UnitAutoload.unit_dic[unit_id]
 	_cd_max = data.deploy_cd
-	
+
 	SignalBus.spawn_unit_by_name.connect(_on_unit_spawned)
+	SignalBus.unit_spawned.connect(_on_unit_spawned_apply_level)
 	SignalBus.on_language_change.connect(update_ui_texts)
+
+	# 監聽 inventory：shop 購買後才知道對應 ActiveMinion
+	var inv = _gm.get_node("Inventory_manager")
+	inv.minion_added.connect(_on_minion_added)
+	_find_and_setup_active_minion()
+
+
+func _exit_tree() -> void:
+	if _active_minion != null and _active_minion.leveled_up.is_connected(_on_leveled_up):
+		_active_minion.leveled_up.disconnect(_on_leveled_up)
 
 func _process(delta: float) -> void:
 	if _cd_timer <= 0:
@@ -85,23 +118,22 @@ func _build_ui():
 	var vbox = VBoxContainer.new()
 	vbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	vbox.alignment = BoxContainer.ALIGNMENT_CENTER
-	vbox.add_theme_constant_override("separation", 4)
+	vbox.add_theme_constant_override("separation", vbox_separation)
 	vbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(vbox)
-	
+
 	var hotkey = Label.new()
-	# 熱鍵通常不需要翻譯，除非不同語系習慣不同
 	hotkey.text = _get_hotkey()
-	hotkey.add_theme_font_size_override("font_size", 9)
+	hotkey.add_theme_font_size_override("font_size", font_size_hotkey)
 	hotkey.add_theme_color_override("font_color", Color("5a7090"))
 	hotkey.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
 	hotkey.position = Vector2(4, 2)
 	hotkey.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(hotkey)
-	
+
 	var portrait_bg = PanelContainer.new()
-	portrait_bg.custom_minimum_size = Vector2(50, 50)
-	portrait_bg.size = Vector2(50, 50)
+	portrait_bg.custom_minimum_size = portrait_size
+	portrait_bg.size = portrait_size
 	portrait_bg.clip_contents = true
 	portrait_bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_apply_portrait_style(portrait_bg, data)
@@ -127,30 +159,44 @@ func _build_ui():
 	cd_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	cd_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	cd_label.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	cd_label.add_theme_font_size_override("font_size", 18)
+	cd_label.add_theme_font_size_override("font_size", font_size_cd)
 	cd_label.add_theme_color_override("font_color", Color("e8e8e8"))
 	cd_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	cd_label.visible = false
 	portrait_bg.add_child(cd_label)
-	
+
 	_name_label = Label.new()
-	# 【關鍵修改】對單位名稱進行翻譯
-	# 這裡假設你的 Localization CSV 裡的 Key 就是單位的原名或 ID
-	_name_label.text = tr(data.get_name_key()) 
+	_name_label.text = tr(data.get_name_key())
 	_name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_name_label.add_theme_font_size_override("font_size", 13)
+	_name_label.add_theme_font_size_override("font_size", font_size_name)
 	_name_label.add_theme_color_override("font_color", Color("c8d8e8"))
 	_name_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	vbox.add_child(_name_label)
-	
+
 	var cost_label = Label.new()
-	# 金額符號通常不需要翻譯，但可以考慮格式化
 	cost_label.text = "$" + str(data.cost)
 	cost_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	cost_label.add_theme_font_size_override("font_size", 12)
+	cost_label.add_theme_font_size_override("font_size", font_size_cost)
 	cost_label.add_theme_color_override("font_color", Color("e8c84a"))
 	cost_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	vbox.add_child(cost_label)
+
+	_upgrade_btn = Button.new()
+	_upgrade_btn.text = tr("UPGRADE") + " $" + str(upgrade_cost)
+	_upgrade_btn.add_theme_font_size_override("font_size", font_size_upgrade)
+	_upgrade_btn.custom_minimum_size = upgrade_btn_size
+	_upgrade_btn.mouse_filter = Control.MOUSE_FILTER_STOP
+	_upgrade_btn.pressed.connect(_on_upgrade_pressed)
+	_upgrade_btn.disabled = true
+	vbox.add_child(_upgrade_btn)
+
+	_exp_label = Label.new()
+	_exp_label.text = "0/10"
+	_exp_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_exp_label.add_theme_font_size_override("font_size", font_size_exp)
+	_exp_label.add_theme_color_override("font_color", Color("88ccff"))
+	_exp_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	vbox.add_child(_exp_label)
 
 func _apply_portrait_style(panel: PanelContainer, data):
 	var style = StyleBoxFlat.new()
@@ -180,7 +226,8 @@ func on_pressed():
 	SignalBus.emit_signal("buy_unit", unit_id)
 
 func on_hover_enter():
-	create_tween().tween_property(self, "position:y", _origin_y - 3, 0.1)
+	_origin_y = position.y
+	create_tween().tween_property(self, "position:y", _origin_y - hover_lift, 0.1)
 
 func on_hover_exit():
 	create_tween().tween_property(self, "position:y", _origin_y, 0.1)
@@ -193,12 +240,80 @@ func _set_cd_active(active: bool) -> void:
 
 func _on_unit_spawned(spawned_id: String) -> void:
 	if spawned_id == unit_id:
-		# 使用計算後的生效 CD
 		_cd_timer = get_effective_cd()
 		_set_cd_active(true)
+
 func update_ui_texts():
 	var data = UnitAutoload.unit_dic[unit_id]
 	if _name_label:
-		# 這裡套用 tr() 確保翻譯生效
 		_name_label.text = tr(data.get_name_key())
+	_refresh_upgrade_ui()
+
+
+# ── 升級系統 ────────────────────────────────────────────────
+
+func _find_and_setup_active_minion() -> void:
+	if _gm == null:
+		return
+	var inv = _gm.get_node("Inventory_manager")
+	for am in inv.active_minions:
+		if am.data.minion_id == unit_id:
+			_link_active_minion(am)
+			return
+
+func _link_active_minion(am: ActiveMinion) -> void:
+	_active_minion = am
+	if not am.leveled_up.is_connected(_on_leveled_up):
+		am.leveled_up.connect(_on_leveled_up)
+	_refresh_upgrade_ui()
+
+func _on_minion_added(minion: ActiveMinion) -> void:
+	if minion.data.minion_id == unit_id and _active_minion == null:
+		_link_active_minion(minion)
+
+func _refresh_upgrade_ui() -> void:
+	if _upgrade_btn == null or _exp_label == null:
+		return
+	if _active_minion == null:
+		_upgrade_btn.disabled = true
+		_upgrade_btn.text = tr("UPGRADE") + " $" + str(upgrade_cost)
+		_exp_label.text = "0/10"
+		return
+	if _active_minion.current_level >= 3:
+		_upgrade_btn.disabled = true
+		_upgrade_btn.text = tr("UNIT_MAX_LEVEL")
+		_exp_label.text = "MAX"
+	else:
+		_upgrade_btn.disabled = false
+		_upgrade_btn.text = tr("UPGRADE") + " $" + str(upgrade_cost)
+		_exp_label.text = "Lv.%d  %d/10" % [_active_minion.current_level, _active_minion.experience]
+
+func _on_upgrade_pressed() -> void:
+	if _active_minion == null or _active_minion.current_level >= 3:
+		return
+	if _gm.ms.money_amount < upgrade_cost:
+		return
+	_gm.ms.force_deduct(upgrade_cost)
+	_active_minion.add_experience(1)
+	_refresh_upgrade_ui()
+
+func _on_leveled_up(new_level: int) -> void:
+	# 對場上現有的同類友方單位套用 +20% max_hp
+	for unit in get_tree().get_nodes_in_group("ally"):
+		if unit.get("unit_id") == unit_id:
+			unit.add_mod("max_hp", 0.2, false)
+			unit.stat_dic["hp"] = minf(unit.stat_dic["hp"] * 1.2, unit.get_moded_stat("max_hp"))
+			unit.refresh()
+	_refresh_upgrade_ui()
+
+func _on_unit_spawned_apply_level(unit: Node) -> void:
+	# 新生成的單位按已累積等級套 mod
+	if unit.get("unit_id") != unit_id or unit.get("side") != "ally":
+		return
+	if _active_minion == null or _active_minion.current_level <= 1:
+		return
+	for i in range(_active_minion.current_level - 1):
+		unit.add_mod("max_hp", 0.2, false)
+	unit.stat_dic["hp"] = unit.get_moded_stat("max_hp")
+	unit.refresh()
 #endregion

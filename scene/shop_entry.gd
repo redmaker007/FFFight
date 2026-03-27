@@ -7,9 +7,11 @@ extends PanelContainer
 
 var _data: Resource
 var _gm: Node
+var _shop_win: Control = null
 
 
-func setup(data: Resource, gm: Node) -> void:
+func setup(data: Resource, gm: Node, shop_win: Control = null) -> void:
+	_shop_win = shop_win
 	_data = data
 	_gm  = gm
 
@@ -45,12 +47,14 @@ func _on_buy() -> void:
 	else:
 		price = _data.price
 
-	if _gm.ms.money_amount < price:
+	if _gm.ms.shop_budget < price:
 		_shake_btn()
 		return
 
-	_gm.ms.money_amount -= price
-	_gm.ms.update_text()
+	_gm.ms.shop_budget -= price
+
+	if is_instance_valid(_shop_win):
+		_shop_win.refresh_budget(_gm.ms.shop_budget)
 
 	var inv: Node = _gm.get_node("Inventory_manager")
 	if _data is ItemData:

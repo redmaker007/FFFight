@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="MagicData" load_steps=2 format=3 uid="uid://ct8webfsy3cvc"]
+[gd_resource type="Resource" script_class="MagicData" load_steps=3 format=3 uid="uid://ct8webfsy3cvc"]
 
 [ext_resource type="Script" uid="uid://obmj7kdm84v6" path="res://resources/resource_precast/magic_data.gd" id="1_magic"]
+[ext_resource type="Texture2D" uid="uid://kigtuxwdgw23" path="res://art/random_art/moneybg.png" id="1_xln15"]
 
 [resource]
 script = ExtResource("1_magic")
 id = "fireball"
 name = "MAGIC_FIREBALL_NAME"
+icon = ExtResource("1_xln15")
 mana_cost = 30.0
 damage = 80.0
 cooldown = 2.5

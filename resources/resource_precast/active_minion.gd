@@ -1,12 +1,14 @@
 class_name ActiveMinion
 extends Resource
 
+signal leveled_up(new_level: int)
+
 # 指向靜態數據庫（minion_data.tres）
 @export var data: minion_data
 
 # 當局狀態
 @export var current_level: int = 1
-@export var experience: float = 0.0
+@export var experience: int = 0
 
 # TODO: 進化路線系統 (Evolution Path)
 # 預計結構：@export var evolution_path: Array[MinionData]
@@ -15,6 +17,17 @@ extends Resource
 # TODO: 當局增益效果清單 (Buff List)
 # 預計結構：@export var active_buffs: Array[stat_mod]
 # 由 Hex 效果的 give_target_stat、grant_ability_hex 等寫入
+
+
+## 增加經驗值，滿 10 點自動升級（上限 Lv.3）
+func add_experience(amount: int) -> void:
+	if current_level >= 3:
+		return
+	experience += amount
+	if experience >= 10:
+		experience -= 10
+		current_level += 1
+		leveled_up.emit(current_level)
 
 
 ## 取得屬性數值。

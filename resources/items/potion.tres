@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://gj0e5vwiy1nj"]
 
-[ext_resource type="Script" uid="uid://t4kcc1syxjli" path="res://scripts/resources/item_data.gd" id="1_item"]
+[ext_resource type="Texture2D" uid="uid://kigtuxwdgw23" path="res://art/random_art/moneybg.png" id="1_36hb1"]
+[ext_resource type="Script" uid="uid://t4kcc1syxjli" path="res://resources/resource_precast/item_data.gd" id="1_item"]
 
 [resource]
 script = ExtResource("1_item")
 id = "potion"
 name = "ITEM_POTION_NAME"
+icon = ExtResource("1_36hb1")
 description = "ITEM_POTION_DESC"
 price = 50
 stackable = true

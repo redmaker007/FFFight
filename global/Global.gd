@@ -48,6 +48,8 @@ var unit_gallery_window = preload("res://scene/Unit Gallery.tscn")
 
 var setting_window = preload("res://scene/Settings.tscn")
 
+var spwan_unit_button = preload("res://scene/spwan_unit_button.tscn")
+
 #color
 const C_BG        = Color("0a0c10")
 const C_PANEL     = Color("111520")

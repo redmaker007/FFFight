@@ -165,3 +165,10 @@ ALLY_BASE,我方基地,Ally Base
 ENEMY_BASE,敌方基地,Enemy Base
 DIFFICULTY,难度,Difficulty
 WAVE,波次,Wave
+
+SHOP,商店,Shop
+SHOP_DONE,完成,Done
+SHOP_BUDGET,预算,Budget
+
+UPGRADE,升级,Upgrade
+UNIT_MAX_LEVEL,已满级,MAX

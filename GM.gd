@@ -17,6 +17,7 @@ class_name game_manager
 @export_group("UI Containers")
 @onready var cl = $CanvasLayer
 @onready var spawn_button_container = %spawn_button_container
+
 @onready var result_screen = $CanvasLayer/HUD_Root/ResultScreen
 
 @export_group("Status Display")
@@ -25,11 +26,38 @@ class_name game_manager
 @onready var ally_hp_text = $CanvasLayer/HUD_Root/TopBar_BG/TopBar/AllyHPBarBG/AllyHPBar/HPLabel/ally_hp_text
 @onready var enemy_hp_bar = $CanvasLayer/HUD_Root/TopBar_BG/TopBar/EnemyHPBarBG/EnemyHPBar/enemy_hp_bar
 @onready var enemy_hp_text = $CanvasLayer/HUD_Root/TopBar_BG/TopBar/EnemyHPBarBG/EnemyHPBar/HPLabel/enemy_hp_text
+
+@export_group("Inventory Display")
+@onready var magic_container: HBoxContainer = %magic_container
+@onready var item_container: HBoxContainer = %item_container
 #endregion
 
 #region 3. 初始化與信號 (Lifecycle & Signals)
 func _ready() -> void:
 	SignalBus.base_hp_changed.connect(_on_base_hp_changed)
+	var inv: Node = get_node("Inventory_manager")
+	inv.item_added.connect(_on_item_added)
+	inv.magic_added.connect(_on_magic_added)
+	inv.minion_added.connect(_on_minion_purchased)
+	_add_starting_unit("red")
+	_add_starting_unit("blue")
+
+
+func _add_starting_unit(unit_id: String) -> void:
+	var am := ActiveMinion.new()
+	am.data = UnitAutoload.unit_dic[unit_id]
+	get_node("Inventory_manager").add_active_minion(am)
+
+
+func _on_minion_purchased(minion: ActiveMinion) -> void:
+	var mid: String = minion.data.minion_id
+	# 避免重複新增同一單位的按鈕
+	for btn in spawn_button_container.get_children():
+		if btn.get("unit_id") == mid:
+			return
+	var btn = Global.spwan_unit_button.instantiate()
+	btn.unit_id = mid
+	spawn_button_container.add_child(btn)
 
 func _on_base_hp_changed(side: String, current_hp: float, max_hp: float):
 	var pct = (current_hp / max_hp) * 100
@@ -92,6 +120,36 @@ func clear_board_by_group(group_n: String):
 ## 重置敵人生成計數
 func em_reset_count():
 	es.reset_whole()
+
+func _on_item_added(data: ItemData) -> void:
+	if not is_instance_valid(item_container):
+		return
+	if data.icon != null:
+		var tex := TextureRect.new()
+		tex.texture = data.icon
+		tex.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		tex.custom_minimum_size = Vector2(32, 32)
+		item_container.add_child(tex)
+	else:
+		var lbl := Label.new()
+		lbl.text = data.get_display_name()
+		item_container.add_child(lbl)
+
+
+func _on_magic_added(data: MagicData) -> void:
+	if not is_instance_valid(magic_container):
+		return
+	if data.icon != null:
+		var tex := TextureRect.new()
+		tex.texture = data.icon
+		tex.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		tex.custom_minimum_size = Vector2(32, 32)
+		magic_container.add_child(tex)
+	else:
+		var lbl := Label.new()
+		lbl.text = data.get_display_name()
+		magic_container.add_child(lbl)
+
 
 ## 重置 UI 血條顯示
 func reset_top_bar():
