@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UnitUpgradeTree" load_steps=5 format=3 uid="uid://dvpgt0s2kerdb"]
+
+[ext_resource type="Script" uid="uid://cet4upddwejal" path="res://resources/resource_precast/upgrade_tree_node.gd" id="1_tya7u"]
+[ext_resource type="Resource" uid="uid://3hh05e1qdcy2" path="res://resources/minion/red.tres" id="2_cdnb0"]
+[ext_resource type="Script" uid="uid://c5ttugevetw7l" path="res://resources/resource_precast/unit_upgrade_tree.gd" id="3_og7w1"]
+
+[sub_resource type="Resource" id="Resource_2cg1x"]
+script = ExtResource("1_tya7u")
+payload = ExtResource("2_cdnb0")
+metadata/_custom_type_script = "uid://cet4upddwejal"
+
+[resource]
+script = ExtResource("3_og7w1")
+root = SubResource("Resource_2cg1x")

@@ -27,6 +27,7 @@ func enter_state():
 	
 	# --- 4. 状态自动流转 (Transition) ---
 	# 准备工作在同一帧完成，直接进入正式战斗阶段
+	gm.es.reset_wave_timer()
 	gm_state_machine.switch_state("play")
 	
 	gm.reset_all_buttons_cd()

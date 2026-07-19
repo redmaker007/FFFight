@@ -23,3 +23,7 @@ func _on_setting_button_pressed() -> void:
 
 func _on_hex_show_button_pressed() -> void:
 	SignalBus.open_hex_show_window.emit()
+
+func _input(event: InputEvent) -> void:
+	if event.is_pressed() and event.is_action("esc"):
+		SignalBus.open_setting.emit()

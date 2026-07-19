@@ -38,3 +38,5 @@ signal on_language_change
 signal enemy_count_changed
 
 signal wave_count_changed
+
+signal open_unit_upgrade_window(active_minion: ActiveMinion)

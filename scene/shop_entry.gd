@@ -19,10 +19,11 @@ func setup(data: Resource, gm: Node, shop_win: Control = null) -> void:
 	var display_name: String
 	var price: int
 
-	if data is minion_data:
-		icon         = data.image
-		display_name = data.get_name_key()
-		price        = data.cost
+	if data is UnitUpgradeTree:
+		var md := data.root.payload as minion_data
+		icon         = md.image
+		display_name = md.get_name_key()
+		price        = md.cost
 	elif data is ItemData:
 		icon         = data.icon
 		display_name = data.get_display_name()
@@ -42,8 +43,8 @@ func setup(data: Resource, gm: Node, shop_win: Control = null) -> void:
 
 func _on_buy() -> void:
 	var price: int
-	if _data is minion_data:
-		price = _data.cost
+	if _data is UnitUpgradeTree:
+		price = (_data.root.payload as minion_data).cost
 	else:
 		price = _data.price
 
@@ -61,9 +62,9 @@ func _on_buy() -> void:
 		inv.add_item(_data)
 	elif _data is MagicData:
 		inv.add_magic(_data)
-	elif _data is minion_data:
+	elif _data is UnitUpgradeTree:
 		var active := ActiveMinion.new()
-		active.data = _data
+		active.init_with_tree(_data)
 		inv.add_active_minion(active)
 
 	buy_btn.disabled = true

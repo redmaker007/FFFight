@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="UnitUpgradeTree" load_steps=5 format=3 uid="uid://4cdw0bc5f4n5"]
+
+[ext_resource type="Script" uid="uid://cet4upddwejal" path="res://resources/resource_precast/upgrade_tree_node.gd" id="1_excp5"]
+[ext_resource type="Script" uid="uid://c5ttugevetw7l" path="res://resources/resource_precast/unit_upgrade_tree.gd" id="1_gbqns"]
+[ext_resource type="Resource" uid="uid://yptl1qhkrhsx" path="res://resources/minion/boxer.tres" id="2_cmjew"]
+
+[sub_resource type="Resource" id="Resource_e0ft7"]
+script = ExtResource("1_excp5")
+payload = ExtResource("2_cmjew")
+metadata/_custom_type_script = "uid://cet4upddwejal"
+
+[resource]
+script = ExtResource("1_gbqns")
+root = SubResource("Resource_e0ft7")
+metadata/_custom_type_script = "uid://c5ttugevetw7l"

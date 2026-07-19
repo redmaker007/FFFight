@@ -3,7 +3,7 @@ extends Resource
 
 @export var items: Array[ItemData] = []
 @export var magics: Array[MagicData] = []
-@export var minions: Array[minion_data] = []
+@export var minions: Array[UnitUpgradeTree] = []
 
 
 ## 從池中隨機抽取 count 件商品並移除，回傳抽到的陣列。
@@ -37,7 +37,9 @@ func draw_random(count: int) -> Array:
 
 
 static func _entry_name(entry: Resource) -> String:
-	if entry is minion_data: return "minion  | %s (cost:%d)" % [entry.minion_name, entry.cost]
+	if entry is UnitUpgradeTree:
+		var md := entry.root.payload as minion_data
+		return "minion  | %s (cost:%d)" % [md.minion_name if md else "?", md.cost if md else 0]
 	if entry is ItemData:    return "item    | %s (price:%d)" % [entry.id, entry.price]
 	if entry is MagicData:   return "magic   | %s (price:%d)" % [entry.id, entry.price]
 	return str(entry)

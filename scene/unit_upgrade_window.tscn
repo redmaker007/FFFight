@@ -1,0 +1,119 @@
+[gd_scene load_steps=4 format=3 uid="uid://cr4a4eljs26xl"]
+
+[ext_resource type="Script" uid="uid://cuiyumidvmam0" path="res://scene/unit_upgrade_window.gd" id="1_upgrade"]
+[ext_resource type="Theme" uid="uid://7dlw0gdjkmon" path="res://art/theme/theme.tres" id="1_wgvwo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wgvwo"]
+bg_color = Color(0.06666667, 0.08235294, 0.1254902, 0.75686276)
+
+[node name="UnitUpgradeWindow" type="PanelContainer" node_paths=PackedStringArray("portrait_rect", "unit_name_label", "level_label", "hp_value_label", "att_value_label", "att_r_value_label", "att_spd_value_label", "speed_value_label", "upgrade_container", "close_btn")]
+process_mode = 3
+custom_minimum_size = Vector2(800, 600)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -504.0
+offset_top = -334.0
+offset_right = 504.0
+offset_bottom = 397.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_wgvwo")
+theme_override_styles/panel = SubResource("StyleBoxFlat_wgvwo")
+script = ExtResource("1_upgrade")
+portrait_rect = NodePath("HBoxContainer3/HBoxContainer/VBoxContainer/TextureRect")
+unit_name_label = NodePath("HBoxContainer3/HBoxContainer/VBoxContainer/Label")
+level_label = NodePath("HBoxContainer3/HBoxContainer/VBoxContainer/Label2")
+hp_value_label = NodePath("HBoxContainer3/HBoxContainer/VBoxContainer/GridContainer/Label2")
+att_value_label = NodePath("HBoxContainer3/HBoxContainer/VBoxContainer/GridContainer/Label4")
+att_r_value_label = NodePath("HBoxContainer3/HBoxContainer/VBoxContainer/GridContainer/Label6")
+att_spd_value_label = NodePath("HBoxContainer3/HBoxContainer/VBoxContainer/GridContainer/Label8")
+speed_value_label = NodePath("HBoxContainer3/HBoxContainer/VBoxContainer/GridContainer/Label10")
+upgrade_container = NodePath("HBoxContainer3/HBoxContainer2")
+close_btn = NodePath("Button")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer3/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 6
+expand_mode = 1
+
+[node name="Label" type="Label" parent="HBoxContainer3/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="HBoxContainer3/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer3/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="HBoxContainer3/HBoxContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "STAT_HP"
+
+[node name="Label2" type="Label" parent="HBoxContainer3/HBoxContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="HBoxContainer3/HBoxContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "STAT_ATT"
+
+[node name="Label4" type="Label" parent="HBoxContainer3/HBoxContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="HBoxContainer3/HBoxContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "STAT_RANGE"
+
+[node name="Label6" type="Label" parent="HBoxContainer3/HBoxContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Label7" type="Label" parent="HBoxContainer3/HBoxContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "STAT_ATK_SPD"
+
+[node name="Label8" type="Label" parent="HBoxContainer3/HBoxContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Label9" type="Label" parent="HBoxContainer3/HBoxContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "STAT_SPEED"
+
+[node name="Label10" type="Label" parent="HBoxContainer3/HBoxContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8

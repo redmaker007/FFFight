@@ -5,7 +5,6 @@ extends GMstate
 func enter_state():
 	gm.ms.apply_shop_budget()
 	gm.group_switch_func(true)
-	gm.es.reset_wave_timer()
 	SignalBus.unit_death.connect(check_base_death)
 
 func end_state():

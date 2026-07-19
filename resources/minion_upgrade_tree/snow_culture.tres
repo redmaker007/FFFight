@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="UnitUpgradeTree" load_steps=10 format=3 uid="uid://k3r3q1wn4786"]
+
+[ext_resource type="Script" uid="uid://c5ttugevetw7l" path="res://resources/resource_precast/unit_upgrade_tree.gd" id="1_0oxpr"]
+[ext_resource type="Script" uid="uid://cet4upddwejal" path="res://resources/resource_precast/upgrade_tree_node.gd" id="1_643by"]
+[ext_resource type="Resource" uid="uid://ckedwbm8nomg7" path="res://resources/minion/butterfly_kun.tres" id="2_fgsfu"]
+[ext_resource type="Script" uid="uid://ck0t2bo8guoew" path="res://resources/resource_precast/unit_stat_upgrade.gd" id="3_t1yyd"]
+[ext_resource type="Resource" uid="uid://ph6hld5vjlt2" path="res://resources/minion/snow_ball_shooter.tres" id="4_j0t3j"]
+
+[sub_resource type="Resource" id="Resource_dveqc"]
+script = ExtResource("1_643by")
+payload = ExtResource("2_fgsfu")
+metadata/_custom_type_script = "uid://cet4upddwejal"
+
+[sub_resource type="Resource" id="Resource_mqqe3"]
+script = ExtResource("3_t1yyd")
+stat_name = "att"
+value = 5.0
+metadata/_custom_type_script = "uid://ck0t2bo8guoew"
+
+[sub_resource type="Resource" id="Resource_wgd2c"]
+script = ExtResource("1_643by")
+payload = SubResource("Resource_mqqe3")
+metadata/_custom_type_script = "uid://cet4upddwejal"
+
+[sub_resource type="Resource" id="Resource_d5ph7"]
+script = ExtResource("1_643by")
+payload = ExtResource("4_j0t3j")
+children = Array[ExtResource("1_643by")]([SubResource("Resource_dveqc"), SubResource("Resource_wgd2c")])
+metadata/_custom_type_script = "uid://cet4upddwejal"
+
+[resource]
+script = ExtResource("1_0oxpr")
+root = SubResource("Resource_d5ph7")

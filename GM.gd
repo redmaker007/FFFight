@@ -43,9 +43,17 @@ func _ready() -> void:
 	_add_starting_unit("blue")
 
 
+const STARTING_TREES: Dictionary = {
+	"red":  preload("res://resources/minion_upgrade_tree/red_normal.tres"),
+	"blue": preload("res://resources/minion_upgrade_tree/blue_normal.tres"),
+}
+
 func _add_starting_unit(unit_id: String) -> void:
 	var am := ActiveMinion.new()
-	am.data = UnitAutoload.unit_dic[unit_id]
+	if STARTING_TREES.has(unit_id):
+		am.init_with_tree(STARTING_TREES[unit_id])
+	else:
+		am.init_with_data(UnitAutoload.unit_dic[unit_id])
 	get_node("Inventory_manager").add_active_minion(am)
 
 

@@ -16,7 +16,7 @@ func setup(drawn: Array, gm: Node) -> void:
 
 	# 在 Title 下方插入預算顯示 label
 	_budget_label = Label.new()
-	_budget_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_budget_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	var vbox = title_label.get_parent()
 	vbox.add_child(_budget_label)
 	vbox.move_child(_budget_label, 1)

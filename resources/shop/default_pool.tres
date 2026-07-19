@@ -1,19 +1,15 @@
-[gd_resource type="Resource" script_class="ShopPool" load_steps=12 format=3 uid="uid://cqgorkemymxgq"]
+[gd_resource type="Resource" script_class="ShopPool" load_steps=8 format=3 uid="uid://cqgorkemymxgq"]
 
 [ext_resource type="Script" uid="uid://t4kcc1syxjli" path="res://resources/resource_precast/item_data.gd" id="2_potion"]
-[ext_resource type="Resource" path="res://resources/items/potion.tres" id="2_tewop"]
+[ext_resource type="Resource" uid="uid://gj0e5vwiy1nj" path="res://resources/items/potion.tres" id="2_tewop"]
 [ext_resource type="Script" uid="uid://obmj7kdm84v6" path="res://resources/resource_precast/magic_data.gd" id="3_fireball"]
-[ext_resource type="Script" uid="uid://dw6wb6dt8h3n5" path="res://resources/resource_precast/minion_data.gd" id="3_lctnc"]
-[ext_resource type="Resource" uid="uid://3hh05e1qdcy2" path="res://resources/minion/red.tres" id="4_e6lt6"]
 [ext_resource type="Resource" uid="uid://ct8webfsy3cvc" path="res://resources/magics/fireball.tres" id="4_ubjpj"]
-[ext_resource type="Resource" uid="uid://dt75mgxolhut5" path="res://resources/minion/blue.tres" id="5_tewop"]
-[ext_resource type="Resource" uid="uid://yptl1qhkrhsx" path="res://resources/minion/boxer.tres" id="6_ubjpj"]
-[ext_resource type="Resource" uid="uid://b0qtemlo2y6ji" path="res://resources/minion/soulblade.tres" id="7_7x8w1"]
-[ext_resource type="Resource" uid="uid://ph6hld5vjlt2" path="res://resources/minion/snow_ball_shooter.tres" id="8_awe2i"]
+[ext_resource type="Script" uid="uid://c5ttugevetw7l" path="res://resources/resource_precast/unit_upgrade_tree.gd" id="5_i5hel"]
+[ext_resource type="Resource" uid="uid://k3r3q1wn4786" path="res://resources/minion_upgrade_tree/snow_culture.tres" id="6_kdjgl"]
 [ext_resource type="Script" uid="uid://bgfjl4kb0hrn7" path="res://resources/resource_precast/shop_pool.gd" id="11_7x8w1"]
 
 [resource]
 script = ExtResource("11_7x8w1")
 items = Array[ExtResource("2_potion")]([ExtResource("2_tewop")])
 magics = Array[ExtResource("3_fireball")]([ExtResource("4_ubjpj")])
-minions = Array[ExtResource("3_lctnc")]([ExtResource("4_e6lt6"), ExtResource("5_tewop"), ExtResource("6_ubjpj"), ExtResource("7_7x8w1"), ExtResource("8_awe2i")])
+minions = Array[ExtResource("5_i5hel")]([ExtResource("6_kdjgl")])

@@ -1,18 +1,66 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctuv1ou4cgov3"]
+[gd_scene load_steps=3 format=3 uid="uid://ctuv1ou4cgov3"]
 
+[ext_resource type="Theme" uid="uid://7dlw0gdjkmon" path="res://art/theme/theme.tres" id="1_5x6m7"]
 [ext_resource type="Script" uid="uid://ddig366rrowg2" path="res://spwan_unit_button.gd" id="1_lv4kh"]
 
-[node name="spwan_unit_1" type="Button"]
-custom_minimum_size = Vector2(200, 0)
+[node name="spwan_unit_1" type="Button" node_paths=PackedStringArray("portrait_icon", "cd_overlay", "cd_label", "name_label", "cost_label", "hotkey_label", "upgrade_btn", "exp_label")]
+custom_minimum_size = Vector2(150, 0)
 offset_left = 42.0
 offset_top = 564.0
 offset_right = 105.0
 offset_bottom = 595.0
-text = "unit 1"
+theme = ExtResource("1_5x6m7")
 script = ExtResource("1_lv4kh")
-btn_size = Vector2(120, 130)
-upgrade_btn_size = Vector2(100, 30)
-font_size_name = 25
-font_size_cost = 20
-font_size_upgrade = 15
-font_size_exp = 15
+portrait_icon = NodePath("HBoxContainer/PanelContainer/TextureRect")
+cd_overlay = NodePath("HBoxContainer/PanelContainer/ColorRect")
+cd_label = NodePath("Label")
+name_label = NodePath("HBoxContainer/Label2")
+cost_label = NodePath("HBoxContainer/Label3")
+hotkey_label = NodePath("HBoxContainer/Label4")
+upgrade_btn = NodePath("HBoxContainer/Button")
+exp_label = NodePath("HBoxContainer/Label5")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 0
+offset_left = 1.0
+offset_top = -5.0
+offset_right = 151.0
+offset_bottom = 183.0
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+expand_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/PanelContainer"]
+layout_mode = 2
+color = Color(1, 1, 1, 0.12156863)
+
+[node name="Label2" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 201.0
+offset_bottom = 32.0

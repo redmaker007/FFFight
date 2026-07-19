@@ -13,6 +13,8 @@ extends Node2D
 #var att_r :float= 50
 #var att_CD :float= 1
 
+var active_minion_ref: ActiveMinion = null
+
 var stat_dic ={
 	"speed"= 100.0,
 	"hp" =100.0,
@@ -41,6 +43,13 @@ func get_moded_stat(stat_str):
 	for m in stat_mod_l[stat_str]:
 		if !m.aom:
 			calculated_value = m.mod(calculated_value)
+	if active_minion_ref != null:
+		for su in active_minion_ref.get_active_stat_upgrades():
+			if su.stat_name == stat_str:
+				if su.additive:
+					calculated_value += su.value
+				else:
+					calculated_value *= (1.0 + su.value)
 	return calculated_value
 
 func add_mod(stat_str,value,aom):

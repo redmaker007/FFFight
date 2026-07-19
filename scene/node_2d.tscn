@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bae3kf36u3115"]
+[gd_scene load_steps=41 format=3 uid="uid://bae3kf36u3115"]
 
 [ext_resource type="Script" uid="uid://bxoj4abwmi3vj" path="res://GM.gd" id="1_123pn"]
 [ext_resource type="Script" uid="uid://4aj1roadh4qo" path="res://gm_state_machine.gd" id="2_3u7g2"]
@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://dus2uqqao0nvh" path="res://art/background/road.png" id="19_5n7tr"]
 [ext_resource type="Texture2D" uid="uid://dmavd50oy5014" path="res://art/background/sun_moon.png" id="20_cw5uo"]
 [ext_resource type="Script" uid="uid://c26fhs0o0j427" path="res://scene/inventory_manager.gd" id="27_5n7tr"]
+[ext_resource type="PackedScene" uid="uid://cr4a4eljs26xl" path="res://scene/unit_upgrade_window.tscn" id="27_cw5uo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yfstv"]
 bg_color = Color(0.06666667, 0.08235294, 0.1254902, 1)
@@ -332,9 +333,9 @@ layout_mode = 2
 [node name="BottomBar_BG" type="PanelContainer" parent="CanvasLayer/HUD_Root"]
 custom_minimum_size = Vector2(2000, 0)
 layout_mode = 0
-offset_top = 770.08
+offset_top = 824.0
 offset_right = 2000.0
-offset_bottom = 915.08044
+offset_bottom = 1080.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HUD_Root/BottomBar_BG"]
 layout_mode = 2
@@ -559,6 +560,7 @@ script = ExtResource("16_f08rc")
 
 [node name="pop_window_manager" type="Node" parent="."]
 script = ExtResource("17_cxisf")
+unit_upgrade_window_scene = ExtResource("27_cw5uo")
 
 [node name="Inventory_manager" type="Node" parent="."]
 script = ExtResource("27_5n7tr")
