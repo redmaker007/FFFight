@@ -15,6 +15,10 @@ run/main_scene="uid://df13xhk5hnqev"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://art/random_art/icon.svg"
 
+[audio]
+
+general/default_playback_type.web=0
+
 [autoload]
 
 SignalBus="*res://global/Signal_Bus.gd"
